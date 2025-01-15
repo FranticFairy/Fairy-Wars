@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<resources>
+    <set path = "mods/fairy-wars/images/game/" />
+    <atlas linearFilter="false">
+        <!-- Human Player menu icons -->
+		<image file="icon_aa.png" />
+        <image file="icon_anch.png" />
+        <image file="icon_antimine.png" />
+        <image file="icon_antiradar.png" />
+        <image file="icon_arty.png" />
+        <image file="icon_asm.png" />
+        <image file="icon_at.png" />
+        <image file="icon_bomb.png" />
+        <image file="icon_fuel.png" />
+        <image file="icon_gun.png" />
+        <image file="icon_hmr.png" />
+        <image file="icon_mine.png" />
+        <image file="icon_move.png" />
+        <image file="icon_para.png" />
+        <image file="icon_radar.png" />
+        <image file="icon_trn.png" />
+        <image file="icon_upgrd.png" />
+
+        <image file="weather/weather_storm.png" cols = "16" />
+        <image file="weather/weather_mist.png" />
+        <!-- player info stuff -->
+        <image file="2co.png" />
+        <image file="co.png" />
+        <image file="turnStartInfo.png" />
+        <!-- power star stuff -->
+        <image file="powerstar.png" />
+        <image file="powerstarfull.png" cols = "13" />
+        <image file="powerstarhalf.png" cols = "13" />
+        <image file="superpowerstar.png" />
+        <image file="superpowerstarfull.png" cols = "13" />
+        <image file="superpowerstarhalf.png" cols = "13" />
+        
+        <!-- on map stuff -->
+        <image file="marked+field.png" cols = "4" />
+        <image file="defenseStar.png" />
+        
+        <image file="arrow+unit.png" cols = "10" />
+        <!-- Human Player menu -->
+        <image file="cursor+menu.png" cols = "4" />
+        <image file="menu+top+mask.png" guideX1="3" guideX2="57" guideY1="2" guideY2="4"/>
+        <image file="menu+middle+mask.png" guideX1="3" guideX2="57" guideY1="2" guideY2="14"/>
+        <image file="menu+bottom+mask.png" guideX1="3" guideX2="57" guideY1="1" guideY2="3"/>
+		
+        <!-- Human Player menu icons -->
+        <image file="wait.png" />
+        <image file="icon_fire.png" />
+        <image file="capture.png" />
+        <image file="next_player.png" />
+        <image file="join.png" />
+        <image file="destroy.png" />
+        <image file="dive.png" />
+        <image file="heal.png" />
+        <image file="load.png" />
+        <image file="ration.png" />
+        <image file="no_power.png" />
+        <image file="power.png" />
+        <image file="superpower.png" />
+        <image file="power2.png" />
+        <image file="superpower2.png" />
+        <image file="tagpower.png" />
+        <image file="unhide.png" />
+        <image file="build.png" />
+        <image file="co0.png" />
+        <image file="co1.png" />
+        <image file="missile_icon.png" />    
+        <image file="exitgame.png" />
+        <image file="savegame.png" />
+        <image file="co_info.png" />    
+        <image file="swap.png" />
+        <image file="help.png" />
+        <image file="repair.png" />
+        <image file="surrender.png" />
+        <image file="intel.png" />        
+        <image file="hq+captured.png" />
+        <image file="hq+lost.png" />
+        <image file="flareshot.png" />
+        <image file="unit_info.png" />
+        <image file="options.png" />
+        <image file="nickname.png" />
+        <image file="music.png" />
+        <image file="wiki.png" />
+        <image file="rules.png" />
+        <image file="statistics.png" />
+        <image file="calculator.png" />
+        <image file="transferUnit.png" />        
+        
+        <!-- z information label -->
+        <image file="z_information_label.png" cols = "8" />
+        <image file="z_information_label+mask.png" cols = "8" />
+		
+        <!-- multiplayer -->
+        <image file="offline.png" />
+        <image file="online.png" />   
+        
+        <!-- dialogue stuff -->  
+        <image file="nextday.png" />
+        <image file="tagaffinitystar.png" />
+        
+        <!-- minimap -->
+        <image file="minimap/minimap_beach.png" />
+        <image file="minimap/minimap_bridge.png" />
+        <image file="minimap/minimap_building.png" />
+        <image file="minimap/minimap_fire.png" />
+        <image file="minimap/minimap_fog.png" />
+        <image file="minimap/minimap_forest.png" />
+        <image file="minimap/minimap_hq.png" />
+        <image file="minimap/minimap_meteor.png" />
+        <image file="minimap/minimap_mountain.png" />
+        <image file="minimap/minimap_pipeline.png" />
+        <image file="minimap/minimap_plains.png" />
+        <image file="minimap/minimap_plasma.png" />
+        <image file="minimap/minimap_reaf.png" />
+        <image file="minimap/minimap_river.png" />
+        <image file="minimap/minimap_rough_sea.png" />        
+        <image file="minimap/minimap_ruin.png" />
+        <image file="minimap/minimap_sea.png" />
+        <image file="minimap/minimap_silo.png" />
+        <image file="minimap/minimap_street.png" />
+        <image file="minimap/minimap_unit.png" />
+        <image file="minimap/minimap_wasteland.png" />
+        <image file="minimap/minimap_weld.png" />
+        <image file="minimap/minimap_blackholebuilding.png" />        
+        <image file="minimap/minimap_desert.png" />
+        <image file="minimap/minimap_desert_forest.png" />
+        <image file="minimap/minimap_desert_path.png" />
+        <image file="minimap/minimap_desert_rock.png" />
+        <image file="minimap/minimap_desert_try_river.png" />
+        <image file="minimap/minimap_desert_wasteland.png" />
+        <image file="minimap/minimap_desert_ruin.png" />        
+        <image file="minimap/minimap_snow.png" />
+        <image file="minimap/minimap_snow_forest.png" />
+        <image file="minimap/minimap_snow_mountain.png" />
+        <image file="minimap/minimap_snow_wasteland.png" />
+        <image file="minimap/minimap_snow_ruin.png" />
+        <image file="minimap/minimap_waste.png" />
+        <image file="minimap/minimap_waste_forest.png" />
+        <image file="minimap/minimap_waste_mountain.png" />
+        <image file="minimap/minimap_waste_wasteland.png" />
+        <image file="minimap/minimap_waste_ruin.png" />        
+        <image file="minimap/minimap_teleport.png" />
+        <image file="minimap/minimap_volcan.png" />
+        <image file="minimap/minimap_depot.png" />
+    </atlas>
+</resources>
+

@@ -1,0 +1,7 @@
+name= Super Hammycom Wars: Nights of Renovation Image Pack 
+description= An image resource pack that is a mixture of original and edited assets from Advance Wars series, using Super Famicom Wars as the foundation. Assembled by HammerGuy.
+version=0.1.5b
+CompatibleMods=
+IncompatibleMods=
+required_mods=
+cosmetic=true

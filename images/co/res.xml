@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<resources>
+    <set path = "mods/fairy-wars/images/co/" />
+    
+    <atlas linearFilter="false">
+        <image file="co_fai+info.png" />
+        <image file="co_fai+mini.png" />
+        <image file="co_fai+face.png" cols = "3" />        
+        <image file="co_fai+nrm.png" />
+        <image file="co_fai_old+info.png" />
+        <image file="co_fai_old+mini.png" />
+        <image file="co_fai_old+face.png" cols = "3" />        
+        <image file="co_fai_old+nrm.png" scale_factor = "0.75" />
+    </atlas>
+</resources>
