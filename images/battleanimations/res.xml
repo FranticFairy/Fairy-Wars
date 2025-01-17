@@ -102,5 +102,9 @@
         <image file="FW_LANDMINE+mask.png"  />
         <image file="FW_COMV+mask.png"  />
         <image file="FW_COMV.png"  />
+        <image file="FW_FAERIE_INFANTRY.png"  />
+        <image file="FW_FAERIE_INFANTRY+mask.png"  />
+        <image file="FW_FAERIE_DREAMWEAVER.png"  />
+        <image file="FW_FAERIE_DREAMWEAVER+mask.png"  />
     </atlas>
 </resources>
