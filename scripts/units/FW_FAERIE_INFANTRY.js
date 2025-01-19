@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 var Constructor = function () {
     this.getUnitDamageID = function (unit) {
         return "FW_INFANTRY";
@@ -6,11 +7,16 @@ var Constructor = function () {
 
     this.init = function(unit) {
 =======
+=======
+>>>>>>> Stashed changes
 var Constructor = function()
 {
 
     this.init = function(unit)
     {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         unit.setAmmo2(9);
         unit.setMaxAmmo2(9);
@@ -22,6 +28,7 @@ var Constructor = function()
         unit.setMinRange(1);
         unit.setMaxRange(1);
         unit.setVision(2);
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     };
 
@@ -58,6 +65,8 @@ var Constructor = function()
         return true;
     }
 =======
+=======
+>>>>>>> Stashed changes
         unit.setVisionHigh(999);
 
         var variables = unit.getVariables();
@@ -138,6 +147,9 @@ var Constructor = function()
         return false;
     };
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }
 
