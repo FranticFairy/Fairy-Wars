@@ -73,25 +73,25 @@ var Constructor = function () {
     }
 
     this.pingCheck = function (unit, map) {
-        switch (unit) {
+        switch (unit.getUnitID()) {
             case "FW_ATTACKER_ANTIRADAR":
             case "FW_SEAPLANE_ANTIRADAR":
-                ACTION_PING.pingID(unit, 4, "FW_SAM,FW_SAM_MOVE,FW_FLAK_AA", false);
+                ACTION_PING.pingID(unit, 4, "FW_SAM,FW_SAM_MOVE,FW_FLAK_AA", false,map);
                 break;
             case "FW_DD":
             case "FW_DD_ASM":
             case "FW_BOMBER_ASM":
-                ACTION_PING.pingID(unit, 3, "FW_SS,FW_SS_AA,FW_SS_ARTY,FW_SS_ASM,FW_SS_TRN,FW_SS_RADAR", true);
+                ACTION_PING.pingID(unit, 3, "FW_SS,FW_SS_AA,FW_SS_ARTY,FW_SS_ASM,FW_SS_TRN,FW_SS_RADAR", true,map);
                 break;
             case "FW_DD_MINE":
             case "FW_ML":
-                ACTION_PING.pingID(unit, 3, "FW_SEAMINE", true);
+                ACTION_PING.pingID(unit, 3, "FW_SEAMINE", true,map);
                 break;
             case "FW_SAM":
             case "FW_SAM_MOVE":
             case "FW_SAM_UPGRD":
             case "FW_TRANSPORT_RADAR":
-                ACTION_PING.pingType(unit, 4, GameEnums.UnitType_Air, false);
+                ACTION_PING.pingType(unit, 4, GameEnums.UnitType_Air, false,map);
                 break;
             case "FW_SS":
             case "FW_SS_AA":
@@ -99,11 +99,11 @@ var Constructor = function () {
             case "FW_SS_ARTY":
             case "FW_SS_ASM":
             case "FW_SS_TRN":
-                ACTION_PING.pingType(unit, 3, GameEnums.UnitType_Naval, false);
-                ACTION_PING.pingID(unit, 3, "FW_SS,FW_SS_AA,FW_SS_ARTY,FW_SS_ASM,FW_SS_TRN,FW_SS_RADAR", true);
+                ACTION_PING.pingType(unit, 3, GameEnums.UnitType_Naval, false,map);
+                ACTION_PING.pingID(unit, 3, "FW_SS,FW_SS_AA,FW_SS_ARTY,FW_SS_ASM,FW_SS_TRN,FW_SS_RADAR", true,map);
             break;
             case "FW_SS_RADAR":
-                ACTION_PING.pingType(unit, 5, GameEnums.UnitType_Naval, true);
+                ACTION_PING.pingType(unit, 5, GameEnums.UnitType_Naval, true,map);
             break;
         }
     }

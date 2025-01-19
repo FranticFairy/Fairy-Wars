@@ -87,10 +87,15 @@ UNIT.buildedUnit = function (unit, player, map) {
 
 UNIT.getActions = function (unit, map) {
     // returns a string id list of the actions this unit can perform
-    return Global[unit.getUnitID()].actionList + UNIT.actionList;
+    var unitActions = Global[unit.getUnitID()].actionList;
+    if(unitActions != "") {
+        return Global[unit.getUnitID()].actionList + "," + UNIT.actionList;
+    } else {
+        return UNIT.actionList;
+    }
 }
 
-UNIT.actionList = ["ACTION_FIRE", "ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_UNLOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"],
+UNIT.actionList = ["ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_UNLOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"],
 
 UNIT.startOfTurn = function (unit, map) {
     ACTION_HANDLER.handleStartOfTurn(unit,map);

@@ -20,8 +20,8 @@ var Constructor = function () {
         return detectedUnits;
     }
 
-    this.pingType = function (unit, range, typeString, detectStealth) {
-        var detectedUnits = this.ping(unit, range, detectStealth);
+    this.pingType = function (unit, range, typeString, detectStealth,map) {
+        var detectedUnits = this.ping(unit, range, detectStealth,map);
         for (var i = 0; i < detectedUnits.length; i++) {
             var detectedUnit = detectedUnits[i];
             if (detectedUnit.getUnitType() == typeString) {
@@ -30,8 +30,8 @@ var Constructor = function () {
         }
     }
 
-    this.pingID = function (unit, range, IDString, detectStealth) {
-        var detectedUnits = this.ping(unit, range, detectStealth);
+    this.pingID = function (unit, range, IDString, detectStealth,map) {
+        var detectedUnits = this.ping(unit, range, detectStealth,map);
         for (var i = 0; i < detectedUnits.length; i++) {
             var detectedUnit = detectedUnits[i];
             var unitID = detectedUnit.getUnitID();
@@ -41,8 +41,8 @@ var Constructor = function () {
         }
     }
 
-    this.pingAll = function (unit, range, detectStealth) {
-        var detectedUnits = this.ping(unit, range, detectStealth);
+    this.pingAll = function (unit, range, detectStealth,map) {
+        var detectedUnits = this.ping(unit, range, detectStealth,map);
         for (var i = 0; i < detectedUnits.length; i++) {
             var detectedUnit = detectedUnits[i];
             unit.getOwner().addVisionField(detectedUnit.getX(), detectedUnit.getY(), 1, true);
