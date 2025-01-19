@@ -1,23 +1,8 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-var Constructor = function() {
-    this.getUnitDamageID = function (unit) {
-        return "FW_INFANTRY";
-    };
-
-    this.init = function(unit) {
-=======
-=======
->>>>>>> Stashed changes
 var Constructor = function()
 {
 
     this.init = function(unit)
     {
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         unit.setAmmo1(2);
         unit.setMaxAmmo1(2);
         unit.setWeapon1ID("");
@@ -32,46 +17,6 @@ var Constructor = function()
         unit.setMinRange(1);
         unit.setMaxRange(1);
         unit.setVision(2);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    };
-
-    this.getMovementType = function() {
-        return "MOVE_AIR";
-    };
-
-    this.getUnitType = function() {
-        return GameEnums.UnitType_Ground;
-    };
-
-    this.getName = function() {
-        return qsTr("Faerie Dreamweaver");
-    };
-
-    this.getDescription = function() {
-        return qsTr("Teina's unique unit. A flying infantry unit, capable of capturing and performing the functions of a Dozer or Minelayer.");
-    };
-
-    this.getBaseCost = function() {
-        return 7000;
-    };
-
-	this.canMoveAndFire = function(unit) {
-        return true;
-    };
-
-    this.actionList = [
-        "ACTION_PLACE_LANDMINE", "ACTION_PLACE_WATERMINE", "ACTION_DISABLE_MINE",
-        "ACTION_PLACE_PONTOON", "ACTION_BUILD_DEPOT", "ACTION_BUILD_TEMP_HARBOUR", "ACTION_BUILD_TEMP_AIRPORT", "ACTION_CLEAR_FOREST", "ACTION_BUILD_ROAD", "ACTION_BUILD_TRENCH", "ACTION_RESTOCK",
-        "ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"
-    ];
-
-    this.getShowInEditor = function() {
-        return true;
-    }
-=======
-=======
->>>>>>> Stashed changes
         unit.setVisionHigh(999);
 
         var variables = unit.getVariables();
@@ -161,10 +106,6 @@ var Constructor = function()
         return false;
     };
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }
 
 Constructor.prototype = UNIT;

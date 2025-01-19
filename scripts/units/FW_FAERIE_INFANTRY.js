@@ -1,23 +1,8 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-var Constructor = function () {
-    this.getUnitDamageID = function (unit) {
-        return "FW_INFANTRY";
-    };
-
-    this.init = function(unit) {
-=======
-=======
->>>>>>> Stashed changes
 var Constructor = function()
 {
 
     this.init = function(unit)
     {
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         unit.setAmmo2(9);
         unit.setMaxAmmo2(9);
         unit.setWeapon2ID("FW_WEP_AR");
@@ -28,45 +13,6 @@ var Constructor = function()
         unit.setMinRange(1);
         unit.setMaxRange(1);
         unit.setVision(2);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    };
-
-    this.getMovementType = function() {
-        return "MOVE_AIR";
-    };
-
-    this.getUnitType = function() {
-        return GameEnums.UnitType_Infantry;
-    };
-
-    this.getName = function() {
-        return qsTr("Faerie Infantry");
-    };
-
-    this.getDescription = function() {
-        return qsTr("Teina's unique unit. Flying infantry unit, effective for capturing across water or in difficult terrain.");
-    };
-
-    this.getBaseCost = function() {
-        return 2500;
-    };
-
-	this.canMoveAndFire = function(unit) {
-        return true;
-    };
-
-    this.actionList = [
-        "ACTION_FIRE", "ACTION_MISSILE", "ACTION_CAPTURE",
-        "ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"
-    ];
-
-    this.getShowInEditor = function() {
-        return true;
-    }
-=======
-=======
->>>>>>> Stashed changes
         unit.setVisionHigh(999);
 
         var variables = unit.getVariables();
@@ -147,10 +93,6 @@ var Constructor = function()
         return false;
     };
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }
 
 Constructor.prototype = UNIT;
