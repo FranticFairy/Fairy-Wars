@@ -98,7 +98,7 @@ var Constructor = function()
             if (costs <= funds) {
                 enabled = true;
             }
-            data.addData(name + " " + costs.toString(),types[i],"build", costs, enabled);
+            data.addData(name + " " + costs.toString(),types[i],types[i], costs, enabled);
         }
     };
 
