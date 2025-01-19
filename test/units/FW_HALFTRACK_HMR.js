@@ -49,7 +49,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A tougher Truck, can take more of a punch and has a defensive machine gun.");
+        return qsTr("A halftrack upgraded to carry bridge-laying equipment, to deploy pontoon bridges.");
     };
 
     this.getBaseCost = function()
@@ -59,7 +59,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon2 = function(unit)

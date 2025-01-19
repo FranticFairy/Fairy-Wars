@@ -44,7 +44,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("The artillery unit you're familiar with, but slightly more expensive.");
+        return qsTr("A mobile artillery piece, good for keeping up with armoured pushes, but vulnerable under direct fire.");
     };
 
     this.getBaseCost = function()

@@ -53,7 +53,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Heavy Infantry, packs a punch against vehicles.");
+        return qsTr("Heavier infantry wielding heavy weapons for anti-vehicle duty. Gains bonus vision on mountains.");
     };
 
     this.getBaseCost = function()

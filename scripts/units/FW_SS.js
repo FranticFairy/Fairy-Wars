@@ -29,7 +29,7 @@ var Constructor = function()
 
     this.getMovementType = function()
     {
-        return "MOVE_SHIP";
+        return "MOVE_SUB";
     };
 
     this.getUnitType = function()

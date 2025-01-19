@@ -44,7 +44,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Ground;
+        return GameEnums.UnitType_Air;
     };
 
     this.getName = function()
@@ -54,7 +54,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A cheap but  slow propellor-driven aircraft. Used for harassing soft ground targets and helicopters.");
+        return qsTr("A propellor-driven aircraft carrying air-to-air missiles instead of bombs, for countering enemy helicopters and non-fighter aircraft.");
     };
 
     this.getBaseCost = function()
@@ -64,7 +64,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

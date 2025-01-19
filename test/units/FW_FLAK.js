@@ -58,7 +58,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return False;
+        return false;
     };
 
     this.getTypeOfWeapon1 = function(unit)

@@ -49,7 +49,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Your standard battle copter.");
+        return qsTr("A heavy combat helicopter, great for engaging ground targets, but weak against anti-air.");
     };
 
     this.getBaseCost = function()
@@ -59,7 +59,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

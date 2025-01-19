@@ -54,7 +54,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Your standard battle copter.");
+        return qsTr("A modified heavy helicopter, capable of carrying a single infantry unit.");
     };
 
     this.getBaseCost = function()
@@ -64,7 +64,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

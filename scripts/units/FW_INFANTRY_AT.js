@@ -53,7 +53,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Standard Infantry, not much to say.");
+        return qsTr("Infantry units carrying disposable anti-tank launchers. This allows them to pack some punch against vehicles, but with little ammo.");
     };
 
     this.getBaseCost = function()

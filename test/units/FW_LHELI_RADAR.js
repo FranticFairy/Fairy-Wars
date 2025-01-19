@@ -50,7 +50,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A fast but fragile scouting helicopter. Good vision and mobility, but limited firepower. Good for harassing captures.");
+        return qsTr("A light helicopter mounting advanced sensor equipment, giving them a longer sight range.");
     };
 
     this.getBaseCost = function()
@@ -60,7 +60,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon2 = function(unit)

@@ -46,7 +46,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("An unarmed transport plane. Can carry land units, but can only load and unload on (Temp) Airports. Infantry units can be dropped anywhere.");
+        return qsTr("A transport plane refitted to carry high-tech radar equipment. Grants it a greater vision range and allows it to spot air units from far away.");
     };
 
     this.getBaseCost = function()

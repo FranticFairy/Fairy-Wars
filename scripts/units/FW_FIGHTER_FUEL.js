@@ -50,7 +50,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A fast anti-air air unit, great at killing anything that flies, but harmless against ground targets.");
+        return qsTr("A fighter carrying drop-tanks for extra fuel, allowing them to stay in the air for longer.");
     };
 
     this.getBaseCost = function()

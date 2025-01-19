@@ -45,7 +45,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A utility unit, capable of building Temp (Air)Ports, as well as laying and clearing landmines and building Temp Bridges.");
+        return qsTr("A dozer refitted to carry repair equipment and medical equipment instead of construction equipment. Can repair adjacent units.");
     };
 
     this.getBaseCost = function()

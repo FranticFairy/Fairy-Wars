@@ -53,7 +53,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A tougher Truck, can take more of a punch and has a defensive machine gun.");
+        return qsTr("A halftrack upgraded to mount a light tank gun for anti-vehicle fire support.");
     };
 
     this.getBaseCost = function()
@@ -63,7 +63,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

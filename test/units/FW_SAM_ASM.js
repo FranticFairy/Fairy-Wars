@@ -49,7 +49,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Long-range anti-air artillery. Can provide cover against enemy air attacks, and is devastating against any air units, but defenseless when attacked.");
+        return qsTr("A SAM launcher refitted to fire anti-ship missles instead, for anti-ship defenses at closer range.");
     };
 
     this.getBaseCost = function()
@@ -59,7 +59,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return False;
+        return false;
     };
 
     this.getTypeOfWeapon1 = function(unit)

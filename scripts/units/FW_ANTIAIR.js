@@ -44,7 +44,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("The Anti-air unit you're familiar with.");
+        return qsTr("A mobile anti-aircraft unit, good for providing air cover when pushing towards the enemy.");
     };
 
     this.getBaseCost = function()

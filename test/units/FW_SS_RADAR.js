@@ -49,7 +49,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A sneaky attacker, devastating against most naval units except destroyers. Can pass through shoals when not submerged.");
+        return qsTr("A submarine upgraded with improved sensor equipment, allowing for detecting enemy vessels at greater range, even infiltration submarines.");
     };
 
     this.getBaseCost = function()
@@ -59,7 +59,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

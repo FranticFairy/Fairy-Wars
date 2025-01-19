@@ -53,7 +53,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Essentially a vanilla recon.");
+        return qsTr("A recon car mounting a recoilless rifle, providing a good anti-vehicle punch.");
     };
 
     this.getBaseCost = function()

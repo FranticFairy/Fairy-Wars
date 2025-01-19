@@ -54,7 +54,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A mixed-use air unit, can attack both air and ground targets, but isn't as good at either as a dedicated Fighter or Bomber");
+        return qsTr("An attacker refitted to carry anti-ship missiles, allowing it to pack a greater punch against naval targets.");
     };
 
     this.getBaseCost = function()
@@ -64,7 +64,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

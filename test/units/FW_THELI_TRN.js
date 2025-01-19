@@ -46,7 +46,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Your standard transport copter.");
+        return qsTr("An upgraded transport helicopter, capable of carrying light vehicles.");
     };
 
     this.getBaseCost = function()
@@ -56,7 +56,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getLoadingPlace = function()

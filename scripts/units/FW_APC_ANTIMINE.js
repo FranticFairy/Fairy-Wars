@@ -45,7 +45,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A tougher Halftrack, can take quite a beating and can carry two Infantry units, but no Field Guns. Can perform resupplies.");
+        return qsTr("An APC mounting a mine-clearing flail at the front. Provides immunity to landmines and allows it to clear them.");
     };
 
     this.getBaseCost = function()

@@ -41,7 +41,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Your standard transport copter.");
+        return qsTr("A transport helicopter, useful for transporting around infantry, but too weak to carry  vehicles.");
     };
 
     this.getBaseCost = function()

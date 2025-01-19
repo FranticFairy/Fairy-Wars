@@ -50,7 +50,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A specialized air unit meant to be launched from carriers. Low fuel, but packs a good punch against sea targets, and is decent against air and land units.");
+        return qsTr("A seaplane refitted to carry anti-ship missiles, allowing it to pack a greater punch against naval targets.");
     };
 
     this.getBaseCost = function()

@@ -53,7 +53,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A tougher Truck, can take more of a punch and has a defensive machine gun.");
+        return qsTr("A halftrack upgraded to mount a light anti-air gun for anti-air fire support.");
     };
 
     this.getBaseCost = function()

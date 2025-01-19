@@ -53,7 +53,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("The standard tank unit.");
+        return qsTr("A medium tank mounting a mine-clearing flail at the front. Provides immunity to landmines and allows it to clear them.");
     };
 
     this.getBaseCost = function()
@@ -63,7 +63,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

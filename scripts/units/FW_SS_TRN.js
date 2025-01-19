@@ -30,7 +30,7 @@ var Constructor = function()
 
     this.getMovementType = function()
     {
-        return "MOVE_SHIP";
+        return "MOVE_SUB";
     };
 
     this.getUnitType = function()
@@ -45,7 +45,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A sneaky attacker, devastating against most naval units except destroyers. Can pass through shoals when not submerged.");
+        return qsTr("A submarine refitted to carry a single light ground unit, for sneaky insertion attacks.");
     };
 
     this.getBaseCost = function()

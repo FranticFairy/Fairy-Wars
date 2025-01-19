@@ -53,7 +53,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("An anti-air naval unit. Can carry two helicopters. Has ranged anti-air capability.");
+        return qsTr("A light cruiser that swaps out it's deck gun for a cruise missile launcher. Less potent against air targets, but gives it a ranged anti-ground-and-sea attack.");
     };
 
     this.getBaseCost = function()
@@ -63,7 +63,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

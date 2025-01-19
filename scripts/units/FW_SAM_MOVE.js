@@ -49,7 +49,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Long-range anti-air artillery. Can provide cover against enemy air attacks, and is devastating against any air units, but defenseless when attacked.");
+        return qsTr("A SAM launcher with tracks instead of wheels, for greater mobility.");
     };
 
     this.getBaseCost = function()

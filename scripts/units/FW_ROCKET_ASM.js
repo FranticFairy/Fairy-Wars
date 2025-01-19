@@ -49,7 +49,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A wheeled artillery piece that fires rockets. Struggles off-road, but has good ranged firepower.");
+        return qsTr("A rocket launcher refitted to fire anti-ship missles instead, for anti-ship defenses.");
     };
 
     this.getBaseCost = function()

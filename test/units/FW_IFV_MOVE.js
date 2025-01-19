@@ -37,12 +37,12 @@ var Constructor = function()
     };
 
     this.getCOSpecificUnit = function(building) {
-        return True;
+        return true;
     };
 
     this.getMovementType = function()
     {
-        return "MOVE_TANK";
+        return "MOVE_TANK_AMPHIB";
     };
 
     this.getUnitType = function()
@@ -57,7 +57,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A scouting/harrassment tank. Good against unarmoured targets, but weak against armoured enemies, and isn't very well-armoured itself.");
+        return qsTr("An IFV with amphibious propulsion, for crossing rivers.");
     };
 
     this.getBaseCost = function()
@@ -67,7 +67,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon2 = function(unit)

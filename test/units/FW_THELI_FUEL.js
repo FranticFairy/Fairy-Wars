@@ -46,7 +46,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Your standard transport copter.");
+        return qsTr("A transport helicopter carrying supplies for ground units rather than carrying ground units directly.");
     };
 
     this.getBaseCost = function()
@@ -56,7 +56,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.actionList = ["ACTION_SUPPORTALL_RATION"];

@@ -49,7 +49,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A floating airport, capable of repairing, refuelling and carrying Fighter, Attacker and Seaplane units. Has anti-air, but no other defenses.");
+        return qsTr("A carrier upgraded to have a larger flight deck, allowing it to carry and launch bombers and transport planes.");
     };
 
     this.getBaseCost = function()
@@ -59,7 +59,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

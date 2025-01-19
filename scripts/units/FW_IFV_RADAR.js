@@ -57,7 +57,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A scouting/harrassment tank. Good against unarmoured targets, but weak against armoured enemies, and isn't very well-armoured itself.");
+        return qsTr("An IFV mounting improved sensors, for improved scouting duties.");
     };
 
     this.getBaseCost = function()

@@ -49,7 +49,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Standard Infantry, not much to say.");
+        return qsTr("Infantry units trained to quickly disembark from landing craft. Allows them to move after unloading from naval transports.");
     };
 
     this.getBaseCost = function()

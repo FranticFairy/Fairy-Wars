@@ -53,7 +53,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Heavy Infantry, packs a punch against vehicles.");
+        return qsTr("Heavy Infantry teams carrying shoulder-launched anti-air missiles, for light anti-air support.");
     };
 
     this.getBaseCost = function()
@@ -63,7 +63,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

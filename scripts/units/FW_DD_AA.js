@@ -53,7 +53,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A submarine-hunting naval unit. Can spot submarines at range, and excels at destroying them. Good against weaker naval units.");
+        return qsTr("A destroyer refitted to have anti-aircraft guns instead of depth-charge racks, for defending against air targets.");
     };
 
     this.getBaseCost = function()

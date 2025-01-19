@@ -44,7 +44,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Standard Infantry, not much to say.");
+        return qsTr("Basic frontline infantry, the backbone of any army. Gains bonus vision on mountains.");
     };
 
     this.getBaseCost = function()
@@ -54,7 +54,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon2 = function(unit)

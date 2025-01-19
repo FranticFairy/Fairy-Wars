@@ -26,12 +26,12 @@ var Constructor = function()
     this.getShowInEditor = function () {
         return true;
     };
-    
+
     this.getFirstStrike = function(unit, uX, uY, attacker, isDefender, map, aX, aY) {
         if(isDefender) {
             return true;
         }
-    }
+    };
 
     this.getMovementType = function()
     {

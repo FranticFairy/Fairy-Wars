@@ -49,7 +49,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Standard Infantry, not much to say.");
+        return qsTr("Infantry units that have received additional training and equipment to fight better against other infantry.");
     };
 
     this.getBaseCost = function()

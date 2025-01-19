@@ -3,13 +3,13 @@ var Constructor = function()
 
     this.init = function(unit)
     {
-        unit.setAmmo1(4);
-        unit.setMaxAmmo1(4);
-        unit.setWeapon1ID("FW_WEP_MBOMB");
+        unit.setAmmo1(2);
+        unit.setMaxAmmo1(2);
+        unit.setWeapon1ID("FW_WEP_AAM");
 
         unit.setAmmo2(2);
         unit.setMaxAmmo2(2);
-        unit.setWeapon2ID("FW_WEP_AAM");
+        unit.setWeapon2ID("FW_WEP_LAAM");
 
         unit.setFuel(60);
         unit.setMaxFuel(60);
@@ -54,7 +54,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A mixed-use air unit, can attack both air and ground targets, but isn't as good at either as a dedicated Fighter or Bomber");
+        return qsTr("An attacker refitted to carry more powerful air-to-air missiles, to better compete for air superiority, at the cost of ground-attack capability.");
     };
 
     this.getBaseCost = function()
@@ -64,7 +64,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

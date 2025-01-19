@@ -49,7 +49,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A wheeled artillery piece that fires rockets. Struggles off-road, but has good ranged firepower.");
+        return qsTr("A rocket launcher with tracks instead of wheels, for greater mobility.");
     };
 
     this.getBaseCost = function()
@@ -59,7 +59,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return False;
+        return false;
     };
 
     this.getTypeOfWeapon1 = function(unit)

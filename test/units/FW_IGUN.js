@@ -27,6 +27,12 @@ var Constructor = function()
         return true;
     };
 
+    this.getFirstStrike = function(unit, uX, uY, attacker, isDefender, map, aX, aY) {
+        if(isDefender) {
+            return true;
+        }
+    };
+
     this.getMovementType = function()
     {
         return "MOVE_TIRE_B";
@@ -54,7 +60,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return False;
+        return false;
     };
 
     this.getTypeOfWeapon1 = function(unit)

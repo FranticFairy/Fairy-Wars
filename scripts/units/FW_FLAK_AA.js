@@ -53,7 +53,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("An anti-air field gun. Has a bit of range. Very strong against Helicopters, okay against light armoured targets, useless against heavy armour.");
+        return qsTr("An upgraded towed anti-aircraft gun that substitutes the cannons for a SAM launcher. Vulnerable to SEAD airplanes.");
     };
 
     this.getBaseCost = function()

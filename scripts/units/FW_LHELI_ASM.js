@@ -3,13 +3,13 @@ var Constructor = function()
 
     this.init = function(unit)
     {
-        unit.setAmmo1(4);
-        unit.setMaxAmmo1(4);
+        unit.setAmmo1(2);
+        unit.setMaxAmmo1(2);
         unit.setWeapon1ID("FW_WEP_TORP");
 
-        unit.setAmmo2(9);
-        unit.setMaxAmmo2(9);
-        unit.setWeapon2ID("FW_WEP_HELI_MG");
+        unit.setAmmo2(2);
+        unit.setMaxAmmo2(2);
+        unit.setWeapon2ID("FW_WEP_DC");
 
         unit.setFuel(60);
         unit.setMaxFuel(60);
@@ -54,7 +54,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A fast but fragile scouting helicopter. Good vision and mobility, but limited firepower. Good for harassing captures.");
+        return qsTr("A light helicopter carrying torpedos and depth charges, to support seaborne operations.");
     };
 
     this.getBaseCost = function()

@@ -44,7 +44,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Your standard artillery piece, but less mobile, but can be transported by Trucks/Halftracks/T.Copters.");
+        return qsTr("The standard artillery piece, without a mobile chassis. Can be transported by Trucks/Halftracks/T.Copters.");
     };
 
     this.getBaseCost = function()

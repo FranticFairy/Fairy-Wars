@@ -50,7 +50,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A fast anti-air air unit, great at killing anything that flies, but harmless against ground targets.");
+        return qsTr("A fighter carrying bombs instead of missiles, for when enemy airpower has been eliminated.");
     };
 
     this.getBaseCost = function()
@@ -60,7 +60,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

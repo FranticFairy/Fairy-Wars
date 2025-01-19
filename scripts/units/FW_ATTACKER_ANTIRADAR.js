@@ -54,7 +54,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A mixed-use air unit, can attack both air and ground targets, but isn't as good at either as a dedicated Fighter or Bomber");
+        return qsTr("An attacker refitted to carry anti-radar missiles. Allows it to detected and kill SAM launchers from a distance.");
     };
 
     this.getBaseCost = function()

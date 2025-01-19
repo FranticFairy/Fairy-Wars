@@ -53,7 +53,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A submarine-hunting naval unit. Can spot submarines at range, and excels at destroying them. Good against weaker naval units.");
+        return qsTr("A destroyer refitted to drop mines instead of depth charges, also carries sweeping equipment to clear out seamines.");
     };
 
     this.getBaseCost = function()
@@ -63,7 +63,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

@@ -3,8 +3,8 @@ var Constructor = function()
 
     this.init = function(unit)
     {
-        unit.setAmmo1(4);
-        unit.setMaxAmmo1(4);
+        unit.setAmmo1(6);
+        unit.setMaxAmmo1(6);
         unit.setWeapon1ID("FW_WEP_LBOMB");
 
         unit.setFuel(70);
@@ -50,7 +50,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("An unarmed transport plane. Can carry land units, but can only load and unload on (Temp) Airports. Infantry units can be dropped anywhere.");
+        return qsTr("A transport plane refitted to carry a bulkload of light bombs.");
     };
 
     this.getBaseCost = function()

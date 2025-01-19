@@ -27,6 +27,12 @@ var Constructor = function()
         return true;
     };
 
+    this.getFirstStrike = function(unit, uX, uY, attacker, isDefender, map, aX, aY) {
+        if(isDefender) {
+            return true;
+        }
+    };
+
     this.getMovementType = function()
     {
         return "MOVE_TIRE_B";
@@ -44,7 +50,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A field gun dedicated to killing tanks. Fires first when attacked, and has a little bit of range, but is quite squishy and can't target infantry or air.");
+        return qsTr("A field gun dedicated to killing tanks. Fires first when attacked, but is vulnerable to infantry attack.");
     };
 
     this.getBaseCost = function()
@@ -54,7 +60,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return False;
+        return false;
     };
 
     this.getTypeOfWeapon1 = function(unit)

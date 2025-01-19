@@ -44,7 +44,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Essentially a vanilla recon.");
+        return qsTr("A squishy but fast recon unit, sporting a good vision range. Can harass infantry quite well.");
     };
 
     this.getBaseCost = function()

@@ -46,7 +46,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("An unarmed transport plane. Can carry land units, but can only load and unload on (Temp) Airports. Infantry units can be dropped anywhere.");
+        return qsTr("A transport plane refitted into functioning as an aerial supply plane. Can refuel air units, but not re-arm them.");
     };
 
     this.getBaseCost = function()
@@ -56,7 +56,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.actionList = ["ACTION_SUPPORTALL_RATION"];

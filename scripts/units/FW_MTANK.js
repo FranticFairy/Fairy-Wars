@@ -48,7 +48,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("The standard tank unit.");
+        return qsTr("A standard, mainline battle tank, the backbone of a solid armoured force.");
     };
 
     this.getBaseCost = function()

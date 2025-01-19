@@ -80,6 +80,7 @@ var Constructor = function () {
                 break;
             case "FW_DD":
             case "FW_DD_ASM":
+            case "FW_BOMBER_ASM":
                 ACTION_PING.pingID(unit, 3, "FW_SS,FW_SS_AA,FW_SS_ARTY,FW_SS_ASM,FW_SS_TRN,FW_SS_RADAR", true);
                 break;
             case "FW_DD_MINE":
@@ -98,10 +99,12 @@ var Constructor = function () {
             case "FW_SS_ARTY":
             case "FW_SS_ASM":
             case "FW_SS_TRN":
-            case "FW_SS_RADAR":
                 ACTION_PING.pingType(unit, 3, GameEnums.UnitType_Naval, false);
                 ACTION_PING.pingID(unit, 3, "FW_SS,FW_SS_AA,FW_SS_ARTY,FW_SS_ASM,FW_SS_TRN,FW_SS_RADAR", true);
-                break;
+            break;
+            case "FW_SS_RADAR":
+                ACTION_PING.pingType(unit, 5, GameEnums.UnitType_Naval, true);
+            break;
         }
     }
 

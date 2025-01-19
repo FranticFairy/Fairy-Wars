@@ -48,7 +48,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A utility unit, capable of building Temp (Air)Ports, as well as laying and clearing landmines and building Temp Bridges.");
+        return qsTr("A utility unit, capable of building various structures and defenses, as well as laying and clearing landmines.");
     };
 
     this.getBaseCost = function()
@@ -58,7 +58,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

@@ -40,7 +40,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A mostly harmless naval unit that has light AA to defend itself. Can resupply other naval units and conduct repairs for them at sea.");
+        return qsTr("A harmless support ship with no way to defend itself. Can resupply other naval units and conduct repairs for them at sea.");
     };
 
     this.getBaseCost = function()

@@ -50,7 +50,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A dedicated heavy ground attack unit, devastates land targets but is vulnerable to air attack.");
+        return qsTr("A bomber carrying a rack of depth charges, useful for detecting and hunting down swarms of submarines.");
     };
 
     this.getBaseCost = function()
@@ -60,7 +60,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

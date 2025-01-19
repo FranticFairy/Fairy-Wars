@@ -32,7 +32,7 @@ ACTION_SUPPORTALL_RATION.checkUnit = function (unit, x, y, map) {
 ACTION_SUPPORTALL_RATION.giveSingleRation = function (unit, x, y, refillMaterial, queueAnimation, map) {
     if (ACTION_SUPPORTALL_RATION.checkUnit(unit, x, y, map)) {
         var refillUnit = map.getTerrain(x, y).getUnit();
-        if (unit.getUnitID() === "FW_TRANSPORT") {
+        if (unit.getUnitID() === "FW_TRANSPORT_FUEL") {
             refillUnit.refill(refillMaterial, 1, 0, 0);
         } else {
             refillUnit.refill(refillMaterial);

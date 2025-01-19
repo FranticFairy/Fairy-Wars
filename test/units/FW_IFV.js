@@ -32,7 +32,7 @@ var Constructor = function()
     };
 
     this.getCOSpecificUnit = function(building) {
-        return True;
+        return true;
     };
 
     this.getMovementType = function()
@@ -62,7 +62,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon2 = function(unit)
