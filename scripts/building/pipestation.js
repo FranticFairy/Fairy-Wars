@@ -19,3 +19,6 @@ PIPESTATION.onWeatherChanged = function(building, weather, map)
 PIPESTATION.getShowInEditor = function() {
     return false;
 };
+PIPESTATION.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};

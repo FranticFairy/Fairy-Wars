@@ -10,27 +10,13 @@ UNIT.transporterRefilling = function (unit, map) {
         var refresh = map.getGameRules().getTransporterRefresh();
         if (unitID === "FW_AST_INFANTRY" || unitID === "FW_SEAPLANE") {
             transportUnit.setHasMoved(false);
-        } else if (unitID === "FW_INFANTRY") {
-            var variables = transportUnit.getVariables();
-            var displayIconVar = variables.createVariable("displayIcon");
-            var displayIcon = displayIconVar.readDataString();
-            if (displayIcon === "+anch") {
-                if (unit.getUnitType() === GameEnums.UnitType_Naval) {
-                    transportUnit.setHasMoved(false);
-                }
-            } else if (displayIcon === "+para") {
-                if (unit.getUnitType() === GameEnums.UnitType_Air) {
-                    transportUnit.setHasMoved(false);
-                }
+        } else if (unit.getUnitType() === GameEnums.UnitType_Naval) {
+            if(unitID === "FW_INFANTRY_ANCH" || unitID === "FW_IFV_ANCH") {
+                transportUnit.setHasMoved(false);
             }
-        } else if (unitID === "FW_IFV") {
-            var variables = transportUnit.getVariables();
-            var displayIconVar = variables.createVariable("displayIcon");
-            var displayIcon = displayIconVar.readDataString();
-            if (displayIcon === "+anch") {
-                if (unit.getUnitType() === GameEnums.UnitType_Naval) {
-                    transportUnit.setHasMoved(false);
-                }
+        } else if (unit.getUnitType() === GameEnums.UnitType_Air) {
+            if(unitID === "FW_INFANTRY_PARA") {
+                transportUnit.setHasMoved(false);
             }
         }
     }
@@ -81,10 +67,8 @@ UNIT.doWalkingAnimation = function (action, map) {
 };
 
 UNIT.canAttackStealthedUnit = function (attacker, defender, map) {
-    if (defender.getUnitID() == "FW_SS") {
-        if (attacker.getWeapon1ID() == "FW_WEP_DC" || attacker.getWeapon2ID() == "FW_WEP_DC") {
-            return true;
-        }
+    if (attacker.getWeapon1ID() == "FW_WEP_DC" || attacker.getWeapon2ID() == "FW_WEP_DC") {
+        return true;
     }
     if (defender.getCloaked() && !defender.getHidden()) {
         return true;
@@ -99,46 +83,6 @@ UNIT.initForMods = function (unit) {
 var defaultValues = [];
 
 UNIT.buildedUnit = function (unit, player, map) {
-    unit.defaultValues = []
-
-    if (unit.getWeapon1ID() != null) {
-        unit.defaultValues.push(unit.getAmmo1()); //0
-        unit.defaultValues.push(unit.getMaxAmmo1()); //1
-        unit.defaultValues.push(unit.getWeapon1ID()); //2
-    } else {
-        unit.defaultValues.push(""); //0
-        unit.defaultValues.push(0); //1
-        unit.defaultValues.push(0); //2
-    }
-
-    if (unit.getWeapon2ID() != null) {
-        unit.defaultValues.push(unit.getAmmo2()); //0
-        unit.defaultValues.push(unit.getMaxAmmo2()); //1
-        unit.defaultValues.push(unit.getWeapon2ID()); //2
-    } else {
-        unit.defaultValues.push(""); //0
-        unit.defaultValues.push(0); //1
-        unit.defaultValues.push(0); //2
-    }
-
-    unit.defaultValues.push(unit.getMaxFuel()); //6
-    unit.defaultValues.push(unit.getBaseMovementPoints()); //7
-    unit.defaultValues.push(unit.getBaseMinRange()); //8
-    unit.defaultValues.push(unit.getBaseMaxRange()); //9
-    unit.defaultValues.push(unit.getBaseVision()); //10
-
-    unit.defaultValues.push(unit.canMoveAndFire(Qt.point(unit.x, unit.y))); //11
-    unit.defaultValues.push(unit.getTypeOfWeapon1()); //12
-    unit.defaultValues.push(unit.getTypeOfWeapon2()); //13
-
-    if (unit.getVisionHigh() != null) {
-        unit.defaultValues.push(unit.getVisionHigh()); //14
-    } else {
-        unit.defaultValues.push(0); //2
-    }
-
-    unit.defaultValues.push(unit.getMovementType()); //15
-    unit.defaultValues.push(unit.getLoadingPlace()); //16
 }
 
 UNIT.getActions = function (unit, map) {
@@ -148,53 +92,38 @@ UNIT.getActions = function (unit, map) {
 
 UNIT.actionList = ["ACTION_FIRE", "ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_UNLOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"],
 
-    UNIT.startOfTurn = function (unit, map) {
-        if (typeof map !== 'undefined') {
+UNIT.startOfTurn = function (unit, map) {
+    ACTION_HANDLER.handleStartOfTurn(unit,map);
+};
 
-            if (map.getCurrentDay() < 2) {
-                var playerCounter = map.getPlayerCount();
-                for (var i2 = 0; i2 < playerCounter; i2++) {
-                    var otherPlayer = map.getPlayer(i2);
+UNIT.endOfTurn = function(unit, map) {
+    ACTION_HANDLER.handleEndOfTurn(unit, map);
+}
 
-                    var units = otherPlayer.getUnits();
-                    units.randomize();
-                    for (i = 0; i < units.size(); i++) {
-                        var unit = units.at(i);
-                        if (unit !== null) {
-                            if (!unit.getUnitID().includes("FW_")) {
-                                ACTION_REPLACEDEFAULTUNIT.replace(unit);
-                                unit.refill(false);
-                            }
-                        }
+UNIT.postBattleActions = function(unit, damage, otherUnit, gotAttacked, weapon, action) {
+    ACTION_HANDLER.handlePostBattleActions(unit, damage, otherUnit, gotAttacked, weapon, action);
+}
 
-                    }
-                    units.remove();
-                }
-            }
-        }
-        /*
-        if(!unit.getActionList().includes("ACTION_LOADOUT")) {
-        }
-        */
-    };
+UNIT.postAction = function(unit, action, map) {
+    ACTION_HANDLER.handlePostAction(unit, action, map);
+}
 
 UNIT.getShowInEditor = function () {
     return false;
 }
 
+UNIT.variant = false;
+UNIT.upgradeCost = 0;
+UNIT.variantList = [];
+UNIT.fuelConsumption = 0;
+
 UNIT.isVariantUnit = false;
 
 UNIT.getSpriteReference = function (unit) {
     var unitID = unit.getUnitID();
-    var variables = unit.getVariables();
 
-    var variantVar = variables.createVariable("variant");
-    var variant = variantVar.readDataBool();
-    var variantListVar = variables.createVariable("variantList");
-    var variantList = variantListVar.readDataString();
-    
-    if(variant) {
-        return variantList.split(',')[0];
+    if(Global[unitID].variant) {
+        return Global[unitID].variantList[0];
     }
     return unitID;
 }

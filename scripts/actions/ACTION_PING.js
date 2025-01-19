@@ -36,16 +36,7 @@ var Constructor = function () {
             var detectedUnit = detectedUnits[i];
             var unitID = detectedUnit.getUnitID();
             if (IDString.includes(unitID)) {
-                if(unitID === "FW_SAM" || unitID === "FW_SS") {
-                    var variables = detectedUnit.getVariables();
-                    var displayIconVar = variables.createVariable("displayIcon");
-                    var displayIcon = displayIconVar.readDataString();
-                    if(displayIcon != "+antiradar") {
-                        unit.getOwner().addVisionField(detectedUnit.getX(), detectedUnit.getY(), 1, true);
-                    }
-                } else {
-                    unit.getOwner().addVisionField(detectedUnit.getX(), detectedUnit.getY(), 1, true);
-                }
+                unit.getOwner().addVisionField(detectedUnit.getX(), detectedUnit.getY(), 1, true);
             }
         }
     }

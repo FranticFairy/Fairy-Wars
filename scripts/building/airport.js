@@ -15,3 +15,6 @@ AIRPORT.loadSprites = function(building, neutral, map)
 AIRPORT.onWeatherChanged = function(building, weather, map)
 {	
 };
+AIRPORT.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};

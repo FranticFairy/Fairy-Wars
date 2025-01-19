@@ -26,27 +26,12 @@ var Constructor = function()
         displayIcon = "+asm";
         displayIconVar.writeDataString(displayIcon);
 
-        var variantVar = variables.createVariable("variant");
-        var variant = variantVar.readDataBool();
-        variant = true;
-        variantVar.writeDataBool(variant);
-
-        var upgradeCostVar = variables.createVariable("upgradeCost");
-        var upgradeCost = upgradeCostVar.readDataInt32();
-        upgradeCost = 0;
-        upgradeCostVar.writeDataInt32(upgradeCost);
-
-        var variantListVar = variables.createVariable("variantList");
-        var variantList = variantListVar.readDataString();
-        variantList = ["FW_PROP","FW_PROP_AA","FW_PROP_AT"];
-        variantListVar.writeDataString(variantList);
-
-        var fuelConsumptionVar = variables.createVariable("fuelConsumption");
-        var fuelConsumption = fuelConsumptionVar.readDataInt32();
-        fuelConsumption = 4;
-        fuelConsumptionVar.writeDataInt32(fuelConsumption);
-
     };
+
+    this.variant = true;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_PROP","FW_PROP_AA","FW_PROP_AT"];
+    this.fuelConsumption = 4;
 
     this.getShowInEditor = function () {
         return true;
@@ -59,7 +44,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Ground;
+        return GameEnums.UnitType_Air;
     };
 
     this.getName = function()
@@ -79,7 +64,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon1 = function(unit)

@@ -13,3 +13,6 @@ POWERPLANT.loadSprites = function(building, neutral, map)
 POWERPLANT.onWeatherChanged = function(building, weather, map)
 {	
 };
+POWERPLANT.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};

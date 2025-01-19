@@ -25,27 +25,12 @@ var Constructor = function()
         displayIcon = "+at";
         displayIconVar.writeDataString(displayIcon);
 
-        var variantVar = variables.createVariable("variant");
-        var variant = variantVar.readDataBool();
-        variant = true;
-        variantVar.writeDataBool(variant);
-
-        var upgradeCostVar = variables.createVariable("upgradeCost");
-        var upgradeCost = upgradeCostVar.readDataInt32();
-        upgradeCost = 3000;
-        upgradeCostVar.writeDataInt32(upgradeCost);
-
-        var variantListVar = variables.createVariable("variantList");
-        var variantList = variantListVar.readDataString();
-        variantList = ["FW_IFV","FW_IFV_AA","FW_IFV_ARTY","FW_IFV_ANTIMINE","FW_IFV_RADAR","FW_IFV_MOVE","FW_IFV_ANCH","FW_IFV_HMR"];
-        variantListVar.writeDataString(variantList);
-
-        var fuelConsumptionVar = variables.createVariable("fuelConsumption");
-        var fuelConsumption = fuelConsumptionVar.readDataInt32();
-        fuelConsumption = 0;
-        fuelConsumptionVar.writeDataInt32(fuelConsumption);
-
     };
+
+    this.variant = true;
+    this.upgradeCost = 3000;
+    this.variantList = ["FW_IFV","FW_IFV_AA","FW_IFV_ARTY","FW_IFV_ANTIMINE","FW_IFV_RADAR","FW_IFV_MOVE","FW_IFV_ANCH","FW_IFV_HMR"];
+    this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {
         return true;

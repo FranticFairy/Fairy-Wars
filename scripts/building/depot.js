@@ -28,3 +28,6 @@ DEPOT.loadSprites = function(building, neutral, map)
 DEPOT.onWeatherChanged = function(building, weather, map)
 {	
 };
+DEPOT.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};

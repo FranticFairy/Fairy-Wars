@@ -5,3 +5,6 @@ SILO.loadSprites = function(building, neutral, map)
 SILO.onWeatherChanged = function(building, weather, map)
 {	
 };
+SILO.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};

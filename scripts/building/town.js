@@ -15,3 +15,6 @@ TOWN.loadSprites = function(building, neutral, map)
 TOWN.onWeatherChanged = function(building, weather, map)
 {	
 };
+TOWN.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};

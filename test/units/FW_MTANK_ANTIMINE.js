@@ -25,27 +25,12 @@ var Constructor = function()
         displayIcon = "+antimine";
         displayIconVar.writeDataString(displayIcon);
 
-        var variantVar = variables.createVariable("variant");
-        var variant = variantVar.readDataBool();
-        variant = true;
-        variantVar.writeDataBool(variant);
-
-        var upgradeCostVar = variables.createVariable("upgradeCost");
-        var upgradeCost = upgradeCostVar.readDataInt32();
-        upgradeCost = 4000;
-        upgradeCostVar.writeDataInt32(upgradeCost);
-
-        var variantListVar = variables.createVariable("variantList");
-        var variantList = variantListVar.readDataString();
-        variantList = ["FW_MTANK"];
-        variantListVar.writeDataString(variantList);
-
-        var fuelConsumptionVar = variables.createVariable("fuelConsumption");
-        var fuelConsumption = fuelConsumptionVar.readDataInt32();
-        fuelConsumption = 0;
-        fuelConsumptionVar.writeDataInt32(fuelConsumption);
-
     };
+
+    this.variant = true;
+    this.upgradeCost = 4000;
+    this.variantList = ["FW_MTANK"];
+    this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {
         return true;

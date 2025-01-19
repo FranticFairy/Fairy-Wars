@@ -16,6 +16,9 @@ FACTORY.loadSprites = function(building, neutral, map)
 FACTORY.onWeatherChanged = function(building, weather, map)
 {	
 };
+FACTORY.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};
 
 /*
 FACTORY.getConstructionList = function (building) {

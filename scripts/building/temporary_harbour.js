@@ -25,3 +25,6 @@ TEMPORARY_HARBOUR.getBuildingGroup = function()
 {
     return 0;
 };
+TEMPORARY_HARBOUR.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};

@@ -20,3 +20,6 @@ TEMPORARY_AIRPORT.getBuildingGroup = function()
 {
     return 0;
 };
+TEMPORARY_AIRPORT.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};

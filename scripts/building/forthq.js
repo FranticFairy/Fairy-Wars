@@ -19,3 +19,6 @@ FORTHQ.onWeatherChanged = function(building, weather, map)
 FORTHQ.getShowInEditor = function() {
     return false;
 };
+FORTHQ.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};

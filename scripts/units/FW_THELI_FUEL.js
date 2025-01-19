@@ -18,27 +18,12 @@ var Constructor = function()
         displayIcon = "+fuel";
         displayIconVar.writeDataString(displayIcon);
 
-        var variantVar = variables.createVariable("variant");
-        var variant = variantVar.readDataBool();
-        variant = true;
-        variantVar.writeDataBool(variant);
-
-        var upgradeCostVar = variables.createVariable("upgradeCost");
-        var upgradeCost = upgradeCostVar.readDataInt32();
-        upgradeCost = 2000;
-        upgradeCostVar.writeDataInt32(upgradeCost);
-
-        var variantListVar = variables.createVariable("variantList");
-        var variantList = variantListVar.readDataString();
-        variantList = ["FW_THELI","FW_THELI_TRN"];
-        variantListVar.writeDataString(variantList);
-
-        var fuelConsumptionVar = variables.createVariable("fuelConsumption");
-        var fuelConsumption = fuelConsumptionVar.readDataInt32();
-        fuelConsumption = 2;
-        fuelConsumptionVar.writeDataInt32(fuelConsumption);
-
     };
+
+    this.variant = true;
+    this.upgradeCost = 2000;
+    this.variantList = ["FW_THELI","FW_THELI_TRN"];
+    this.fuelConsumption = 2;
 
     this.getShowInEditor = function () {
         return true;
@@ -71,7 +56,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.actionList = ["ACTION_SUPPORTALL_RATION"];

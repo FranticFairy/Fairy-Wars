@@ -16,27 +16,12 @@ var Constructor = function()
 
         var variables = unit.getVariables();
 
-        var variantVar = variables.createVariable("variant");
-        var variant = variantVar.readDataBool();
-        variant = false;
-        variantVar.writeDataBool(variant);
-
-        var upgradeCostVar = variables.createVariable("upgradeCost");
-        var upgradeCost = upgradeCostVar.readDataInt32();
-        upgradeCost = 0;
-        upgradeCostVar.writeDataInt32(upgradeCost);
-
-        var variantListVar = variables.createVariable("variantList");
-        var variantList = variantListVar.readDataString();
-        variantList = [];
-        variantListVar.writeDataString(variantList);
-
-        var fuelConsumptionVar = variables.createVariable("fuelConsumption");
-        var fuelConsumption = fuelConsumptionVar.readDataInt32();
-        fuelConsumption = 1;
-        fuelConsumptionVar.writeDataInt32(fuelConsumption);
-
     };
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = [];
+    this.fuelConsumption = 1;
 
     this.getShowInEditor = function () {
         return true;
@@ -69,7 +54,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon2 = function(unit)

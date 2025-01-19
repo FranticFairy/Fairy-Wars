@@ -22,7 +22,6 @@ OILRIG.startOfTurn = function(building, map)
     BUILDING.replenishUnit(building, map, 0, 1, 1, 1, false);
 };
 
-OILRIG.getConstructionList = function(building)
-{
-    return OILRIG.constructionList;
+OILRIG.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
 };

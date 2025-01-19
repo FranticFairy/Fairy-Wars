@@ -25,27 +25,12 @@ var Constructor = function()
         displayIcon = "+at";
         displayIconVar.writeDataString(displayIcon);
 
-        var variantVar = variables.createVariable("variant");
-        var variant = variantVar.readDataBool();
-        variant = true;
-        variantVar.writeDataBool(variant);
-
-        var upgradeCostVar = variables.createVariable("upgradeCost");
-        var upgradeCost = upgradeCostVar.readDataInt32();
-        upgradeCost = 1000;
-        upgradeCostVar.writeDataInt32(upgradeCost);
-
-        var variantListVar = variables.createVariable("variantList");
-        var variantList = variantListVar.readDataString();
-        variantList = ["FW_INFANTRY","FW_INFANTRY_GUN","FW_INFANTRY_PARA","FW_INFANTRY_ANCH"];
-        variantListVar.writeDataString(variantList);
-
-        var fuelConsumptionVar = variables.createVariable("fuelConsumption");
-        var fuelConsumption = fuelConsumptionVar.readDataInt32();
-        fuelConsumption = 0;
-        fuelConsumptionVar.writeDataInt32(fuelConsumption);
-
     };
+
+    this.variant = true;
+    this.upgradeCost = 1000;
+    this.variantList = ["FW_INFANTRY","FW_INFANTRY_GUN","FW_INFANTRY_PARA","FW_INFANTRY_ANCH"];
+    this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {
         return true;

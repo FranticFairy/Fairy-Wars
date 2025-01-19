@@ -16,27 +16,12 @@ var Constructor = function()
 
         var variables = unit.getVariables();
 
-        var variantVar = variables.createVariable("variant");
-        var variant = variantVar.readDataBool();
-        variant = false;
-        variantVar.writeDataBool(variant);
-
-        var upgradeCostVar = variables.createVariable("upgradeCost");
-        var upgradeCost = upgradeCostVar.readDataInt32();
-        upgradeCost = 0;
-        upgradeCostVar.writeDataInt32(upgradeCost);
-
-        var variantListVar = variables.createVariable("variantList");
-        var variantList = variantListVar.readDataString();
-        variantList = ["FW_IFV_AT","FW_IFV_AA","FW_IFV_ARTY","FW_IFV_ANTIMINE","FW_IFV_RADAR","FW_IFV_MOVE","FW_IFV_ANCH","FW_IFV_HMR"];
-        variantListVar.writeDataString(variantList);
-
-        var fuelConsumptionVar = variables.createVariable("fuelConsumption");
-        var fuelConsumption = fuelConsumptionVar.readDataInt32();
-        fuelConsumption = 0;
-        fuelConsumptionVar.writeDataInt32(fuelConsumption);
-
     };
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_IFV_AT","FW_IFV_AA","FW_IFV_ARTY","FW_IFV_ANTIMINE","FW_IFV_RADAR","FW_IFV_MOVE","FW_IFV_ANCH","FW_IFV_HMR"];
+    this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {
         return true;
@@ -47,7 +32,7 @@ var Constructor = function()
     };
 
     this.getCOSpecificUnit = function(building) {
-        return True;
+        return true;
     };
 
     this.getMovementType = function()
@@ -77,7 +62,7 @@ var Constructor = function()
 
 	this.canMoveAndFire = function()
     {
-        return True;
+        return true;
     };
 
     this.getTypeOfWeapon2 = function(unit)

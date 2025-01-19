@@ -15,3 +15,6 @@ HARBOUR.loadSprites = function(building, neutral, map)
 HARBOUR.onWeatherChanged = function(building, weather, map)
 {	
 };
+HARBOUR.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};

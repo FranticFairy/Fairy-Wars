@@ -20,3 +20,6 @@ HQ.getBuildingGroup = function()
 {
     return 2;
 };
+HQ.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};
