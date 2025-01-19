@@ -22,11 +22,11 @@ var Constructor = function () {
         if (weather === "")
         {
             weatherVar.writeDataString("night");
-            map.getGameRules().setFogMode(GameEnums.Fog_OfShroud);
+            map.getGameRules().setFogMode(GameEnums.Fog_Off);
             for(var x = 0; x < map.getMapWidth(); x++) {
                 for(var y = 0; y < map.getMapHeight(); y++) {
                     var tile = map.getTerrain(x,y);
-                    player.addVisionField(x,y,0,false,GameEnums.VisionType_Shrouded)
+                    player.addVisionField(x,y,0,false,GameEnums.VisionType_Clear)
                 }
             }
         } else {

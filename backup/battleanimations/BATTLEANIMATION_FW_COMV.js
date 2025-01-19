@@ -2,7 +2,7 @@ var Constructor = function()
 {
     this.getMaxUnitCount = function()
     {
-        return 5;
+        return 10;
     };
     this.loadStandingAnimation = function(sprite, unit, defender, weapon)
     {

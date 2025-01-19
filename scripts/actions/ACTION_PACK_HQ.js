@@ -6,7 +6,7 @@ var Constructor = function()
         var building = action.getTargetBuilding();
         if ((unit === null) &&
             (building !== null) &&
-            (BUILDING.hqIds.includes(building.getBuildingID())) && building.getOwner() == map.getCurrentPlayer() && player.getFunds() >= 10000)
+            (BUILDING.hqIds.includes(building.getBuildingID())) && building.getOwner() == map.getCurrentPlayer() && map.getCurrentPlayer().getFunds() >= 10000)
 		{
             return true;
 		}

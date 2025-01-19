@@ -144,11 +144,15 @@ var Constructor = function () {
             if (co.getPowerMode() === GameEnums.PowerMode_Superpower ||
                     co.getPowerMode() === GameEnums.PowerMode_Tagpower)
             {
-                return CO_FAI.superPowerMovement;
+                if(unit.getBaseMovementPoints() > 0) {
+                    return CO_FAI.superPowerMovement;
+                }
             }
             else if (co.getPowerMode() === GameEnums.PowerMode_Power)
             {
-                return CO_FAI.powerMovement;
+                if(unit.getBaseMovementPoints() > 0) {
+                    return CO_FAI.powerMovement;
+                }
             }
         }
         return 0;

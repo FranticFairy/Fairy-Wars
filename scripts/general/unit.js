@@ -61,8 +61,8 @@ UNIT.getSound = function (unit) {
 }
 
 UNIT.loadSprites = function (unit) {
-    unit.loadSpriteV2(unit.getUnitID() + "+mask", GameEnums.Recoloring_Matrix);
-    unit.loadSpriteV2(unit.getUnitID(), GameEnums.Recoloring_None);
+    unit.loadSpriteV2(UNIT.getSpriteReference(unit) + "+mask", GameEnums.Recoloring_Matrix);
+    unit.loadSpriteV2(UNIT.getSpriteReference(unit), GameEnums.Recoloring_None);
     var variables = unit.getVariables();
     var displayIconVar = variables.createVariable("displayIcon");
     var displayIcon = displayIconVar.readDataString();
@@ -73,7 +73,7 @@ UNIT.loadSprites = function (unit) {
 UNIT.doWalkingAnimation = function (action, map) {
     var unit = action.getTargetUnit();
     var animation = GameAnimationFactory.createWalkingAnimation(map, unit, action);
-    var unitID = unit.getUnitID().toLowerCase();
+    var unitID = UNIT.getSpriteReference(unit).toLowerCase();
     animation.loadSpriteV2(unitID + "+mask", GameEnums.Recoloring_Matrix, 1);
     animation.loadSpriteV2(unitID, GameEnums.Recoloring_None, 1);
     animation.setSound(UNIT.getSound(unit), -2);
@@ -141,82 +141,11 @@ UNIT.buildedUnit = function (unit, player, map) {
     unit.defaultValues.push(unit.getLoadingPlace()); //16
 }
 
-UNIT.onGameStarted = function() {
-    GameConsole.print("UoGS",1);
-}
-
-UNIT.getBasicActions = function (unit, map, extraActions = "") {
-    var captureCapable = ["FW_IFV","FW_FF"];
-    var hasResupply = ["FW_TRUCK","FW_APC","FW_AX","FW_TRANSPORT"];
-    var hasRepair = ["FW_AX"];
-    var hasFactoryLoad = ["FW_IFV","FW_TRUCK","FW_APC","FW_THELI","FW_HALFTRACK","FW_TR"];
-    var hasStealth = ["FW_SS"];
-    var isIdle = ["FW_SEAMINE","FW_LANDMINE"];
-    var isMinelayer = ["FW_ML"];
-    var isSweeper = ["FW_ML"];
-    var basicActions = [];
-    var unitID = unit.getUnitID()
-    var unitType = unit.getUnitType()
-    if (unit.getWeapon1ID() != "" || unit.getWeapon2ID() != "") {
-        basicActions.push("ACTION_FIRE");
-    }
-    if (unitType === GameEnums.UnitType_Infantry || captureCapable.includes(unitID)) {
-        basicActions.push("ACTION_MISSILE");
-        basicActions.push("ACTION_CAPTURE");
-    }
-    if (hasFactoryLoad.includes(unitID)) {
-        basicActions.push("ACTION_BUILD_CARRY");
-    }
-    if (hasRepair.includes(unitID)) {
-        basicActions.push("ACTION_SUPPORTSINGLE_REPAIR");
-    }
-    if (hasResupply.includes(unitID)) {
-        basicActions.push("ACTION_SUPPORTALL_RATION");
-    }
-    if ((unit.getWeapon1ID() === "" && unit.getMaxAmmo1() > 0) || (unit.getWeapon2ID() === "" && unit.getMaxAmmo2() > 0)) {
-        basicActions.push("ACTION_RESTOCK");
-    }
-    if (unit.getMovementType() === "MOVE_HELI" || unit.getMovementType() === "MOVE_HELI_LANDED") {
-        basicActions.push("ACTION_LAND");
-        basicActions.push("ACTION_LIFT");
-    }
-    if (hasStealth.includes(unitID)) {
-        basicActions.push("ACTION_STEALTH");
-        basicActions.push("ACTION_UNSTEALTH");
-    }
-    if (isMinelayer.includes(unitID)) {
-        if(unitType === GameEnums.UnitType_Infantry || unitType === GameEnums.UnitType_Ground) {
-            basicActions.push("ACTION_PLACE_LANDMINE");
-        } else {
-            basicActions.push("ACTION_PLACE_WATERMINE");
-        }
-    }
-    if (isSweeper.includes(unitID)) {
-        basicActions.push("ACTION_DISABLE_MINE");
-    }
-    if(extraActions != "") {
-        for(var i = 0; i < extraActions.length; i++) {
-            basicActions.push(extraActions[i]);
-        }
-    }
-
-    if (isIdle.includes(unitID)) {
-        basicActions.push("ACTION_DISARM");
-        basicActions.push("ACTION_WAIT");
-    } else {
-        basicActions.push("ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_UNLOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1")
-    }
-
-    return basicActions;
-}
-/*
 UNIT.getActions = function (unit, map) {
-    var baseActions = UNIT.getBasicActions(unit,map);
-
-    return baseActions;
     // returns a string id list of the actions this unit can perform
-};
-*/
+    return Global[unit.getUnitID()].actionList + UNIT.actionList;
+}
+
 UNIT.actionList = ["ACTION_FIRE", "ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_UNLOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"],
 
     UNIT.startOfTurn = function (unit, map) {
@@ -253,6 +182,23 @@ UNIT.getShowInEditor = function () {
     return false;
 }
 
+UNIT.isVariantUnit = false;
+
+UNIT.getSpriteReference = function (unit) {
+    var unitID = unit.getUnitID();
+    var variables = unit.getVariables();
+
+    var variantVar = variables.createVariable("variant");
+    var variant = variantVar.readDataBool();
+    var variantListVar = variables.createVariable("variantList");
+    var variantList = variantListVar.readDataString();
+    
+    if(variant) {
+        return variantList.split(',')[0];
+    }
+    return unitID;
+}
+
 UNIT.getTypeOfWeapon1 = function (unit) {
     if (unit.getBaseMaxRange() > 1) {
         return GameEnums.WeaponType_Indirect;
@@ -278,5 +224,71 @@ UNIT.getTypeOfWeapon2 = function (unit) {
             return GameEnums.WeaponType_Indirect;
         default:
             return GameEnums.WeaponType_Direct;
+    }
+};
+
+UNIT.createExplosionAnimation = function (x, y, unit, map) {
+    if (unit.getUnitType() === GameEnums.UnitType_Air) {
+        var animation = GameAnimationFactory.createAnimation(map, x, y);
+        animation.addSprite("explosion + air", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
+        animation.setSound("explosion + air.wav");
+        return animation;
+    } else if (unit.getUnitType() === GameEnums.UnitType_Naval) {
+        var animation = GameAnimationFactory.createAnimation(map, x, y);
+        animation.addSprite("explosion + water", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
+        animation.setSound("explosion + water.wav");
+        return animation;
+    } else {
+        var animation = GameAnimationFactory.createAnimation(map, x, y);
+        animation.addSprite("explosion+land", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
+        animation.setSound("explosion+land.wav");
+        return animation;
+    }
+};
+
+UNIT.getTerrainAnimationBase = function (unit, terrain, defender, map) {
+    if (unit.getUnitType() === GameEnums.UnitType_Air || unit.getUnitType() === GameEnums.UnitType_Naval) {
+        var weatherModifier = TERRAIN.getWeatherModifier(map);
+        return "base_" + weatherModifier + "air";
+    }
+    if (Global[terrain.getID()].getTerrainAnimationBase !== null) {
+        return Global[terrain.getID()].getTerrainAnimationBase(unit, terrain, defender, map);
+
+    }
+    else {
+        return "";
+    }
+};
+
+UNIT.getTerrainAnimationMoveSpeed = function (unit) {
+    if (unit.getUnitType() === GameEnums.UnitType_Air || unit.getUnitType() === GameEnums.UnitType_Naval) {
+        return 1;
+    }
+    return 0;
+};
+
+UNIT.getTerrainAnimationForeground = function (unit, terrain, defender, map) {
+    if (unit.getUnitType() === GameEnums.UnitType_Air || unit.getUnitType() === GameEnums.UnitType_Naval) {
+        return "";
+    }
+    if (Global[terrain.getID()].getTerrainAnimationForeground !== null) {
+        return Global[terrain.getID()].getTerrainAnimationForeground(unit, terrain, defender, map);
+    }
+    else {
+        return "";
+    }
+};
+
+UNIT.getTerrainAnimationBackground = function (unit, terrain, defender, map) {
+    if (unit.getUnitType() === GameEnums.UnitType_Air || unit.getUnitType() === GameEnums.UnitType_Naval) {
+        var weatherModifier = TERRAIN.getWeatherModifier(map);
+        return "back_" + weatherModifier + "sea";
+    } else {
+        if (Global[terrain.getID()].getTerrainAnimationBackground !== null) {
+            return Global[terrain.getID()].getTerrainAnimationBackground(unit, terrain, defender, map);
+        }
+        else {
+            return "";
+        }
     }
 };

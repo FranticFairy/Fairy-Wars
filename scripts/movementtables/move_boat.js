@@ -22,7 +22,7 @@ var Constructor = function()
         {
             if (!currentUnit.isStealthed(unit.getOwner()) || trapChecking)
             {
-                if (currentUnit.getUnitType() !== GameEnums.UnitType_Air)
+                if (currentUnit.getUnitType() !== GameEnums.UnitType_Air && unit.getUnitID() != "FW_SEAMINE")
                 {
                     if(!currentUnit.getHidden()) {
                         return -1;

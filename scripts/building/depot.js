@@ -1,6 +1,6 @@
 DEPOT.startOfTurn = function(building, map)
 {
-    BUILDING.replenishUnit(building, map, 1, 0.5, 0.5, 0.5, true);
+    BUILDING.replenishUnit(building, map, 1, 0.5, 0.5, 0.5, false);
 };
 
 DEPOT.getDescription = function()
