@@ -1,8 +1,5 @@
 var Constructor = function()
 {
-    this.getUnitDamageID = function (unit) {
-        return "FW_MTANK";
-    };
 
     this.init = function(unit)
     {
@@ -13,6 +10,21 @@ var Constructor = function()
         unit.setMaxRange(1);
         unit.setVision(1);
 
+        var variables = unit.getVariables();
+
+    };
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = [];
+    this.fuelConsumption = 0;
+
+    this.getShowInEditor = function () {
+        return true;
+    };
+
+    this.getUnitDamageID = function (unit) {
+        return "FW_MTANK";
     };
 
     this.getMovementType = function()
@@ -37,29 +49,15 @@ var Constructor = function()
 
     this.getBaseCost = function()
     {
-        return 6000;
+        return 10000;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return true;
     };
 
-    this.startOfTurn = function(unit, map)
-    {
-        if (unit.getTerrain() !== null)
-        {
-            //Potential code here to reveal Command Vehicles to all players.
-        }
-    };
-
-    this.actionList = ["ACTION_UNPACK_HQ", "ACTION_LOAD", "ACTION_UNLOAD", "ACTION_JOIN", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
-
-    this.getShowInEditor = function() {
-        return true;
-    }
-
-
+    this.actionList = ["ACTION_UNPACK_HQ"];
 }
 
 Constructor.prototype = UNIT;

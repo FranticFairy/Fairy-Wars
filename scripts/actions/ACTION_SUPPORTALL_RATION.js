@@ -10,7 +10,7 @@ ACTION_SUPPORTALL_RATION.checkUnit = function (unit, x, y, map) {
                             return true;
                     }
                 } else if (unit.getUnitID() === "FW_TRANSPORT_FUEL") {
-                    if (target.getUnitType() === GameEnums.UnitType_Air) {
+                    if (target.getUnitType() === GameEnums.UnitType_Air && target.getMovementType() != "MOVE_HELI_LANDED") {
                         return true;
                     }
                 } else {

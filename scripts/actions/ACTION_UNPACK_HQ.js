@@ -9,6 +9,10 @@ var Constructor = function()
         {
             return false;
         }
+        var unitCount = unit.getOwner().getUnitCount();
+        if(unitCount <= 1) {
+            return false;
+        }
         if (ACTION.isEmptyFieldAndHasNotMoved(action, unit, actionTargetField, targetField, map))
         {
             var building = action.getMovementBuilding();
