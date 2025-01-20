@@ -28,6 +28,10 @@ var Constructor = function()
         return true;
     };
 
+    this.getUnitDamageID = function (unit) {
+        return "FW_DOZER";
+    };
+
     this.getMovementType = function()
     {
         return "MOVE_TANK";

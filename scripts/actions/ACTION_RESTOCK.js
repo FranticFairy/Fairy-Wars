@@ -15,7 +15,9 @@ var Constructor = function () {
             (building !== null)) {
             var constructionList = building.getConstructionList();
             if (((constructionList.indexOf(unit.getUnitID()) >= 0) || BUILDING.isHq(building)) && (unit.getOwner() === building.getOwner())) {
-                return true;
+                if((unit.getWeapon1ID() === "" && unit.getMaxAmmo1() > 0 && unit.getAmmo1() < unit.getMaxAmmo1()) || (unit.getWeapon2ID() === "" && unit.getMaxAmmo2() > 0 && unit.getAmmo2() < unit.getMaxAmmo2())) {
+                    return true;
+                }
             }
         }
         return false;

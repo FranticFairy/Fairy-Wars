@@ -37,6 +37,10 @@ var Constructor = function()
         return true;
     };
 
+    this.getUnitDamageID = function (unit) {
+        return "FW_ATTACKER";
+    };
+
     this.getMovementType = function()
     {
         return "MOVE_AIR";

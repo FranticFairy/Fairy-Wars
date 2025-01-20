@@ -31,26 +31,8 @@ var Constructor = function () {
         // move unit to target position
         Global[unit.getUnitID()].moveUnit(unit, action, map);
         // disable unit commandments for this turn
-        ACTION_GETUPGRADES.resetValues(unit, unit.defaultValues);
 
-        unit.setMovementType("MOVE_HELI");
-        unit.setMinRange(1);
-        unit.setMaxRange(1);
-        unit.setVisionHigh(999);
-        switch (unit.getUnitID()) {
-            case "FW_LHELI":
-                unit.setBaseMovementPoints(6);
-                unit.setVision(3);
-                break;
-            case "FW_AHELI":
-                unit.setBaseMovementPoints(5);
-                unit.setVision(1);
-                break;
-            default:
-                unit.setBaseMovementPoints(6);
-                unit.setVision(1);
-                break;
-        }
+        unit.transformUnit(unit.getUnitID());
 
         unit.setHasMoved(true);
     };

@@ -29,6 +29,10 @@ var Constructor = function()
         return true;
     };
 
+    this.getUnitDamageID = function (unit) {
+        return "FW_THELI";
+    };
+
     this.getMovementType = function()
     {
         return "MOVE_HELI";

@@ -36,6 +36,10 @@ var Constructor = function()
         return true;
     };
 
+    this.getUnitDamageID = function (unit) {
+        return "FW_CL";
+    };
+
     this.getMovementType = function()
     {
         return "MOVE_SHIP";

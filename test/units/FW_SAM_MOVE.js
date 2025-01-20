@@ -32,6 +32,10 @@ var Constructor = function()
         return true;
     };
 
+    this.getUnitDamageID = function (unit) {
+        return "FW_SAM";
+    };
+
     this.getMovementType = function()
     {
         return "MOVE_TANK";

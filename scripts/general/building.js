@@ -41,8 +41,10 @@ BUILDING.assembleConstructionList = function (building) {
     var isHuman = true;
     var buildingDomain = "LAND"
     var buildables = [];
-    if (owner.getBaseGameInput().getAiType() != GameEnums.AiTypes_Human) {
-        isHuman = false;
+    if(owner != null) {
+        if (owner.getBaseGameInput().getAiType() != GameEnums.AiTypes_Human) {
+            isHuman = false;
+        }
     }
     switch (buildingID) {
         case "AIRPORT":

@@ -62,7 +62,7 @@ var Constructor = function()
         return GameEnums.WeaponType_Direct;
     };
 
-    this.actionList = ["ACTION_PLACE_SEAMINE", "ACTION_DISABLE_MINE"];
+    this.actionList = ["ACTION_PLACE_WATERMINE", "ACTION_DISABLE_MINE"];
 }
 
 Constructor.prototype = UNIT;

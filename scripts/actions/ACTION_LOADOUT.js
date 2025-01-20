@@ -6,40 +6,43 @@ var Constructor = function () {
         var targetField = action.getTarget();
 
         if (unit != null) {
-            var units = Global[unit.getUnitID()].variantList;
+            if ((actionTargetField.x === targetField.x) && (actionTargetField.y === targetField.y)) {
 
-            if (units.length > 0 && unit.getHasMoved() === false && unit.getLoadedUnitCount() === 0) {
-                if (ACTION_LOADOUT.canBuildUnits(unit, map, units)) {
-                    if ((building !== null) && (unit.getOwner() === building.getOwner())) {
-                        var constructionList = building.getConstructionList();
-                        var unitID = unit.getUnitID();
-                        if(Global[unitID].variant) {
-                            unitID = Global[unitID].variantList[0];
+                var units = Global[unit.getUnitID()].variantList;
+
+                if (units.length > 0 && unit.getHasMoved() === false && unit.getLoadedUnitCount() === 0) {
+                    if (ACTION_LOADOUT.canBuildUnits(unit, map, units)) {
+                        if ((building !== null) && (unit.getOwner() === building.getOwner())) {
+                            var constructionList = building.getConstructionList();
+                            var unitID = unit.getUnitID();
+                            if (Global[unitID].variant) {
+                                unitID = Global[unitID].variantList[0];
+                            }
+                            if (((constructionList.indexOf(unitID) >= 0) || BUILDING.isHq(building))) {
+                                return true
+                            }
+                        } else {
+                            var x = actionTargetField.x + 1;
+                            var y = actionTargetField.y;
+                            if (ACTION_LOADOUT.checkAdjacentUnits(unit, x, y, map)) {
+                                return true;
+                            }
+                            x = actionTargetField.x - 1;
+                            if (ACTION_LOADOUT.checkAdjacentUnits(unit, x, y, map)) {
+                                return true;
+                            }
+                            x = actionTargetField.x;
+                            y = actionTargetField.y + 1;
+                            if (ACTION_LOADOUT.checkAdjacentUnits(unit, x, y, map)) {
+                                return true;
+                            }
+                            y = actionTargetField.y - 1;
+                            if (ACTION_LOADOUT.checkAdjacentUnits(unit, x, y, map)) {
+                                return true;
+                            }
                         }
-                        if (((constructionList.indexOf(unitID) >= 0) || BUILDING.isHq(building))) {
-                            return true
-                        }
-                    } else {
-                        var x = actionTargetField.x + 1;
-                        var y = actionTargetField.y;
-                        if (ACTION_LOADOUT.checkAdjacentUnits(unit, x, y, map)) {
-                            return true;
-                        }
-                        x = actionTargetField.x - 1;
-                        if (ACTION_LOADOUT.checkAdjacentUnits(unit, x, y, map)) {
-                            return true;
-                        }
-                        x = actionTargetField.x;
-                        y = actionTargetField.y + 1;
-                        if (ACTION_LOADOUT.checkAdjacentUnits(unit, x, y, map)) {
-                            return true;
-                        }
-                        y = actionTargetField.y - 1;
-                        if (ACTION_LOADOUT.checkAdjacentUnits(unit, x, y, map)) {
-                            return true;
-                        }
+
                     }
-
                 }
             }
         }
@@ -102,7 +105,7 @@ var Constructor = function () {
         var player = unit.getOwner();
         var unitData = [];
         for (i = 0; i < units.length; i++) {
-            var forUnit  = units[i];
+            var forUnit = units[i];
             var cost = Global[forUnit].upgradeCost;
 
             unitData.push([cost, units[i]]);
@@ -122,9 +125,9 @@ var Constructor = function () {
         var player = unit.getOwner();
         var unitData = [];
         for (i = 0; i < units.length; i++) {
-            var forUnit  = units[i];
+            var forUnit = units[i];
             var cost = Global[forUnit].upgradeCost;
-            
+
             unitData.push([cost, units[i]]);
         }
         if (map !== null) {
