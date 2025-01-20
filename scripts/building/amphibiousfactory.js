@@ -22,6 +22,11 @@ AMPHIBIOUSFACTORY.getName = function()
     return qsTr("Naval Factory");
 };
 
+this.getRepairTypes = function(building)
+{
+    return [GameEnums.UnitType_Ground, GameEnums.UnitType_Infantry, GameEnums.UnitType_Naval];
+};
+
 AMPHIBIOUSFACTORY.getDescription = function()
 {
     return qsTr("A light factory that can produce a mixture of light land units and, depending on adjacent tiles, light sea units.");

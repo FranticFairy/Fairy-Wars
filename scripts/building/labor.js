@@ -29,3 +29,8 @@ LABOR.getDescription = function()
 LABOR.getConstructionList = function (building) {
     return BUILDING.assembleConstructionList(building);
 };
+
+this.getRepairTypes = function(building)
+{
+    return [GameEnums.UnitType_Ground, GameEnums.UnitType_Infantry, GameEnums.UnitType_Naval, GameEnums.UnitType_Air];
+};

@@ -93,6 +93,10 @@ var Constructor = function()
         {
             return 1;
         }
+        if ((id === "TELEGATE") && (unit !== null) && (unit.getOwner().isAlly(terrain.getBuilding().getOwner())))
+        {
+            return 0;
+        }
         return MOVEMENTTABLE.getMovementpointsFromTable(terrain, MOVE_TIRE_B.movementpointsTable);
     };
 };

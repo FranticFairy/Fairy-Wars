@@ -22,3 +22,13 @@ TELEPORTTILE.init = function (terrain) {
     }
     terrain.setSupportPalette(false);
 };
+
+TELEPORTTILE.getName = function()
+{
+    return qsTr("Void");
+};
+
+TELEPORTTILE.getDescription = function()
+{
+    return qsTr("A strange, anomalous void. Units may pass through this freely, but any unit that ends it's turn within the void is forever lost.");
+};

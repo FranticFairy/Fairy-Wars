@@ -54,6 +54,10 @@ var Constructor = function () {
                 }
             }
         }
+        if ((id === "TELEGATE") && (unit !== null) && (unit.getOwner().isAlly(terrain.getBuilding().getOwner())))
+        {
+            return 0;
+        }
         return MOVEMENTTABLE.getMovementpointsFromTable(terrain, MOVE_SUB.movementpointsTable);
     };
 };
