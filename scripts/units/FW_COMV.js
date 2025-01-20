@@ -24,7 +24,7 @@ var Constructor = function()
     };
 
     this.getUnitDamageID = function (unit) {
-        return "FW_MTANK";
+        return "FW_APC";
     };
 
     this.getMovementType = function()

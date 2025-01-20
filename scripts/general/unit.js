@@ -102,15 +102,11 @@ UNIT.getTransportUnits = function (unit, map) {
 
     var carryList = [];
 
-    for (var i = 0; i < allUnits.length; i++) {
-        var unit = allUnits[i];
-        var isVariant = Global[unit].variant;
-        var parent = null;
-        if (isVariant) {
-            parent = Global[unit].variantList[0];
-        }
-        if (baseList.includes(unit) || baseList.includes(parent)) {
-            carryList.push(unit);
+    for (var i = 0; i < baseList.length; i++) {
+        var unit = baseList[i];
+        var variantList = ACTION_HANDLER.grabVariants(unit);
+        for(var x = 0; x < variantList.length; x++) {
+            carryList.push(variantList[x]);
         }
     }
 

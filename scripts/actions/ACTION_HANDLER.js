@@ -1,5 +1,18 @@
 var Constructor = function () {
 
+    this.grabVariants = function(unitID) {
+        var output = [];
+        output.push(unitID);
+        var variants = Global[unitID].variantList;
+
+        for (var i = 0; i < variants.length; i++) {
+            if(!output.includes(variants[i])) {
+                output.push(variants[i]);
+            }
+        }
+        return output;
+    }
+
     this.replaceVanillaUnits = function (unit, map) {
         if (map.getCurrentDay() < 2) {
             var playerCounter = map.getPlayerCount();
@@ -51,12 +64,24 @@ var Constructor = function () {
             }
 
         }
+        if (typeof map !== 'undefined') {
+            var tile =  map.getTerrain(unit.getX(), unit.getY());
+            if(tile != null & tile.getTerrainID() === "TELEPORTTILE") {
+                unit.killUnit();
+            }
+        }
 
     }
 
     this.handleEndOfTurn = function (unit, map) {
         if (unit.getTerrain() !== null) {
             ACTION_HANDLER.pingCheck(unit, map)
+        }
+        if (typeof map !== 'undefined') {
+            var tile =  map.getTerrain(unit.getX(), unit.getY());
+            if(tile != null & tile.getTerrainID() === "TELEPORTTILE") {
+                unit.killUnit();
+            }
         }
     }
 

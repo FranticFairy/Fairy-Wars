@@ -2,6 +2,23 @@ var Constructor = function () {
     this.init = function (co, map) {
         co.setPowerStars(2);
         co.setSuperpowerStars(3);
+
+        for (var i = 0; i < debuffedUnits.length; i++) {
+            var unit = debuffedUnits[i];
+            var variantList = ACTION_HANDLER.grabVariants(unit);
+            for(var x = 0; x < variantList.length; x++) {
+                debuffedAllUnits.push(variantList[x]);
+            }
+        }
+
+        for (var i = 0; i < buffedUnits.length; i++) {
+            var unit = buffedUnits[i];
+            var variantList = ACTION_HANDLER.grabVariants(unit);
+            for(var x = 0; x < variantList.length; x++) {
+                buffedAllUnits.push(variantList[x]);
+            }
+        }
+
     };
 
     this.loadCOMusic = function (co, map) {
@@ -133,9 +150,11 @@ var Constructor = function () {
 
     var debuffedUnits = ["FW_BB", "FW_BOMBER", "FW_HTANK", "FW_SHTANK", "FW_HVY_ARTILLERY", "FW_ROCKET", "FW_FIGHTER", "FW_CV", "FW_TANK_DESTROYER"];
     this.debuffDebuff = -20;
+    var debuffedAllUnits = [];
 
     var buffedUnits = ["FW_LTANK", "FW_IFV", "FW_ATTACKER", "FW_CL", "FW_DD", "FW_LHELI", "FW_ACAR","FW_ASSAULT_GUN","FW_HALFTRACK"];
     this.buffBuff = 20;
+    var buffedAllUnits = [];
 
     this.getMovementpointModifier = function(co, unit, posX, posY, map)
     {
@@ -165,17 +184,17 @@ var Constructor = function () {
                 case GameEnums.PowerMode_Tagpower:
                 case GameEnums.PowerMode_Superpower:
                 case GameEnums.PowerMode_Power:
-                    if (debuffedUnits.includes(attacker.getUnitID())) {
+                    if (debuffedAllUnits.includes(attacker.getUnitID())) {
                         return CO_FAI.debuffDebuff + CO_FAI.powerOffBonus;
                     }
-                    if (buffedUnits.includes(attacker.getUnitID())) {
+                    if (buffedAllUnits.includes(attacker.getUnitID())) {
                         return CO_FAI.buffBuff + CO_FAI.powerOffBonus;
                     }
                 default:
-                    if (debuffedUnits.includes(attacker.getUnitID())) {
+                    if (debuffedAllUnits.includes(attacker.getUnitID())) {
                         return CO_FAI.debuffDebuff;
                     }
-                    if (buffedUnits.includes(attacker.getUnitID())) {
+                    if (buffedAllUnits.includes(attacker.getUnitID())) {
                         return CO_FAI.buffBuff;
                     }
             }
@@ -190,7 +209,7 @@ var Constructor = function () {
             if (co.getPowerMode() > GameEnums.PowerMode_Off) {
                 buffAmount += CO_FAI.powerDefBonus;
             }
-            if (buffedUnits.includes(defender.getUnitID())) {
+            if (buffedAllUnits.includes(defender.getUnitID())) {
                 buffAmount += CO_FAI.powerDefBonus;
             }
         }
