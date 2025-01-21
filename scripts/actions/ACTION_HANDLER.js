@@ -66,7 +66,7 @@ var Constructor = function () {
         }
         if (typeof map !== 'undefined') {
             var tile =  map.getTerrain(unit.getX(), unit.getY());
-            if(tile != null & tile.getTerrainID() === "TELEPORTTILE") {
+            if(tile != null && tile.getTerrainID() === "TELEPORTTILE") {
                 unit.killUnit();
             }
         }
@@ -79,7 +79,7 @@ var Constructor = function () {
         }
         if (typeof map !== 'undefined') {
             var tile =  map.getTerrain(unit.getX(), unit.getY());
-            if(tile != null & tile.getTerrainID() === "TELEPORTTILE") {
+            if(tile != null && tile.getTerrainID() === "TELEPORTTILE") {
                 unit.killUnit();
             }
         }
