@@ -37,9 +37,15 @@ var Constructor = function () {
     }
 
     this.handleStartOfTurn = function (unit, map) {
-        if(Global[unit.getUnitID()].builtBeforeToday === false) {
-            Global[unit.getUnitID()].builtBeforeToday = true;
+
+        var variables = unit.getVariables();
+        var builtVar = variables.createVariable("built");
+        var built = builtVar.readDataString();
+        if(built === "") {
+            built = "true";
+            builtVar.writeDataString(built);
         }
+
         if (typeof map !== 'undefined') {
             if (map.getCurrentDay() < 2) {
                 ACTION_HANDLER.replaceVanillaUnits(unit, map);

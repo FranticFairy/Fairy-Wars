@@ -10,7 +10,11 @@ var Constructor = function () {
 
                 var units = Global[unit.getUnitID()].variantList;
 
-                if (units.length > 0 && (unit.getHasMoved() === false || Global[unit.getUnitID()].builtBeforeToday === false) && unit.getLoadedUnitCount() === 0) {
+                var variables = unit.getVariables();
+                var builtVar = variables.createVariable("built");
+                var built = builtVar.readDataString();
+
+                if (units.length > 0 && (unit.getHasMoved() === false || built === "") && unit.getLoadedUnitCount() === 0) {
                     if (ACTION_LOADOUT.canBuildUnits(unit, map, units)) {
                         if ((building !== null) && (unit.getOwner() === building.getOwner())) {
                             var constructionList = building.getConstructionList();
