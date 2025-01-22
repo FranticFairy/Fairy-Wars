@@ -39,12 +39,12 @@ var Constructor = function()
 
     this.getMovementType = function()
     {
-        return "MOVE_TANK";
+        return "MOVE_TANK_HEAVY";
     };
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Vehicle_Medium;
+        return GameEnums.UnitType_Vehicle_Heavy;
     };
 
     this.getName = function()

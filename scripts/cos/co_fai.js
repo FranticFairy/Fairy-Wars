@@ -254,10 +254,10 @@ var Constructor = function () {
         return qsTr("Suffering the consequences of her actions.");
     };
     this.getCODescription = function (co) {
-        return qsTr("Good at mid-game combat with standard units.\nBonuses to light/medium units, but penalties for expensive and slow units.\nCO Power allows for quick pushes.");
+        return qsTr("Good at mid-game combat with standard units.\nBonuses to Light Vehicles, Helicopter and Medium Ships, but penalties for Heavy Vehicles, Heavy Ships and Large Planes.\nCO Power allows for quick pushes.");
     };
     this.getLongCODescription = function (co, map) {
-        var text = qsTr("\nSpecial Unit:\nIFV\n\nGlobal Effect: \nSmall boosts to some units, and penalties to others.") +
+        var text = qsTr("\nSpecial Unit:\nIFV\n\nGlobal Effect: \nSmall boosts to Light Vehicles, Helicopter and Medium Ships, and penalties to Heavy Vehicles, Heavy Ships and Large Planes.") +
             qsTr("\n\nCO Zone Effect: \nFai does not gain bonuses from CO Zone use.");
         return text;
     };

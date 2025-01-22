@@ -35,7 +35,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Vehicle_Medium;
+        return GameEnums.UnitType_Vehicle_Heavy;
     };
 
     this.getName = function()
