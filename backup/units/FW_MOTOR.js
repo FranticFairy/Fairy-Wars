@@ -14,6 +14,18 @@ var Constructor = function()
         unit.setMaxRange(1);
         unit.setVision(2);
 
+        var variables = unit.getVariables();
+
+    };
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = [];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 0;
+
+    this.getShowInEditor = function () {
+        return true;
     };
 
     this.getMovementType = function()
@@ -33,7 +45,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Fast but fragile motorcycle infantry, good for scouting and capturing.");
+        return qsTr("Fast but fragile, good for scouting and capturing.");
     };
 
     this.getBaseCost = function()
@@ -41,24 +53,17 @@ var Constructor = function()
         return 2500;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return true;
     };
 
-    this.actionList = ["ACTION_FIRE", "ACTION_MISSILE", "ACTION_CAPTURE","ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
-    this.startOfTurn = function(unit, map)
+    this.getTypeOfWeapon2 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-        }
+        return GameEnums.WeaponType_Direct;
     };
 
-    this.getShowInEditor = function() {
-        return true;
-    }
-
-
+    this.actionList = ["ACTION_FIRE", "ACTION_CAPTURE", "ACTION_MISSILE"];
 }
 
 Constructor.prototype = UNIT;

@@ -25,6 +25,7 @@ var Constructor = function()
 
     this.variant = true;
     this.upgradeCost = 6000;
+    this.builtBeforeToday = false;
     this.variantList = ["FW_CV","FW_CV_UPGRD"];
     this.fuelConsumption = 1;
 
@@ -43,7 +44,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Naval;
+        return GameEnums.UnitType_Naval_Heavy;
     };
 
     this.getName = function()

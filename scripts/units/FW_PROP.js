@@ -30,8 +30,8 @@ var Constructor = function()
 
     this.variant = false;
     this.upgradeCost = 0;
-    this.variantList = ["FW_PROP_AA","FW_PROP_ASM","FW_PROP_AT"];
     this.builtBeforeToday = false;
+    this.variantList = ["FW_PROP_AA","FW_PROP_ASM","FW_PROP_AT"];
     this.fuelConsumption = 4;
 
     this.getShowInEditor = function () {
@@ -45,7 +45,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Air;
+        return GameEnums.UnitType_Plane;
     };
 
     this.getName = function()

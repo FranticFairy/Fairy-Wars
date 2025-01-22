@@ -14,13 +14,25 @@ var Constructor = function()
         unit.setMaxRange(2);
         unit.setVision(1);
 
+        var variables = unit.getVariables();
+
     };
-    
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = [];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 0;
+
+    this.getShowInEditor = function () {
+        return true;
+    };
+
     this.getFirstStrike = function(unit, uX, uY, attacker, isDefender, map, aX, aY) {
         if(isDefender) {
             return true;
         }
-    }
+    };
 
     this.getMovementType = function()
     {
@@ -47,23 +59,17 @@ var Constructor = function()
         return 6500;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return false;
     };
-	
-    this.startOfTurn = function(unit, map)
+
+    this.getTypeOfWeapon1 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-        }
+        return GameEnums.WeaponType_Indirect;
     };
 
-    this.getShowInEditor = function() {
-        return true;
-    }
-
-
+    this.actionList = ["ACTION_FIRE"];
 }
 
 Constructor.prototype = UNIT;

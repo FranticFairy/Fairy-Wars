@@ -20,6 +20,7 @@ var Constructor = function()
 
     this.variant = false;
     this.upgradeCost = 0;
+    this.builtBeforeToday = false;
     this.variantList = [];
     this.fuelConsumption = 1;
 
@@ -34,7 +35,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Naval;
+        return GameEnums.UnitType_Naval_Heavy;
     };
 
     this.getName = function()

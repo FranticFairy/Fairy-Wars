@@ -20,12 +20,22 @@ var Constructor = function()
         unit.setVisionHigh(999);
 
         var variables = unit.getVariables();
+
         var displayIconVar = variables.createVariable("displayIcon");
         var displayIcon = displayIconVar.readDataString();
-        if(displayIcon === "") {
-            displayIcon = "+bomb";
-        }
+        displayIcon = "+bomb";
         displayIconVar.writeDataString(displayIcon);
+
+    };
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_PROP_AA","FW_PROP_ASM","FW_PROP_AT"];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 4;
+
+    this.getShowInEditor = function () {
+        return true;
     };
 
     this.getMovementType = function()
@@ -45,7 +55,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A cheap but slow propellor-driven aircraft. Used for harassing soft ground targets and helicopters.");
+        return qsTr("A cheap but  slow propellor-driven aircraft. Used for harassing soft ground targets and helicopters.");
     };
 
     this.getBaseCost = function()
@@ -53,33 +63,22 @@ var Constructor = function()
         return 12000;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return true;
     };
 
-    this.startOfTurn = function(unit, map)
+    this.getTypeOfWeapon1 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-            //Start of Turn Fuel Cost
-            var fuelCosts = 4 + unit.getFuelCostModifier(Qt.point(unit.getX(), unit.getY()), 4);
-            if (fuelCosts < 0)
-            {
-                fuelCosts = 0;
-            }
-            unit.setFuel(unit.getFuel() - fuelCosts);
-        }
+        return GameEnums.WeaponType_Direct;
     };
 
-    this.createExplosionAnimation = function(x, y, unit, map)
+    this.getTypeOfWeapon2 = function(unit)
     {
-        var animation = GameAnimationFactory.createAnimation(map, x, y);
-        animation.addSprite("explosion + air", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
-        animation.setSound("explosion + air.wav");
-        return animation;
+        return GameEnums.WeaponType_Direct;
     };
 
+    this.actionList = ["ACTION_FIRE"];
     this.useTerrainDefense = function()
     {
         return false;
@@ -89,33 +88,6 @@ var Constructor = function()
     {
         return false;
     };
-
-	this.getTerrainAnimationBase = function(unit, terrain, defender, map)
-    {
-        var weatherModifier = TERRAIN.getWeatherModifier(map);
-        return "base_" + weatherModifier + "air";
-    };
-
-    this.getTerrainAnimationForeground = function(unit, terrain, defender, map)
-    {
-        return "";
-    };
-
-    this.getTerrainAnimationBackground = function(unit, terrain, defender, map)
-    {
-    };
-
-    this.getTerrainAnimationMoveSpeed = function()
-    {
-        return 1;
-    };
-
-    this.getShowInEditor = function() {
-        return true;
-    }
-
-    
-    this.actionList = ["ACTION_FIRE", "ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
 
 }
 

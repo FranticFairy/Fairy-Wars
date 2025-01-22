@@ -50,7 +50,7 @@ var Constructor = function () {
     };
 
     this.checkAdjacentUnits = function (unit, x, y, map) {
-        if (unit.getUnitType() === GameEnums.UnitType_Ground || unit.getUnitType() === GameEnums.UnitType_Infantry || unit.getMovementType() === "MOVE_HELI_LANDED") {
+        if (UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Ground || unit.getMovementType() === "MOVE_HELI_LANDED") {
             if (map.onMap(x, y)) {
                 var target = map.getTerrain(x, y).getUnit();
                 if (target !== null) {

@@ -3,8 +3,8 @@ var Constructor = function()
 
     this.init = function(unit)
     {
-        unit.setFuel(99);
-        unit.setMaxFuel(99);
+        unit.setFuel(80);
+        unit.setMaxFuel(80);
         unit.setBaseMovementPoints(6);
         unit.setMinRange(1);
         unit.setMaxRange(1);
@@ -16,8 +16,8 @@ var Constructor = function()
 
     this.variant = false;
     this.upgradeCost = 0;
-    this.variantList = [];
     this.builtBeforeToday = false;
+    this.variantList = [];
     this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {
@@ -28,6 +28,10 @@ var Constructor = function()
         return "FW_APC";
     };
 
+    this.getCOSpecificUnit = function(building) {
+        return true;
+    };
+
     this.getMovementType = function()
     {
         return "MOVE_TANK";
@@ -35,7 +39,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Ground;
+        return GameEnums.UnitType_Vehicle_Medium;
     };
 
     this.getName = function()

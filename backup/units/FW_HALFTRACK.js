@@ -1,6 +1,8 @@
-var Constructor = function () {
+var Constructor = function()
+{
 
-    this.init = function (unit) {
+    this.init = function(unit)
+    {
         unit.setAmmo2(9);
         unit.setMaxAmmo2(9);
         unit.setWeapon2ID("FW_WEP_MG");
@@ -12,67 +14,62 @@ var Constructor = function () {
         unit.setMaxRange(1);
         unit.setVision(1);
 
-    };
-
-    this.getMovementType = function () {
-        return "MOVE_TANK";
-    };
-
-    this.getUnitType = function () {
-        return GameEnums.UnitType_Ground;
-    };
-
-    this.getName = function () {
-        return qsTr("Halftrack");
-    };
-
-    this.getDescription = function () {
-        return qsTr("A tougher Truck, can take more of a punch and has a defensive machine gun.");
-    };
-
-    this.getBaseCost = function () {
-        return 4500;
-    };
-
-    this.canMoveAndFire = function (unit) {
-        return true;
-    };
-
-    this.getLoadingPlace = function () {
-        return 1;
-    };
-    this.transportList = ["FW_INFANTRY", "FW_HVY_INFANTRY", "FW_AST_INFANTRY", "FW_ATGUN", "FW_IGUN", "FW_HOWITZER", "FW_FLAK"];
-
-    this.actionList = ["ACTION_FIRE", "ACTION_BUILD_CARRY", "ACTION_LOAD", "ACTION_UNLOAD", "ACTION_LOADOUT", "ACTION_JOIN", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
-
-
-    this.getActions = function (unit, map) {
-        var baseActions = ["ACTION_FIRE", "ACTION_BUILD_CARRY", "ACTION_LOAD", "ACTION_UNLOAD", "ACTION_LOADOUT", "ACTION_JOIN", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
-
         var variables = unit.getVariables();
-        var displayIconVar = variables.createVariable("displayIcon");
-        var displayIcon = displayIconVar.readDataString();
-        switch (displayIcon) {
-            case "+hmr":
-                baseActions.push("ACTION_PLACE_PONTOON");
-                return (baseActions);
-            default:
-                return baseActions;
-        }
-        // returns a string id list of the actions this unit can perform
+
     };
 
-    this.startOfTurn = function (unit, map) {
-        if (unit.getTerrain() !== null) {
-        }
-        UNIT.transporterRefilling(unit, map);
-    };
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_HALFTRACK_AT","FW_HALFTRACK_ARTY","FW_HALFTRACK_AA","FW_HALFTRACK_HMR"];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {
         return true;
-    }
+    };
 
+    this.getMovementType = function()
+    {
+        return "MOVE_TANK";
+    };
 
+    this.getUnitType = function()
+    {
+        return GameEnums.UnitType_Ground;
+    };
+
+    this.getName = function()
+    {
+        return qsTr("Halftrack");
+    };
+
+    this.getDescription = function()
+    {
+        return qsTr("A tougher Truck, can take more of a punch and has a defensive machine gun.");
+    };
+
+    this.getBaseCost = function()
+    {
+        return 4500;
+    };
+
+	this.canMoveAndFire = function()
+    {
+        return true;
+    };
+
+    this.getTypeOfWeapon2 = function(unit)
+    {
+        return GameEnums.WeaponType_Direct;
+    };
+
+    this.getLoadingPlace = function()
+    {
+        return 1;
+    };
+    this.transportList = ["FW_INFANTRY" , "FW_HVY_INFANTRY" , "FW_AST_INFANTRY" , "FW_FAERIE_INFANTRY" , "FW_FAERIE_DREAMWEAVER" , "FW_ATGUN" , "FW_IGUN" , "FW_HOWITZER" , "FW_FLAK"];
+
+    this.actionList = ["ACTION_FIRE", "ACTION_BUILD_CARRY"];
 }
 
 Constructor.prototype = UNIT;

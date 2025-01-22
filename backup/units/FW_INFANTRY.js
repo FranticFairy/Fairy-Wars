@@ -14,6 +14,18 @@ var Constructor = function()
         unit.setMaxRange(1);
         unit.setVision(2);
 
+        var variables = unit.getVariables();
+
+    };
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_INFANTRY_GUN","FW_INFANTRY_AT","FW_INFANTRY_PARA","FW_INFANTRY_ANCH"];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 0;
+
+    this.getShowInEditor = function () {
+        return true;
     };
 
     this.getMovementType = function()
@@ -33,7 +45,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Standard Infantry, not much to say. Used for capturing structures.");
+        return qsTr("Basic frontline infantry, the backbone of any army. Gains bonus vision on mountains.");
     };
 
     this.getBaseCost = function()
@@ -41,25 +53,17 @@ var Constructor = function()
         return 1000;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return true;
     };
 
-    this.actionList = ["ACTION_FIRE", "ACTION_MISSILE", "ACTION_CAPTURE","ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
-
-    this.getShowInEditor = function() {
-        return true;
-    }
-	
-    this.startOfTurn = function(unit, map)
+    this.getTypeOfWeapon2 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-        }
+        return GameEnums.WeaponType_Direct;
     };
 
-
+    this.actionList = ["ACTION_FIRE", "ACTION_CAPTURE", "ACTION_MISSILE"];
 }
 
 Constructor.prototype = UNIT;

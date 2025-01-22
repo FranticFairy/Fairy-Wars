@@ -12,10 +12,22 @@ var Constructor = function()
         unit.setBaseMovementPoints(5);
         unit.setMinRange(1);
         unit.setMaxRange(1);
-        unit.setVision(2);
+        unit.setVision(3);
+
+        var variables = unit.getVariables();
 
     };
-    
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_SS_ARTY","FW_SS_ASM","FW_SS_RADAR","FW_SS_ANTIRADAR","FW_SS_AA","FW_SS_TRN"];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 1;
+
+    this.getShowInEditor = function () {
+        return true;
+    };
+
     this.getMovementType = function()
     {
         return "MOVE_SUB";
@@ -26,15 +38,6 @@ var Constructor = function()
         return GameEnums.UnitType_Naval;
     };
 
-    this.getWeatherImmune = function(unit, map)
-    {
-        if(unit.getHidden()) {
-            return true;
-        } else {
-            return false;
-        }
-    };
-
     this.getName = function()
     {
         return qsTr("Submarine");
@@ -42,7 +45,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A sneaky attacker, devastating against most naval units except destroyers. Can pass through shoals when not submerged.\r\n Can spot sea units (even submerged subs, but not seamines) up to 4 tiles away even when submerged.");
+        return qsTr("A sneaky attacker, devastating against most naval units except destroyers. Can pass through shoals when not submerged.");
     };
 
     this.getBaseCost = function()
@@ -50,76 +53,17 @@ var Constructor = function()
         return 11000;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return true;
     };
-    
-    this.actionList = ["ACTION_FIRE", "ACTION_STEALTH", "ACTION_UNSTEALTH","ACTION_LOADOUT", "ACTION_JOIN", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
 
-    this.startOfTurn = function(unit, map)
+    this.getTypeOfWeapon1 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-            // pay unit upkeep
-            var fuelCosts = 1 + unit.getFuelCostModifier(Qt.point(unit.getX(), unit.getY()), 1);
-            if (unit.getHidden())
-            {
-                fuelCosts += 4;
-                unit.setVision(1);
-            } else {
-                unit.setVision(2);
-            }
-            if (fuelCosts < 0)
-            {
-                fuelCosts = 0;
-            }
-            unit.setFuel(unit.getFuel() - fuelCosts);
-            ACTION_PING.pingType(unit,4,GameEnums.UnitType_Naval,false);
-            ACTION_PING.pingID(unit,4,"FW_SS",true);
-        }
+        return GameEnums.WeaponType_Direct;
     };
 
-    this.postAction = function(unit, action, map) {
-        ACTION_PING.pingType(unit,4,GameEnums.UnitType_Naval,false);
-        ACTION_PING.pingID(unit,4,"FW_SS",true);
-    }
-
-    this.createExplosionAnimation = function(x, y, unit, map)
-    {
-        var animation = GameAnimationFactory.createAnimation(map, x, y);
-        animation.addSprite("explosion + water", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
-        animation.setSound("explosion + water.wav");
-        return animation;
-    };
-
-	this.getTerrainAnimationBase = function(unit, terrain, defender, map)
-    {
-        var weatherModifier = TERRAIN.getWeatherModifier(map);
-        return "base_" + weatherModifier + "air";
-    };
-
-    this.getTerrainAnimationForeground = function(unit, terrain, defender, map)
-    {
-        return "";
-    };
-
-    this.getTerrainAnimationBackground = function(unit, terrain, defender, map)
-    {
-        var weatherModifier = TERRAIN.getWeatherModifier(map);
-        return "back_" + weatherModifier +"sea";
-    };
-
-    this.getTerrainAnimationMoveSpeed = function()
-    {
-        return 1;
-    };
-
-    this.getShowInEditor = function() {
-        return true;
-    }
-
-
+    this.actionList = ["ACTION_FIRE", "ACTION_UNSTEALTH", "ACTION_STEALTH"];
 }
 
 Constructor.prototype = UNIT;

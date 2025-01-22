@@ -29,6 +29,7 @@ var Constructor = function()
 
     this.variant = true;
     this.upgradeCost = 0;
+    this.builtBeforeToday = false;
     this.variantList = ["FW_HVY_INFANTRY","FW_HVY_INFANTRY_AA"];
     this.fuelConsumption = 0;
 

@@ -24,8 +24,8 @@ var Constructor = function()
 
     this.variant = false;
     this.upgradeCost = 0;
-    this.variantList = ["FW_DOZER_UPGRD","FW_DOZER_FUEL"];
     this.builtBeforeToday = false;
+    this.variantList = ["FW_DOZER_UPGRD","FW_DOZER_FUEL"];
     this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {
@@ -39,7 +39,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Ground;
+        return GameEnums.UnitType_Vehicle_Medium;
     };
 
     this.getName = function()

@@ -16,16 +16,23 @@ var Constructor = function()
         unit.setVisionHigh(999);
 
         var variables = unit.getVariables();
+
         var displayIconVar = variables.createVariable("displayIcon");
         var displayIcon = displayIconVar.readDataString();
-        if(displayIcon === "") {
-            displayIcon = "+bomb";
-        }
+        displayIcon = "+bomb";
         displayIconVar.writeDataString(displayIcon);
-    };
-    
-    this.actionList = ["ACTION_FIRE", "ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
 
+    };
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_BOMBER_ASM","FW_BOMBER_ARTY"];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 4;
+
+    this.getShowInEditor = function () {
+        return true;
+    };
 
     this.getMovementType = function()
     {
@@ -52,25 +59,17 @@ var Constructor = function()
         return 18000;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return true;
     };
 
-    this.startOfTurn = function(unit, map)
+    this.getTypeOfWeapon1 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-            //Start of Turn Fuel Cost
-            var fuelCosts = 4 + unit.getFuelCostModifier(Qt.point(unit.getX(), unit.getY()), 4);
-            if (fuelCosts < 0)
-            {
-                fuelCosts = 0;
-            }
-            unit.setFuel(unit.getFuel() - fuelCosts);
-        }
+        return GameEnums.WeaponType_Direct;
     };
 
+    this.actionList = ["ACTION_FIRE"];
     this.useTerrainDefense = function()
     {
         return false;
@@ -80,11 +79,6 @@ var Constructor = function()
     {
         return false;
     };
-
-    this.getShowInEditor = function() {
-        return true;
-    }
-
 
 }
 

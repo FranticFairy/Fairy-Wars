@@ -100,6 +100,7 @@ BUILDING.assembleConstructionList = function (building) {
     for(var i = 0; i < allUnits.length; i++) {
         var unit = allUnits[i];
         var unitType = Global[unit].getUnitType();
+        var unitDomain = UNIT.unitTypeToDomain(unitType);
         var unitMove = Global[unit].getMovementType();
         var isVariant = Global[unit].variant;
         var isUnique = Global[unit].getCOSpecificUnit;
@@ -111,12 +112,12 @@ BUILDING.assembleConstructionList = function (building) {
         if(((isVariant && !isHuman) || !isVariant) && !isUnique) {
 
             if(buildingDomain === "AIR") {
-                if(unitType === GameEnums.UnitType_Air) {
+                if(unitDomain === GameEnums.UnitType_Air) {
                     buildables.push(unit);
                 }
             }
             if(buildingDomain === "SEA") {
-                if(unitType === GameEnums.UnitType_Naval) {
+                if(unitDomain === GameEnums.UnitType_Naval) {
                     buildables.push(unit);
                 }
             }
@@ -124,45 +125,37 @@ BUILDING.assembleConstructionList = function (building) {
                 buildables.push(unit);
             }
             if(buildingDomain === "BEACH") {
-                if(unitType === GameEnums.UnitType_Naval) {
-                    if(unitMove != "MOVE_SHIP") {
-                        buildables.push(unit);
-                    }
-                } else {
+                if(unitType != GameEnums.UnitType_Naval_Heavy && unitType != GameEnums.UnitType_Naval_Medium) {
                     buildables.push(unit);
                 }
             }
             if(buildingDomain === "LANDAIR") {
-                if(unitType != GameEnums.UnitType_Naval) {
+                if(unitDomain != GameEnums.UnitType_Naval) {
                     buildables.push(unit);
                 }
             }
             if(buildingDomain === "LIGHTSEA") {
-                if(lightUnits.includes(unit) || lightUnits.includes(parent)) {
+                if(unitType === GameEnums.UnitType_Infantry || unitType === GameEnums.UnitType_Vehicle_Light || unitType === GameEnums.UnitType_Fieldgun || unitType === GameEnums.UnitType_Naval_Light || unitType === GameEnums.UnitType_Naval_Medium) {
                     buildables.push(unit);
                 }
             }
             if(buildingDomain === "LIGHTBEACH") {
-                if(lightUnits.includes(unit) || lightUnits.includes(parent)) {
-                    if(unitMove != "MOVE_SHIP") {
-                        buildables.push(unit);
-                    }
+                if(unitType === GameEnums.UnitType_Infantry || unitType === GameEnums.UnitType_Vehicle_Light || unitType === GameEnums.UnitType_Fieldgun || unitType === GameEnums.UnitType_Naval_Light) {
+                    buildables.push(unit);
                 }
             }
             if(buildingDomain === "LIGHT") {
-                if(lightUnits.includes(unit) || lightUnits.includes(parent)) {
-                    if(unitType != GameEnums.UnitType_Naval) {
-                        buildables.push(unit);
-                    }
+                if(unitType === GameEnums.UnitType_Infantry || unitType === GameEnums.UnitType_Vehicle_Light || unitType === GameEnums.UnitType_Fieldgun) {
+                    buildables.push(unit);
                 }
             }
             if(buildingDomain === "OILRIG") {
-                if(rigUnits.includes(unit) || rigUnits.includes(parent)) {
+                if(unitType === GameEnums.UnitType_Naval_Light) {
                     buildables.push(unit);
                 }
             }
             if(buildingDomain === "LAND") {
-                if(unitType != GameEnums.UnitType_Naval && unitType != GameEnums.UnitType_Air) {
+                if(unitDomain === GameEnums.UnitType_Ground) {
                     buildables.push(unit);
                 }
             }

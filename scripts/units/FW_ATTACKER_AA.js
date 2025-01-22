@@ -30,8 +30,8 @@ var Constructor = function()
 
     this.variant = true;
     this.upgradeCost = 0;
-    this.variantList = ["FW_ATTACKER","FW_ATTACKER_ANTIRADAR","FW_ATTACKER_ASM"];
     this.builtBeforeToday = false;
+    this.variantList = ["FW_ATTACKER","FW_ATTACKER_ANTIRADAR","FW_ATTACKER_ASM"];
     this.fuelConsumption = 4;
 
     this.getShowInEditor = function () {
@@ -49,7 +49,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Air;
+        return GameEnums.UnitType_Plane;
     };
 
     this.getName = function()

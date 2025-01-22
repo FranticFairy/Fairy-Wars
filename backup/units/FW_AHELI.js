@@ -1,12 +1,5 @@
 var Constructor = function()
 {
-    this.getUnitDamageID = function(unit)
-    {
-        if (unit.getMovementType() === "MOVE_HELI_LANDED") {
-            return "FW_TRUCK";
-        } else {
-        }
-    };
 
     this.init = function(unit)
     {
@@ -26,9 +19,19 @@ var Constructor = function()
         unit.setVision(1);
         unit.setVisionHigh(999);
 
+        var variables = unit.getVariables();
+
     };
-    
-    this.actionList = ["ACTION_FIRE","ACTION_LOADOUT","ACTION_LAND", "ACTION_LIFT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_UNLOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_AHELI_TRN"];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 2;
+
+    this.getShowInEditor = function () {
+        return true;
+    };
 
     this.getMovementType = function()
     {
@@ -42,12 +45,12 @@ var Constructor = function()
 
     this.getName = function()
     {
-        return qsTr("Attack Helicopter");
+        return qsTr("Heavy Helicopter");
     };
 
     this.getDescription = function()
     {
-        return qsTr("A heavy attack helicopter, armed with a more powerful gun and rockets to attack ground forces and other helicopters.");
+        return qsTr("A heavy combat helicopter, great for engaging ground targets, but weak against anti-air.");
     };
 
     this.getBaseCost = function()
@@ -55,108 +58,31 @@ var Constructor = function()
         return 9500;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return true;
     };
 
-    this.startOfTurn = function(unit, map)
+    this.getTypeOfWeapon1 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-            //Start of Turn Fuel Cost
-            var fuelCosts = 2 + unit.getFuelCostModifier(Qt.point(unit.getX(), unit.getY()), 2);
-            if (fuelCosts < 0 || unit.getMovementType() === "MOVE_HELI_LANDED")
-            {
-                fuelCosts = 0;
-            }
-            unit.setFuel(unit.getFuel() - fuelCosts);
-        }
+        return GameEnums.WeaponType_Direct;
     };
 
-    this.createExplosionAnimation = function (x, y, unit, map) {
-        if (unit.getMovementType() === "MOVE_HELI_LANDED") {
-            var animation = GameAnimationFactory.createAnimation(map, x, y);
-            animation.addSprite("explosion+land", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
-            animation.setSound("explosion+land.wav");
-            return animation;
-        } else {
-            var animation = GameAnimationFactory.createAnimation(map, x, y);
-            animation.addSprite("explosion + air", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
-            animation.setSound("explosion + copter.wav");
-            return animation;
-        }
+    this.getTypeOfWeapon2 = function(unit)
+    {
+        return GameEnums.WeaponType_Direct;
     };
 
-    this.useTerrainDefense = function (unit) {
-        if (unit.getMovementType() === "MOVE_HELI_LANDED") {
-            return true;
-        } else {
-            return false;
-        }
+    this.actionList = ["ACTION_FIRE"];
+    this.useTerrainDefense = function()
+    {
+        return false;
     };
 
-    this.useTerrainHide = function (unit) {
-        if (unit.getMovementType() === "MOVE_HELI_LANDED") {
-            return true;
-        } else {
-            return false;
-        }
+    this.useTerrainHide = function()
+    {
+        return false;
     };
-
-    this.getTerrainAnimationBase = function (unit, terrain, defender, map) {
-        if (unit.getMovementType() === "MOVE_HELI_LANDED") {
-            if (Global[terrain.getID()].getTerrainAnimationBase !== null) {
-                return Global[terrain.getID()].getTerrainAnimationBase(unit, terrain, defender, map);
-
-            }
-            else {
-                return "";
-            }
-        } else {
-            var weatherModifier = TERRAIN.getWeatherModifier(map);
-            return "base_" + weatherModifier + "air";
-        }
-    };
-
-    this.getTerrainAnimationForeground = function (unit, terrain, defender, map) {
-        if (unit.getMovementType() === "MOVE_HELI_LANDED") {
-            if (Global[terrain.getID()].getTerrainAnimationForeground !== null) {
-                return Global[terrain.getID()].getTerrainAnimationForeground(unit, terrain, defender, map);
-            }
-            else {
-                return "";
-            }
-        } else {
-            return "";
-        }
-    };
-
-    this.getTerrainAnimationBackground = function (unit, terrain, defender, map) {
-        if (unit.getMovementType() === "MOVE_HELI_LANDED") {
-            if (Global[terrain.getID()].getTerrainAnimationBackground !== null) {
-                return Global[terrain.getID()].getTerrainAnimationBackground(unit, terrain, defender, map);
-            }
-            else {
-                return "";
-            }
-        } else {
-            return "";
-        }
-    };
-
-    this.getTerrainAnimationMoveSpeed = function (unit) {
-        if (unit.getMovementType() === "MOVE_HELI_LANDED") {
-            return 0;
-        } else {
-            return 1;
-        }
-    };
-
-    this.getShowInEditor = function() {
-        return true;
-    }
-
 
 }
 

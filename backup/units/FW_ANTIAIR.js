@@ -14,6 +14,18 @@ var Constructor = function()
         unit.setMaxRange(1);
         unit.setVision(2);
 
+        var variables = unit.getVariables();
+
+    };
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = [];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 0;
+
+    this.getShowInEditor = function () {
+        return true;
     };
 
     this.getMovementType = function()
@@ -33,7 +45,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("The Anti-air unit you're familiar with.");
+        return qsTr("A mobile anti-aircraft unit, good for providing air cover when pushing towards the enemy.");
     };
 
     this.getBaseCost = function()
@@ -41,23 +53,17 @@ var Constructor = function()
         return 11000;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return true;
     };
 
-    this.startOfTurn = function(unit, map)
+    this.getTypeOfWeapon1 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-        }
+        return GameEnums.WeaponType_Direct;
     };
 
-    this.getShowInEditor = function() {
-        return true;
-    }
-
-
+    this.actionList = ["ACTION_FIRE"];
 }
 
 Constructor.prototype = UNIT;

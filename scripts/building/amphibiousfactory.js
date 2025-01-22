@@ -22,9 +22,9 @@ AMPHIBIOUSFACTORY.getName = function()
     return qsTr("Naval Factory");
 };
 
-this.getRepairTypes = function(building)
+AMPHIBIOUSFACTORY.getRepairTypes = function(building)
 {
-    return [GameEnums.UnitType_Ground, GameEnums.UnitType_Infantry, GameEnums.UnitType_Naval];
+    return [GameEnums.UnitType_Infantry, GameEnums.UnitType_Vehicle_Light, GameEnums.UnitType_Vehicle_Medium, GameEnums.UnitType_Vehicle_Heavy, GameEnums.UnitType_Fieldgun, GameEnums.UnitType_Naval_Light, GameEnums.UnitType_Naval_Medium, GameEnums.UnitType_Naval_Heavy];
 };
 
 AMPHIBIOUSFACTORY.getDescription = function()

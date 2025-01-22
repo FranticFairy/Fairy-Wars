@@ -29,8 +29,8 @@ var Constructor = function()
 
     this.variant = false;
     this.upgradeCost = 0;
-    this.variantList = ["FW_HVY_INFANTRY_ARTY","FW_HVY_INFANTRY_AA"];
     this.builtBeforeToday = false;
+    this.variantList = ["FW_HVY_INFANTRY_ARTY","FW_HVY_INFANTRY_AA"];
     this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {

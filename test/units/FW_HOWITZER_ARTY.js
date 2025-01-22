@@ -25,6 +25,7 @@ var Constructor = function()
 
     this.variant = true;
     this.upgradeCost = 6000;
+    this.builtBeforeToday = false;
     this.variantList = ["FW_HOWITZER"];
     this.fuelConsumption = 0;
 
@@ -43,7 +44,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Ground;
+        return GameEnums.UnitType_Fieldgun;
     };
 
     this.getName = function()

@@ -25,8 +25,8 @@ var Constructor = function()
 
     this.variant = true;
     this.upgradeCost = 7000;
-    this.variantList = ["FW_SAM","FW_SAM_MOVE","FW_SAM_UPGRD"];
     this.builtBeforeToday = false;
+    this.variantList = ["FW_SAM","FW_SAM_MOVE","FW_SAM_UPGRD"];
     this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {
@@ -44,7 +44,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Ground;
+        return GameEnums.UnitType_Vehicle_Medium;
     };
 
     this.getName = function()

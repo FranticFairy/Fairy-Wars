@@ -18,23 +18,20 @@ var Constructor = function()
         unit.setMaxRange(1);
         unit.setVision(3);
 
+        var variables = unit.getVariables();
+
     };
 
-    this.actionList = ["ACTION_FIRE","ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_UNLOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
-/*
-    this.getActions = function(unit, map)
-    {
-        var variables = unit.getVariables();
-        var displayIconVar = variables.createVariable("displayIcon");
-        var displayIcon = displayIconVar.readDataString();
-        if(displayIcon === "+mine") {
-            this.actionList.append("ACTION_PLACE_WATERMINE");
-            this.actionList.append("ACTION_RESTOCK");
-        }
-        // returns a string id list of the actions this unit can perform
-        return this.actionList;
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_DD_AA","FW_DD_ASM","FW_DD_MINE"];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 1;
+
+    this.getShowInEditor = function () {
+        return true;
     };
-*/
+
     this.getMovementType = function()
     {
         return "MOVE_SHIP";
@@ -52,7 +49,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A submarine-hunting naval unit. Can spot submarines at 3 range, and excels at destroying them. Good against weaker naval units.");
+        return qsTr("A submarine-hunting naval unit. Can spot submarines at range, and excels at destroying them. Good against weaker naval units.");
     };
 
     this.getBaseCost = function()
@@ -60,65 +57,22 @@ var Constructor = function()
         return 7000;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return true;
     };
 
-    this.startOfTurn = function(unit, map)
+    this.getTypeOfWeapon1 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-            //Start of Turn Fuel Cost
-            var fuelCosts = 1 + unit.getFuelCostModifier(Qt.point(unit.getX(), unit.getY()), 1);
-            if (fuelCosts < 0)
-            {
-                fuelCosts = 0;
-            }
-            unit.setFuel(unit.getFuel() - fuelCosts);
-            ACTION_PING.pingID(unit,3,"FW_SS",true);
-        }
+        return GameEnums.WeaponType_Direct;
     };
 
-    this.postAction = function(unit, action, map) {
-        ACTION_PING.pingID(unit,3,"FW_SS",true);
-    }
-
-    this.createExplosionAnimation = function(x, y, unit, map)
+    this.getTypeOfWeapon2 = function(unit)
     {
-        var animation = GameAnimationFactory.createAnimation(map, x, y);
-        animation.addSprite("explosion + water", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
-        animation.setSound("explosion + water.wav");
-        return animation;
+        return GameEnums.WeaponType_Direct;
     };
 
-	this.getTerrainAnimationBase = function(unit, terrain, defender, map)
-    {
-        var weatherModifier = TERRAIN.getWeatherModifier(map);
-        return "base_" + weatherModifier + "air";
-    };
-
-    this.getTerrainAnimationForeground = function(unit, terrain, defender, map)
-    {
-        return "";
-    };
-
-    this.getTerrainAnimationBackground = function(unit, terrain, defender, map)
-    {
-        var weatherModifier = TERRAIN.getWeatherModifier(map);
-        return "back_" + weatherModifier +"sea";
-    };
-
-    this.getTerrainAnimationMoveSpeed = function()
-    {
-        return 1;
-    };
-
-    this.getShowInEditor = function() {
-        return true;
-    }
-
-
+    this.actionList = ["ACTION_FIRE"];
 }
 
 Constructor.prototype = UNIT;

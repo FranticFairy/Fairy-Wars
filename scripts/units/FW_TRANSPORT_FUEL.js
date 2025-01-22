@@ -22,8 +22,8 @@ var Constructor = function()
 
     this.variant = true;
     this.upgradeCost = 0;
-    this.variantList = ["FW_TRANSPORT","FW_TRANSPORT_RADAR","FW_TRANSPORT_BOMB"];
     this.builtBeforeToday = false;
+    this.variantList = ["FW_TRANSPORT","FW_TRANSPORT_RADAR","FW_TRANSPORT_BOMB"];
     this.fuelConsumption = 4;
 
     this.getShowInEditor = function () {
@@ -41,7 +41,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Air;
+        return GameEnums.UnitType_Plane_Large;
     };
 
     this.getName = function()

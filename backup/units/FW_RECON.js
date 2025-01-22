@@ -14,6 +14,18 @@ var Constructor = function()
         unit.setMaxRange(1);
         unit.setVision(5);
 
+        var variables = unit.getVariables();
+
+    };
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_RECON_AT"];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 0;
+
+    this.getShowInEditor = function () {
+        return true;
     };
 
     this.getMovementType = function()
@@ -33,7 +45,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A squishy recon unit. Fast and good for bullying infantry, but fragile in direct combat.");
+        return qsTr("A squishy but fast recon unit, sporting a good vision range. Can harass infantry quite well.");
     };
 
     this.getBaseCost = function()
@@ -41,23 +53,17 @@ var Constructor = function()
         return 4000;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return true;
     };
 
-    this.startOfTurn = function(unit, map)
+    this.getTypeOfWeapon2 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-        }
+        return GameEnums.WeaponType_Direct;
     };
 
-    this.getShowInEditor = function() {
-        return true;
-    }
-
-
+    this.actionList = ["ACTION_FIRE"];
 }
 
 Constructor.prototype = UNIT;

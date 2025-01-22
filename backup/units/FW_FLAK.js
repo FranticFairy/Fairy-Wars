@@ -3,8 +3,8 @@ var Constructor = function()
 
     this.init = function(unit)
     {
-        unit.setAmmo1(6);
-        unit.setMaxAmmo1(6);
+        unit.setAmmo1(5);
+        unit.setMaxAmmo1(5);
         unit.setWeapon1ID("FW_WEP_HFLAK");
 
         unit.setAmmo2(5);
@@ -18,15 +18,19 @@ var Constructor = function()
         unit.setMaxRange(2);
         unit.setVision(2);
 
+        var variables = unit.getVariables();
+
     };
 
-    this.getFirstStrike = function(unit, uX, uY, attacker, isDefender, map, aX, aY) {
-        if(isDefender) {
-            if(attacker.getUnitType() === GameEnums.UnitType_Air) {
-                return true;
-            }
-        }
-    }
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_FLAK_AA"];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 0;
+
+    this.getShowInEditor = function () {
+        return true;
+    };
 
     this.getMovementType = function()
     {
@@ -53,23 +57,22 @@ var Constructor = function()
         return 8000;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return false;
     };
 
-    this.startOfTurn = function(unit, map)
+    this.getTypeOfWeapon1 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-        }
+        return GameEnums.WeaponType_Indirect;
     };
 
-    this.getShowInEditor = function() {
-        return true;
-    }
+    this.getTypeOfWeapon2 = function(unit)
+    {
+        return GameEnums.WeaponType_Direct;
+    };
 
-
+    this.actionList = ["ACTION_FIRE"];
 }
 
 Constructor.prototype = UNIT;

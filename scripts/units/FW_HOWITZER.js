@@ -20,8 +20,8 @@ var Constructor = function()
 
     this.variant = false;
     this.upgradeCost = 0;
-    this.variantList = ["FW_HOWITZER_ARTY"];
     this.builtBeforeToday = false;
+    this.variantList = ["FW_HOWITZER_ARTY"];
     this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {
@@ -35,7 +35,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Ground;
+        return GameEnums.UnitType_Fieldgun;
     };
 
     this.getName = function()

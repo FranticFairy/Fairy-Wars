@@ -101,10 +101,10 @@ ACTION_TRAP.isTrap = function(action, moveUnit, targetFieldUnit, targetX, target
         {
             return true;
         }
-        if(targetFieldUnit.getUnitID() === "FW_LANDMINE" && moveUnitType === GameEnums.UnitType_Ground && targetFieldUnit.isStealthed(moveUnit.getOwner())) {
+        if(targetFieldUnit.getUnitID() === "FW_LANDMINE" && UNIT.unitTypeToGround(moveUnitType) === GameEnums.UnitType_Ground && targetFieldUnit.isStealthed(moveUnit.getOwner())) {
             return true;
         }
-        if(targetFieldUnit.getUnitID() === "FW_SEAMINE" && moveUnitType === GameEnums.UnitType_Naval && targetFieldUnit.isStealthed(moveUnit.getOwner())) {
+        if(targetFieldUnit.getUnitID() === "FW_SEAMINE" && UNIT.unitTypeToDomain(moveUnitType) === GameEnums.UnitType_Naval && targetFieldUnit.isStealthed(moveUnit.getOwner())) {
             return true;
         }
     }

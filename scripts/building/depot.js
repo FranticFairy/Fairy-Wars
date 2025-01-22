@@ -31,3 +31,7 @@ DEPOT.onWeatherChanged = function(building, weather, map)
 DEPOT.getConstructionList = function (building) {
     return BUILDING.assembleConstructionList(building);
 };
+DEPOT.getRepairTypes = function(building)
+{
+    return [GameEnums.UnitType_Infantry, GameEnums.UnitType_Vehicle_Light, GameEnums.UnitType_Vehicle_Medium, GameEnums.UnitType_Vehicle_Heavy, GameEnums.UnitType_Fieldgun];
+};

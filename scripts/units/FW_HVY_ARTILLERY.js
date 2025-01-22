@@ -20,8 +20,8 @@ var Constructor = function()
 
     this.variant = false;
     this.upgradeCost = 0;
-    this.variantList = [];
     this.builtBeforeToday = false;
+    this.variantList = [];
     this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {
@@ -30,12 +30,12 @@ var Constructor = function()
 
     this.getMovementType = function()
     {
-        return "MOVE_TANK";
+        return "MOVE_TANK_HEAVY";
     };
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Ground;
+        return GameEnums.UnitType_Vehicle_Heavy;
     };
 
     this.getName = function()

@@ -14,8 +14,20 @@ var Constructor = function()
         unit.setMaxRange(2);
         unit.setVision(2);
 
+        var variables = unit.getVariables();
+
     };
-    
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_CV_TRN","FW_CV_UPGRD"];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 1;
+
+    this.getShowInEditor = function () {
+        return true;
+    };
+
     this.getMovementType = function()
     {
         return "MOVE_SHIP";
@@ -41,80 +53,23 @@ var Constructor = function()
         return 18000;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return true;
+    };
+
+    this.getTypeOfWeapon1 = function(unit)
+    {
+        return GameEnums.WeaponType_Indirect;
     };
 
     this.getLoadingPlace = function()
     {
         return 3;
     };
-    this.transportList = ["FW_LHELI" , "FW_AHELI" , "FW_THELI", "FW_PROP" , "FW_FIGHTER" , "FW_ATTACKER" , "FW_SEAPLANE"];
-    this.transportListLVF = ["FW_LHELI" , "FW_AHELI" , "FW_THELI", "FW_PROP" , "FW_FIGHTER" , "FW_ATTACKER" , "FW_SEAPLANE", "FW_BOMBER", "FW_TRANSPORT"];
+    this.transportList = ["FW_PROP" , "FW_FIGHTER" , "FW_ATTACKER" , "FW_SEAPLANE" , "FW_LHELI" , "FW_AHELI" , "FW_THELI"];
 
-    this.getTransportUnits = function(unit, map)
-    {
-        var variables = unit.getVariables();
-        var displayIconVar = variables.createVariable("displayIcon");
-        var displayIcon = displayIconVar.readDataString();
-        if(displayIcon === "+trn") {
-            return Global[unit.getUnitID()].transportListLVF;
-        }
-        return Global[unit.getUnitID()].transportList;
-    };
-
-    this.actionList = ["ACTION_FIRE","ACTION_LOAD","ACTION_UNLOAD","ACTION_LOADOUT", "ACTION_JOIN", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
-    this.startOfTurn = function(unit, map)
-    {
-        if (unit.getTerrain() !== null)
-        {
-            //Start of Turn Fuel Cost
-            var fuelCosts = 1 + unit.getFuelCostModifier(Qt.point(unit.getX(), unit.getY()), 1);
-            if (fuelCosts < 0)
-            {
-                fuelCosts = 0;
-            }
-            unit.setFuel(unit.getFuel() - fuelCosts);
-        }
-        UNIT.transporterRefilling(unit, map);
-    };
-
-    this.createExplosionAnimation = function(x, y, unit, map)
-    {
-        var animation = GameAnimationFactory.createAnimation(map, x, y);
-        animation.addSprite("explosion + water", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
-        animation.setSound("explosion + water.wav");
-        return animation;
-    };
-
-	this.getTerrainAnimationBase = function(unit, terrain, defender, map)
-    {
-        var weatherModifier = TERRAIN.getWeatherModifier(map);
-        return "base_" + weatherModifier + "air";
-    };
-
-    this.getTerrainAnimationForeground = function(unit, terrain, defender, map)
-    {
-        return "";
-    };
-
-    this.getTerrainAnimationBackground = function(unit, terrain, defender, map)
-    {
-        var weatherModifier = TERRAIN.getWeatherModifier(map);
-        return "back_" + weatherModifier +"sea";
-    };
-
-    this.getTerrainAnimationMoveSpeed = function()
-    {
-        return 1;
-    };
-
-    this.getShowInEditor = function() {
-        return true;
-    }
-
-
+    this.actionList = ["ACTION_FIRE"];
 }
 
 Constructor.prototype = UNIT;

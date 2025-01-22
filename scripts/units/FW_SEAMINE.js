@@ -75,7 +75,11 @@ var Constructor = function()
     };
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Naval;
+        return GameEnums.UnitType_Naval_Light;
+    };
+
+    this.getCOSpecificUnit = function(building) {
+        return true;
     };
 
     this.getShowInEditor = function() {

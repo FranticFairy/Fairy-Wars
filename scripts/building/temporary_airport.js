@@ -23,3 +23,8 @@ TEMPORARY_AIRPORT.getBuildingGroup = function()
 TEMPORARY_AIRPORT.getConstructionList = function (building) {
     return BUILDING.assembleConstructionList(building);
 };
+
+TEMPORARY_AIRPORT.getRepairTypes = function(building)
+{
+    return [GameEnums.UnitType_Plane, GameEnums.UnitType_Plane_Large, GameEnums.UnitType_Heli];
+};

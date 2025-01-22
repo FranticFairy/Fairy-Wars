@@ -25,6 +25,7 @@ var Constructor = function()
 
     this.variant = true;
     this.upgradeCost = 7500;
+    this.builtBeforeToday = false;
     this.variantList = ["FW_ROCKET","FW_ROCKET_MOVE"];
     this.fuelConsumption = 0;
 
@@ -38,12 +39,12 @@ var Constructor = function()
 
     this.getMovementType = function()
     {
-        return "MOVE_TIRE_B";
+        return "MOVE_TIRE_A";
     };
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Ground;
+        return GameEnums.UnitType_Vehicle_Medium;
     };
 
     this.getName = function()

@@ -18,3 +18,8 @@ AIRPORT.onWeatherChanged = function(building, weather, map)
 AIRPORT.getConstructionList = function (building) {
     return BUILDING.assembleConstructionList(building);
 };
+
+AIRPORT.getRepairTypes = function(building)
+{
+    return [GameEnums.UnitType_Plane, GameEnums.UnitType_Plane_Large, GameEnums.UnitType_Heli];
+};

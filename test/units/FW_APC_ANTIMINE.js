@@ -21,6 +21,7 @@ var Constructor = function()
 
     this.variant = true;
     this.upgradeCost = 3000;
+    this.builtBeforeToday = false;
     this.variantList = ["FW_APC"];
     this.fuelConsumption = 0;
 
@@ -39,7 +40,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Ground;
+        return GameEnums.UnitType_Vehicle_Light;
     };
 
     this.getName = function()

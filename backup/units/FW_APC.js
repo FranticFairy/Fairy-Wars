@@ -10,6 +10,18 @@ var Constructor = function()
         unit.setMaxRange(1);
         unit.setVision(1);
 
+        var variables = unit.getVariables();
+
+    };
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_APC_ANTIMINE"];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 0;
+
+    this.getShowInEditor = function () {
+        return true;
     };
 
     this.getMovementType = function()
@@ -37,7 +49,7 @@ var Constructor = function()
         return 6000;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return true;
     };
@@ -46,40 +58,9 @@ var Constructor = function()
     {
         return 2;
     };
-    this.transportList = ["FW_INFANTRY" , "FW_HVY_INFANTRY" , "FW_AST_INFANTRY"];
+    this.transportList = ["FW_INFANTRY" , "FW_HVY_INFANTRY" , "FW_AST_INFANTRY" , "FW_FAERIE_INFANTRY" , "FW_FAERIE_DREAMWEAVER"];
 
-    this.actionList = ["ACTION_BUILD_CARRY","ACTION_LOAD","ACTION_UNLOAD", "ACTION_SUPPORTALL_RATION", "ACTION_LOADOUT", "ACTION_JOIN",  "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
-
-    this.getActions = function (unit, map) {
-        var baseActions = ["ACTION_BUILD_CARRY","ACTION_LOAD","ACTION_UNLOAD", "ACTION_SUPPORTALL_RATION", "ACTION_LOADOUT", "ACTION_JOIN",  "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
-
-        var variables = unit.getVariables();
-        var displayIconVar = variables.createVariable("displayIcon");
-        var displayIcon = displayIconVar.readDataString();
-        switch (displayIcon) {
-            case "+antimine":
-                baseActions.push("ACTION_DISABLE_MINE");
-                return (baseActions);
-            default:
-                return baseActions;
-        }
-        // returns a string id list of the actions this unit can perform
-    };
-
-    this.startOfTurn = function(unit, map)
-    {
-        if (unit.getTerrain() !== null)
-        {
-            ACTION_SUPPORTALL_RATION.giveRation(unit, map);
-        }
-        UNIT.transporterRefilling(unit, map);
-    };
-
-    this.getShowInEditor = function() {
-        return true;
-    }
-
-
+    this.actionList = ["ACTION_SUPPORTALL_RATION", "ACTION_BUILD_CARRY"];
 }
 
 Constructor.prototype = UNIT;

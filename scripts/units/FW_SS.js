@@ -20,8 +20,8 @@ var Constructor = function()
 
     this.variant = false;
     this.upgradeCost = 0;
-    this.variantList = ["FW_SS_ARTY","FW_SS_ASM","FW_SS_RADAR","FW_SS_ANTIRADAR","FW_SS_AA","FW_SS_TRN"];
     this.builtBeforeToday = false;
+    this.variantList = ["FW_SS_ARTY","FW_SS_ASM","FW_SS_RADAR","FW_SS_ANTIRADAR","FW_SS_AA","FW_SS_TRN"];
     this.fuelConsumption = 1;
 
     this.getShowInEditor = function () {
@@ -35,7 +35,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Naval;
+        return GameEnums.UnitType_Naval_Medium;
     };
 
     this.getName = function()

@@ -25,6 +25,7 @@ var Constructor = function()
 
     this.variant = true;
     this.upgradeCost = 3000;
+    this.builtBeforeToday = false;
     this.variantList = ["FW_IFV","FW_IFV_AT","FW_IFV_AA","FW_IFV_ARTY","FW_IFV_ANTIMINE","FW_IFV_MOVE","FW_IFV_ANCH","FW_IFV_HMR"];
     this.fuelConsumption = 0;
 
@@ -47,7 +48,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Ground;
+        return GameEnums.UnitType_Vehicle_Medium;
     };
 
     this.getName = function()

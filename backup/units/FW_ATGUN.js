@@ -14,13 +14,25 @@ var Constructor = function()
         unit.setMaxRange(2);
         unit.setVision(1);
 
+        var variables = unit.getVariables();
+
     };
-    
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = [];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 0;
+
+    this.getShowInEditor = function () {
+        return true;
+    };
+
     this.getFirstStrike = function(unit, uX, uY, attacker, isDefender, map, aX, aY) {
         if(isDefender) {
             return true;
         }
-    }
+    };
 
     this.getMovementType = function()
     {
@@ -39,7 +51,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A field gun dedicated to killing tanks. Fires first when attacked, and has a little bit of range, but is quite squishy and can't target infantry or air.");
+        return qsTr("A field gun dedicated to killing tanks. Fires first when attacked, but is vulnerable to infantry attack.");
     };
 
     this.getBaseCost = function()
@@ -47,23 +59,17 @@ var Constructor = function()
         return 7000;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return false;
     };
 
-    this.startOfTurn = function(unit, map)
+    this.getTypeOfWeapon1 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-        }
+        return GameEnums.WeaponType_Indirect;
     };
 
-    this.getShowInEditor = function() {
-        return true;
-    }
-
-
+    this.actionList = ["ACTION_FIRE"];
 }
 
 Constructor.prototype = UNIT;

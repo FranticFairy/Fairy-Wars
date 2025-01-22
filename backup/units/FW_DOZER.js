@@ -18,6 +18,18 @@ var Constructor = function()
         unit.setMaxRange(1);
         unit.setVision(1);
 
+        var variables = unit.getVariables();
+
+    };
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_DOZER_UPGRD","FW_DOZER_FUEL"];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 0;
+
+    this.getShowInEditor = function () {
+        return true;
     };
 
     this.getMovementType = function()
@@ -37,7 +49,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A utility unit, capable of building Temp (Air)Ports, as well as laying and clearing landmines and building Temp Bridges.");
+        return qsTr("A utility unit, capable of building various structures and defenses, as well as laying and clearing landmines.");
     };
 
     this.getBaseCost = function()
@@ -45,24 +57,22 @@ var Constructor = function()
         return 6000;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return true;
     };
 
-    this.actionList = ["ACTION_PLACE_LANDMINE", "ACTION_DISABLE_MINE", "ACTION_PLACE_PONTOON", "ACTION_BUILD_DEPOT", "ACTION_BUILD_TEMP_HARBOUR", "ACTION_BUILD_TEMP_AIRPORT", "ACTION_CLEAR_FOREST", "ACTION_BUILD_ROAD", "ACTION_BUILD_TRENCH", "ACTION_LOAD","ACTION_UNLOAD","ACTION_LOADOUT", "ACTION_RESTOCK", "ACTION_JOIN", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
-    this.startOfTurn = function(unit, map)
+    this.getTypeOfWeapon1 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-        }
+        return GameEnums.WeaponType_Direct;
     };
 
-    this.getShowInEditor = function() {
-        return true;
-    }
+    this.getTypeOfWeapon2 = function(unit)
+    {
+        return GameEnums.WeaponType_Direct;
+    };
 
-
+    this.actionList = ["ACTION_DISABLE_MINE", "ACTION_BUILD_TEMP_AIRPORT", "ACTION_BUILD_TEMP_HARBOUR", "ACTION_BUILD_DEPOT", "ACTION_PLACE_LANDMINE", "ACTION_PLACE_PONTOON", "ACTION_BUILD_ROAD", "ACTION_BUILD_TRENCH", "ACTION_CLEAR_FOREST"];
 }
 
 Constructor.prototype = UNIT;

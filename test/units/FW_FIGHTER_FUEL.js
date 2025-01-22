@@ -26,6 +26,7 @@ var Constructor = function()
 
     this.variant = true;
     this.upgradeCost = 0;
+    this.builtBeforeToday = false;
     this.variantList = ["FW_FIGHTER","FW_FIGHTER_BOMB","FW_FIGHTER_GUN"];
     this.fuelConsumption = 4;
 
@@ -44,7 +45,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Air;
+        return GameEnums.UnitType_Plane;
     };
 
     this.getName = function()

@@ -22,8 +22,8 @@ var Constructor = function()
 
     this.variant = true;
     this.upgradeCost = 4000;
-    this.variantList = ["FW_THELI","FW_THELI_FUEL"];
     this.builtBeforeToday = false;
+    this.variantList = ["FW_THELI","FW_THELI_FUEL"];
     this.fuelConsumption = 2;
 
     this.getShowInEditor = function () {
@@ -41,7 +41,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Air;
+        return GameEnums.UnitType_Heli;
     };
 
     this.getName = function()

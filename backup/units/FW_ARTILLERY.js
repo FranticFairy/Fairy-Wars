@@ -14,6 +14,18 @@ var Constructor = function()
         unit.setMaxRange(3);
         unit.setVision(1);
 
+        var variables = unit.getVariables();
+
+    };
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = [];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 0;
+
+    this.getShowInEditor = function () {
+        return true;
     };
 
     this.getMovementType = function()
@@ -33,7 +45,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("A mobile artillery unit, for providing ranged fire support to more mobile units. Cannot move and shoot.");
+        return qsTr("A mobile artillery piece, good for keeping up with armoured pushes, but vulnerable under direct fire.");
     };
 
     this.getBaseCost = function()
@@ -41,23 +53,17 @@ var Constructor = function()
         return 12500;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return false;
     };
 
-    this.startOfTurn = function(unit, map)
+    this.getTypeOfWeapon1 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-        }
+        return GameEnums.WeaponType_Indirect;
     };
 
-    this.getShowInEditor = function() {
-        return true;
-    }
-
-
+    this.actionList = ["ACTION_FIRE"];
 }
 
 Constructor.prototype = UNIT;

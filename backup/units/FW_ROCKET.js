@@ -14,22 +14,23 @@ var Constructor = function()
         unit.setMaxRange(5);
         unit.setVision(1);
 
+        var variables = unit.getVariables();
+
     };
 
-    this.loadSprites = function(unit)
-    {
-        unit.loadSpriteV2("FW_ROCKET+mask", GameEnums.Recoloring_Matrix);
-        unit.loadSpriteV2("FW_ROCKET", GameEnums.Recoloring_None);
-        var variables = unit.getVariables();
-        var displayIconVar = variables.createVariable("displayIcon");
-        var displayIcon = displayIconVar.readDataString();
-        displayIconVar.writeDataString(displayIcon);
-        unit.loadSprite(displayIcon, false, false);
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_ROCKET_MOVE","FW_ROCKET_ASM"];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 0;
+
+    this.getShowInEditor = function () {
+        return true;
     };
 
     this.getMovementType = function()
     {
-        return "MOVE_TIRE_A";
+        return "MOVE_TIRE_B";
     };
 
     this.getUnitType = function()
@@ -52,34 +53,17 @@ var Constructor = function()
         return 17000;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
         return false;
     };
-	
-    this.startOfTurn = function(unit, map)
+
+    this.getTypeOfWeapon1 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-        }
+        return GameEnums.WeaponType_Indirect;
     };
 
-    this.doWalkingAnimation = function(action, map)
-    {
-        var unit = action.getTargetUnit();
-        var animation = GameAnimationFactory.createWalkingAnimation(map, unit, action);
-        var unitID = unit.getUnitID().toLowerCase();
-        animation.loadSpriteV2(unitID + "+mask", GameEnums.Recoloring_Matrix, 1);
-        animation.loadSpriteV2(unitID, GameEnums.Recoloring_None, 1);
-        animation.setSound("movetire.wav", -2);
-        return animation;
-    };
-
-    this.getShowInEditor = function() {
-        return true;
-    }
-
-
+    this.actionList = ["ACTION_FIRE"];
 }
 
 Constructor.prototype = UNIT;

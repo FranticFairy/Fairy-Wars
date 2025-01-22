@@ -1,6 +1,8 @@
-var Constructor = function () {
+var Constructor = function()
+{
 
-    this.init = function (unit) {
+    this.init = function(unit)
+    {
         unit.setAmmo1(7);
         unit.setMaxAmmo1(7);
         unit.setWeapon1ID("FW_WEP_MTANKGUN");
@@ -16,58 +18,61 @@ var Constructor = function () {
         unit.setMaxRange(1);
         unit.setVision(1);
 
-    };
-
-    this.getActions = function (unit, map) {
-        var baseActions = UNIT.getBasicActions(unit,map);
-
         var variables = unit.getVariables();
-        var displayIconVar = variables.createVariable("displayIcon");
-        var displayIcon = displayIconVar.readDataString();
-        switch (displayIcon) {
-            case "+antimine":
-                baseActions.push("ACTION_DISABLE_MINE");
-                return (baseActions);
-            default:
-                return baseActions;
-        }
-        // returns a string id list of the actions this unit can perform
+
     };
 
-    this.getMovementType = function () {
-        return "MOVE_TANK";
-    };
-
-    this.getUnitType = function () {
-        return GameEnums.UnitType_Ground;
-    };
-
-    this.getName = function () {
-        return qsTr("Medium Tank");
-    };
-
-    this.getDescription = function () {
-        return qsTr("The standard tank unit, packs a good punch and has good speed without being too costly.");
-    };
-
-    this.getBaseCost = function () {
-        return 9500;
-    };
-
-    this.canMoveAndFire = function (unit) {
-        return true;
-    };
-
-    this.startOfTurn = function (unit, map) {
-        if (unit.getTerrain() !== null) {
-        }
-    };
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_MTANK_ANTIMINE"];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {
         return true;
-    }
+    };
 
+    this.getMovementType = function()
+    {
+        return "MOVE_TANK";
+    };
 
+    this.getUnitType = function()
+    {
+        return GameEnums.UnitType_Ground;
+    };
+
+    this.getName = function()
+    {
+        return qsTr("Medium Tank");
+    };
+
+    this.getDescription = function()
+    {
+        return qsTr("A standard, mainline battle tank, the backbone of a solid armoured force.");
+    };
+
+    this.getBaseCost = function()
+    {
+        return 9500;
+    };
+
+	this.canMoveAndFire = function()
+    {
+        return true;
+    };
+
+    this.getTypeOfWeapon1 = function(unit)
+    {
+        return GameEnums.WeaponType_Direct;
+    };
+
+    this.getTypeOfWeapon2 = function(unit)
+    {
+        return GameEnums.WeaponType_Direct;
+    };
+
+    this.actionList = ["ACTION_FIRE"];
 }
 
 Constructor.prototype = UNIT;

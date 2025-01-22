@@ -30,7 +30,7 @@ LABOR.getConstructionList = function (building) {
     return BUILDING.assembleConstructionList(building);
 };
 
-this.getRepairTypes = function(building)
+LABOR.getRepairTypes = function(building)
 {
-    return [GameEnums.UnitType_Ground, GameEnums.UnitType_Infantry, GameEnums.UnitType_Naval, GameEnums.UnitType_Air];
+    return [GameEnums.UnitType_Infantry, GameEnums.UnitType_Vehicle_Light, GameEnums.UnitType_Vehicle_Medium, GameEnums.UnitType_Vehicle_Heavy, GameEnums.UnitType_Fieldgun, GameEnums.UnitType_Naval_Light, GameEnums.UnitType_Naval_Medium, GameEnums.UnitType_Naval_Heavy, GameEnums.UnitType_Plane, GameEnums.UnitType_Plane_Large, GameEnums.UnitType_Heli];
 };

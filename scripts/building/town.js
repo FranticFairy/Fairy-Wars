@@ -18,3 +18,7 @@ TOWN.onWeatherChanged = function(building, weather, map)
 TOWN.getConstructionList = function (building) {
     return BUILDING.assembleConstructionList(building);
 };
+TOWN.getRepairTypes = function(building)
+{
+    return [GameEnums.UnitType_Infantry, GameEnums.UnitType_Vehicle_Light, GameEnums.UnitType_Vehicle_Medium, GameEnums.UnitType_Vehicle_Heavy, GameEnums.UnitType_Fieldgun];
+};

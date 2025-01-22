@@ -16,8 +16,8 @@ var Constructor = function()
 
     this.variant = false;
     this.upgradeCost = 0;
-    this.variantList = [];
     this.builtBeforeToday = false;
+    this.variantList = [];
     this.fuelConsumption = 1;
 
     this.getShowInEditor = function () {
@@ -31,7 +31,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Naval;
+        return GameEnums.UnitType_Naval_Light;
     };
 
     this.getName = function()

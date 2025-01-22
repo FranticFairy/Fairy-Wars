@@ -25,6 +25,7 @@ var Constructor = function()
 
     this.variant = true;
     this.upgradeCost = 2000;
+    this.builtBeforeToday = false;
     this.variantList = ["FW_HALFTRACK","FW_HALFTRACK_AT","FW_HALFTRACK_ARTY","FW_HALFTRACK_AA"];
     this.fuelConsumption = 0;
 
@@ -43,7 +44,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Ground;
+        return GameEnums.UnitType_Vehicle_Light;
     };
 
     this.getName = function()

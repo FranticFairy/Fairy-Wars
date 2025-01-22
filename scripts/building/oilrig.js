@@ -25,3 +25,8 @@ OILRIG.startOfTurn = function(building, map)
 OILRIG.getConstructionList = function (building) {
     return BUILDING.assembleConstructionList(building);
 };
+
+OILRIG.getRepairTypes = function(building)
+{
+    return [GameEnums.UnitType_Naval_Light];
+};

@@ -19,15 +19,23 @@ var Constructor = function()
         unit.setVision(2);
 
         var variables = unit.getVariables();
+
         var displayIconVar = variables.createVariable("displayIcon");
         var displayIcon = displayIconVar.readDataString();
-        if(displayIcon === "") {
-            displayIcon = "+at";
-        }
+        displayIcon = "+at";
         displayIconVar.writeDataString(displayIcon);
+
     };
-    
-    this.actionList = ["ACTION_FIRE", "ACTION_MISSILE", "ACTION_CAPTURE", "ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
+
+    this.variant = false;
+    this.upgradeCost = 0;
+    this.variantList = ["FW_HVY_INFANTRY_ARTY","FW_HVY_INFANTRY_AA"];
+    this.builtBeforeToday = false;
+    this.fuelConsumption = 0;
+
+    this.getShowInEditor = function () {
+        return true;
+    };
 
     this.getMovementType = function()
     {
@@ -46,7 +54,7 @@ var Constructor = function()
 
     this.getDescription = function()
     {
-        return qsTr("Heavy Infantry, packs a punch against vehicles. Can clear mines.");
+        return qsTr("Heavier infantry wielding heavy weapons for anti-vehicle duty. Gains bonus vision on mountains.");
     };
 
     this.getBaseCost = function()
@@ -54,26 +62,22 @@ var Constructor = function()
         return 2500;
     };
 
-	this.canMoveAndFire = function(unit)
+	this.canMoveAndFire = function()
     {
-        if(unit.getBaseMaxRange() > 1) {
-            return false;
-        }
         return true;
     };
 
-    this.startOfTurn = function(unit, map)
+    this.getTypeOfWeapon1 = function(unit)
     {
-        if (unit.getTerrain() !== null)
-        {
-        }
+        return GameEnums.WeaponType_Direct;
     };
 
-    this.getShowInEditor = function() {
-        return true;
-    }
+    this.getTypeOfWeapon2 = function(unit)
+    {
+        return GameEnums.WeaponType_Direct;
+    };
 
-
+    this.actionList = ["ACTION_FIRE", "ACTION_CAPTURE", "ACTION_MISSILE"];
 }
 
 Constructor.prototype = UNIT;

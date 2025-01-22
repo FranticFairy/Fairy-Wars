@@ -26,8 +26,8 @@ var Constructor = function()
 
     this.variant = true;
     this.upgradeCost = 3000;
-    this.variantList = ["FW_LHELI","FW_LHELI_AA","FW_LHELI_ASM"];
     this.builtBeforeToday = false;
+    this.variantList = ["FW_LHELI","FW_LHELI_AA","FW_LHELI_ASM"];
     this.fuelConsumption = 2;
 
     this.getShowInEditor = function () {
@@ -45,7 +45,7 @@ var Constructor = function()
 
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Air;
+        return GameEnums.UnitType_Heli;
     };
 
     this.getName = function()
