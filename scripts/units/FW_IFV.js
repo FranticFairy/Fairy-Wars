@@ -21,6 +21,7 @@ var Constructor = function()
     this.variant = false;
     this.upgradeCost = 0;
     this.variantList = ["FW_IFV_AT","FW_IFV_AA","FW_IFV_ARTY","FW_IFV_ANTIMINE","FW_IFV_RADAR","FW_IFV_MOVE","FW_IFV_ANCH","FW_IFV_HMR"];
+    this.builtBeforeToday = false;
     this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {

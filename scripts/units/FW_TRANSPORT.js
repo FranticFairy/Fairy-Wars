@@ -23,6 +23,7 @@ var Constructor = function()
     this.variant = false;
     this.upgradeCost = 0;
     this.variantList = ["FW_TRANSPORT_FUEL","FW_TRANSPORT_RADAR","FW_TRANSPORT_BOMB"];
+    this.builtBeforeToday = false;
     this.fuelConsumption = 4;
 
     this.getShowInEditor = function () {

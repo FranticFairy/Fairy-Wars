@@ -26,6 +26,7 @@ var Constructor = function()
     this.variant = true;
     this.upgradeCost = 7500;
     this.variantList = ["FW_ROCKET","FW_ROCKET_MOVE"];
+    this.builtBeforeToday = false;
     this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {

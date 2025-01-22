@@ -23,3 +23,5 @@ HQ.getBuildingGroup = function()
 HQ.getConstructionList = function (building) {
     return BUILDING.assembleConstructionList(building);
 };
+
+HQ.actionList = ["ACTION_PACK_HQ"];

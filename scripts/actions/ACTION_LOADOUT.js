@@ -10,7 +10,7 @@ var Constructor = function () {
 
                 var units = Global[unit.getUnitID()].variantList;
 
-                if (units.length > 0 && unit.getHasMoved() === false && unit.getLoadedUnitCount() === 0) {
+                if (units.length > 0 && (unit.getHasMoved() === false || Global[unit.getUnitID()].builtBeforeToday === false) && unit.getLoadedUnitCount() === 0) {
                     if (ACTION_LOADOUT.canBuildUnits(unit, map, units)) {
                         if ((building !== null) && (unit.getOwner() === building.getOwner())) {
                             var constructionList = building.getConstructionList();
@@ -87,7 +87,9 @@ var Constructor = function () {
         var unit = action.getTargetUnit();
         var player = unit.getOwner();
         var target = action.getTarget();
+        var builtStatus = Global[unit.getUnitID()].builtBeforeToday;
         unit.transformUnit(unitID);
+        Global[unit.getUnitID()].builtBeforeToday = builtStatus;
         // pay for the unit
         player.addFunds(-action.getCosts());
         unit.setHasMoved(true);
@@ -151,7 +153,7 @@ var Constructor = function () {
         return qsTr("Modify unit");
     };
     this.getDescription = function () {
-        return qsTr("Allows you to upgrade a unit, or change it's loadout.");
+        return qsTr("Allows you to upgrade a unit, or change it's loadout. Can be performed right after construction, or on unused units that start move on a construction building.");
     };
 }
 

@@ -23,6 +23,7 @@ var Constructor = function()
     this.variant = true;
     this.upgradeCost = 0;
     this.variantList = ["FW_TRANSPORT","FW_TRANSPORT_FUEL","FW_TRANSPORT_BOMB"];
+    this.builtBeforeToday = false;
     this.fuelConsumption = 4;
 
     this.getShowInEditor = function () {

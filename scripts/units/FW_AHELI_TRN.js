@@ -31,6 +31,7 @@ var Constructor = function()
     this.variant = true;
     this.upgradeCost = 4000;
     this.variantList = ["FW_AHELI"];
+    this.builtBeforeToday = false;
     this.fuelConsumption = 2;
 
     this.getShowInEditor = function () {

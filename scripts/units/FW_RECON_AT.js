@@ -30,6 +30,7 @@ var Constructor = function()
     this.variant = true;
     this.upgradeCost = 3000;
     this.variantList = ["FW_RECON"];
+    this.builtBeforeToday = false;
     this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {

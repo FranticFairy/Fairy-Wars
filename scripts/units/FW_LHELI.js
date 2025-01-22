@@ -22,6 +22,7 @@ var Constructor = function()
     this.variant = false;
     this.upgradeCost = 0;
     this.variantList = ["FW_LHELI_AA","FW_LHELI_RADAR","FW_LHELI_ASM"];
+    this.builtBeforeToday = false;
     this.fuelConsumption = 2;
 
     this.getShowInEditor = function () {

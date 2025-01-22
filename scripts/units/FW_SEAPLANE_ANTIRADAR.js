@@ -27,6 +27,7 @@ var Constructor = function()
     this.variant = true;
     this.upgradeCost = 0;
     this.variantList = ["FW_SEAPLANE","FW_SEAPLANE_ASM","FW_SEAPLANE_AA"];
+    this.builtBeforeToday = false;
     this.fuelConsumption = 4;
 
     this.getShowInEditor = function () {

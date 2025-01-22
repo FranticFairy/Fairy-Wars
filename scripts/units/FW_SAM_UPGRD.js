@@ -26,6 +26,7 @@ var Constructor = function()
     this.variant = true;
     this.upgradeCost = 5000;
     this.variantList = ["FW_SAM","FW_SAM_MOVE","FW_SAM_ASM"];
+    this.builtBeforeToday = false;
     this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {

@@ -26,6 +26,7 @@ var Constructor = function()
     this.variant = true;
     this.upgradeCost = 2000;
     this.variantList = ["FW_HALFTRACK","FW_HALFTRACK_AT","FW_HALFTRACK_ARTY","FW_HALFTRACK_AA"];
+    this.builtBeforeToday = false;
     this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {

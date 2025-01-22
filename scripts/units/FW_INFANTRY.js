@@ -21,6 +21,7 @@ var Constructor = function()
     this.variant = false;
     this.upgradeCost = 0;
     this.variantList = ["FW_INFANTRY_GUN","FW_INFANTRY_AT","FW_INFANTRY_PARA","FW_INFANTRY_ANCH"];
+    this.builtBeforeToday = false;
     this.fuelConsumption = 0;
 
     this.getShowInEditor = function () {

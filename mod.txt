@@ -1,6 +1,6 @@
 name=Fairywars
 description=The Great Fairy Wars have begun.
-version=0.1.0
+version=0.3.0
 compatible_mods=
 incompatible_mods=
 required_mods=

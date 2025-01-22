@@ -27,6 +27,7 @@ var Constructor = function()
     this.variant = false;
     this.upgradeCost = 0;
     this.variantList = ["FW_FIGHTER_FUEL","FW_FIGHTER_BOMB","FW_FIGHTER_GUN"];
+    this.builtBeforeToday = false;
     this.fuelConsumption = 4;
 
     this.getShowInEditor = function () {

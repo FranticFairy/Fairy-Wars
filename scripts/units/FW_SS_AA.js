@@ -22,6 +22,7 @@ var Constructor = function()
     this.variant = true;
     this.upgradeCost = 7000;
     this.variantList = ["FW_SS","FW_SS_ARTY","FW_SS_ASM","FW_SS_RADAR","FW_SS_ANTIRADAR","FW_SS_TRN"];
+    this.builtBeforeToday = false;
     this.fuelConsumption = 1;
 
     this.getShowInEditor = function () {

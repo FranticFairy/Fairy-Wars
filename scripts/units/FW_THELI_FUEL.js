@@ -23,6 +23,7 @@ var Constructor = function()
     this.variant = true;
     this.upgradeCost = 2000;
     this.variantList = ["FW_THELI","FW_THELI_TRN"];
+    this.builtBeforeToday = false;
     this.fuelConsumption = 2;
 
     this.getShowInEditor = function () {

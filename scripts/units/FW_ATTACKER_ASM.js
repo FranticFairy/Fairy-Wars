@@ -31,6 +31,7 @@ var Constructor = function()
     this.variant = true;
     this.upgradeCost = 0;
     this.variantList = ["FW_ATTACKER","FW_ATTACKER_ANTIRADAR","FW_ATTACKER_AA"];
+    this.builtBeforeToday = false;
     this.fuelConsumption = 4;
 
     this.getShowInEditor = function () {
