@@ -63,7 +63,7 @@ var Constructor = function()
 
     this.getBaseCost = function()
     {
-        return 7000;
+        return 7500;
     };
 
 	this.canMoveAndFire = function()
@@ -81,7 +81,7 @@ var Constructor = function()
         return GameEnums.WeaponType_Direct;
     };
 
-    this.actionList = ["ACTION_CAPTURE", "ACTION_DISABLE_MINE", "ACTION_BUILD_TEMP_AIRPORT", "ACTION_BUILD_TEMP_HARBOUR", "ACTION_BUILD_DEPOT", "ACTION_PLACE_LANDMINE", "ACTION_PLACE_SEAMINE", "ACTION_PLACE_PONTOON", "ACTION_BUILD_ROAD", "ACTION_BUILD_TRENCH", "ACTION_CLEAR_FOREST"];
+    this.actionList = ["ACTION_CAPTURE", "ACTION_DISABLE_MINE", "ACTION_BUILD_TEMP_AIRPORT", "ACTION_BUILD_TEMP_HARBOUR", "ACTION_BUILD_DEPOT", "ACTION_PLACE_LANDMINE", "ACTION_PLACE_SEAMINE", "COACTION_TEI_DREAMWEAVE"];
     this.useTerrainDefense = function()
     {
         return false;
