@@ -10,7 +10,7 @@ var Constructor = function()
 
         if (ACTION.isEmptyFieldAndHasNotMoved(action, unit, actionTargetField, targetField, map))
         {
-            if(Global["MOVE_HELI_LANDED"].getMovementpoints(aTF, unit, tF, false, map) > 0 && unit.getMovementType() != "MOVE_HELI_LANDED") {
+            if(Global["MOVE_HELI_LANDED"].getMovementpoints(aTF, unit, tF, false, map) > 0 && unit.getMovementType() === "MOVE_HELI") {
                 return true;
             }
         }

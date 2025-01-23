@@ -25,3 +25,11 @@ TEMPORARY_HARBOUR.getBuildingGroup = function()
 {
     return 0;
 };
+TEMPORARY_HARBOUR.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};
+
+TEMPORARY_HARBOUR.getRepairTypes = function(building)
+{
+    return [GameEnums.UnitType_Naval_Light, GameEnums.UnitType_Naval_Medium, GameEnums.UnitType_Naval_Heavy];
+};

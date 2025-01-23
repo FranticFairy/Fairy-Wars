@@ -48,7 +48,7 @@ var Constructor = function () {
     };
 
     this.getActionText = function (map) {
-        return qsTr("Build Bridge");
+        return qsTr("Build Pontoon Bridge");
     };
     this.getIcon = function (map) {
         return "build";
@@ -118,10 +118,10 @@ var Constructor = function () {
         ACTION_PLACE_PONTOON.postAnimationMineOwner = null;
     };
     this.getName = function () {
-        return qsTr("Build Bridge");
+        return qsTr("Build Pontoon");
     };
     this.getDescription = function () {
-        return qsTr("Build a bridge to cross a river.");
+        return qsTr("Build a pontoon bridge to cross a river. Heavy land vehicles cannot traverse this.");
     };
 }
 

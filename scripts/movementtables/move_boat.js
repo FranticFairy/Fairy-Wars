@@ -22,9 +22,11 @@ var Constructor = function()
         {
             if (!currentUnit.isStealthed(unit.getOwner()) || trapChecking)
             {
-                if (currentUnit.getUnitType() !== GameEnums.UnitType_Air)
+                if (UNIT.unitTypeToDomain(currentUnit.getUnitType()) !== GameEnums.UnitType_Air)
                 {
-                    if(!currentUnit.getHidden()) {
+                    if(UNIT.unitTypeToDomain(currentUnit.getUnitType() === GameEnums.UnitType_Ground && id === "BRIDGE")) {
+
+                    } else if(!currentUnit.getHidden()) {
                         return -1;
                     }
                 }
@@ -55,6 +57,10 @@ var Constructor = function()
             {
                 return -1;
             }
+        }
+        if ((id === "TELEGATE") && (unit !== null) && (unit.getOwner().isAlly(terrain.getBuilding().getOwner())))
+        {
+            return 0;
         }
         return MOVEMENTTABLE.getMovementpointsFromTable(terrain, MOVE_BOAT.movementpointsTable);
     };

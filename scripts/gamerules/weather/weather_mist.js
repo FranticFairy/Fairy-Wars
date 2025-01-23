@@ -32,14 +32,14 @@ var Constructor = function () {
         var fogMode = map.getGameRules().getFogMode();
         variable.writeDataInt32(fogMode);
         // only apply fog of war if the fog rules are softer
-        if (fogMode != GameEnums.Fog_OfShroud) {
-            map.getGameRules().setFogMode(GameEnums.Fog_OfShroud);
+        if (fogMode != GameEnums.Fog_OfWar) {
+            map.getGameRules().setFogMode(GameEnums.Fog_OfWar);
             for (var x = 0; x < map.getMapWidth(); x++) {
                 for (var y = 0; y < map.getMapHeight(); y++) {
                     var playerCount = map.getPlayerCount();
                     for (var c = 0; c < playerCount; c++) {
                         var player = map.getPlayer(c);
-                        player.addVisionField(x, y, 0, false, GameEnums.VisionType_Shrouded)
+                        player.addVisionField(x, y, 0, false, GameEnums.VisionType_Fogged)
                     }
                 }
             }

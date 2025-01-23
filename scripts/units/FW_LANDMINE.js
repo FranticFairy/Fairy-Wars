@@ -54,7 +54,11 @@ var Constructor = function()
     };
     this.getUnitType = function()
     {
-        return GameEnums.UnitType_Ground;
+        return GameEnums.UnitType_Vehicle_Light;
+    };
+
+    this.getCOSpecificUnit = function(building) {
+        return true;
     };
 
     this.getShowInEditor = function() {

@@ -22,3 +22,6 @@ MINE.getDescription = function()
 {
     return qsTr("Oil well. Once captured produces a lot of funds, but can't repair or resupply units.");
 };
+MINE.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};

@@ -1,6 +1,6 @@
 DEPOT.startOfTurn = function(building, map)
 {
-    BUILDING.replenishUnit(building, map, 1, 0.5, 0.5, 0.5, true);
+    BUILDING.replenishUnit(building, map, 1, 0.5, 0.5, 0.5, false);
 };
 
 DEPOT.getDescription = function()
@@ -27,4 +27,11 @@ DEPOT.loadSprites = function(building, neutral, map)
 };
 DEPOT.onWeatherChanged = function(building, weather, map)
 {	
+};
+DEPOT.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};
+DEPOT.getRepairTypes = function(building)
+{
+    return [GameEnums.UnitType_Infantry, GameEnums.UnitType_Vehicle_Light, GameEnums.UnitType_Vehicle_Medium, GameEnums.UnitType_Vehicle_Heavy, GameEnums.UnitType_Fieldgun];
 };

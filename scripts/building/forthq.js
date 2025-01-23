@@ -19,3 +19,10 @@ FORTHQ.onWeatherChanged = function(building, weather, map)
 FORTHQ.getShowInEditor = function() {
     return false;
 };
+FORTHQ.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};
+FORTHQ.getRepairTypes = function(building)
+{
+    return [GameEnums.UnitType_Infantry, GameEnums.UnitType_Vehicle_Light, GameEnums.UnitType_Vehicle_Medium, GameEnums.UnitType_Vehicle_Heavy, GameEnums.UnitType_Fieldgun];
+};

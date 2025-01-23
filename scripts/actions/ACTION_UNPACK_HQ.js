@@ -3,12 +3,27 @@ var Constructor = function()
     this.canBePerformed = function(action, map)
     {
         var unit = action.getTargetUnit();
-        var building = action.getTargetBuilding();
-        if ((unit != null) &&
-            (building !== null) && building.getOwner() == map.getCurrentPlayer())
-		{
-            return true;
-		}
+        var actionTargetField = action.getActionTarget();
+        var targetField = action.getTarget();
+        if (unit.getOwner().getFieldVisibleType(actionTargetField.x, actionTargetField.y) === GameEnums.VisionType_Shrouded)
+        {
+            return false;
+        }
+        var unitCount = unit.getOwner().getUnitCount();
+        if(unitCount <= 1) {
+            return false;
+        }
+        if (ACTION.isEmptyFieldAndHasNotMoved(action, unit, actionTargetField, targetField, map))
+        {
+            var building = action.getMovementBuilding();
+            if (building !== null)
+            {
+                if (building.getOwner() == unit.getOwner())
+                {
+                    return true;
+                }
+            }
+        }
         return false;
     };
     this.getActionText = function(map)
@@ -28,11 +43,13 @@ var Constructor = function()
     this.perform = function(action, map)
     {
         action.startReading();
-        var building = action.getTargetBuilding();
-        var x = building.getX();
-        var y = building.getY();
+        //var building = action.getTargetBuilding();
+        var unit = action.getTargetUnit();
+        Global[unit.getUnitID()].moveUnit(unit, action, map);
+        var x = unit.getX();
+        var y = unit.getY();
         var terrain = map.getTerrain(x,y);
-        var player = building.getOwner();
+        var player = unit.getOwner();
 
         terrain.loadBuilding("HQ");
         terrain.getBuilding().setOwner(player);

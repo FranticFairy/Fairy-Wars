@@ -2,7 +2,10 @@ ACTION_UNLOAD.isUnloadTerrain = function (unit, transportTerrain, map) {
     var unitID = unit.getUnitID();
     var terrainId = transportTerrain.getID();
     var building = transportTerrain.getBuilding();
-    if (unitID === "FW_TR") {
+    if(unit.getHidden()) {
+        return false;
+    }
+    if (unit.getUnitType === GameEnums.UnitType_Naval) {
         if ((transportTerrain !== null &&
             (terrainId === "BRIDGE" ||
                 terrainId === "BRIDGE1" ||

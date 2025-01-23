@@ -6,8 +6,11 @@ var Constructor = function()
         var building = action.getTargetBuilding();
         if ((unit === null) &&
             (building !== null) &&
-            (BUILDING.hqIds.includes(building.getBuildingID())) && building.getOwner() == map.getCurrentPlayer() && player.getFunds() >= 10000)
+            (BUILDING.hqIds.includes(building.getBuildingID())) && building.getOwner() == map.getCurrentPlayer() && map.getCurrentPlayer().getFunds() >= 10000)
 		{
+            if (building.getOwner().getBaseGameInput().getAiType() != GameEnums.AiTypes_Human) {
+                return false;
+            }
             return true;
 		}
         return false;

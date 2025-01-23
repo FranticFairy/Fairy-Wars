@@ -91,7 +91,7 @@ var Constructor = function()
         {
             if (!currentUnit.isStealthed(unit.getOwner()) || trapChecking)
             {
-                if (currentUnit.getUnitType() === GameEnums.UnitType_Air)
+                if (UNIT.unitTypeToDomain(currentUnit.getUnitType()) === GameEnums.UnitType_Air)
                 {
                     return -1;
                 }
@@ -102,6 +102,10 @@ var Constructor = function()
                 (unit.getOwner().isAlly(terrain.getBuilding().getOwner())))
         {
             return 1;
+        }
+        if ((id === "TELEGATE") && (unit !== null) && (unit.getOwner().isAlly(terrain.getBuilding().getOwner())))
+        {
+            return 0;
         }
         return MOVEMENTTABLE.getMovementpointsFromTable(terrain, MOVE_HELI.movementpointsTable);
     };

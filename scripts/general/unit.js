@@ -10,27 +10,13 @@ UNIT.transporterRefilling = function (unit, map) {
         var refresh = map.getGameRules().getTransporterRefresh();
         if (unitID === "FW_AST_INFANTRY" || unitID === "FW_SEAPLANE") {
             transportUnit.setHasMoved(false);
-        } else if (unitID === "FW_INFANTRY") {
-            var variables = transportUnit.getVariables();
-            var displayIconVar = variables.createVariable("displayIcon");
-            var displayIcon = displayIconVar.readDataString();
-            if (displayIcon === "+anch") {
-                if (unit.getUnitType() === GameEnums.UnitType_Naval) {
-                    transportUnit.setHasMoved(false);
-                }
-            } else if (displayIcon === "+para") {
-                if (unit.getUnitType() === GameEnums.UnitType_Air) {
-                    transportUnit.setHasMoved(false);
-                }
+        } else if (unit.getUnitType() === GameEnums.UnitType_Naval) {
+            if (unitID === "FW_INFANTRY_ANCH" || unitID === "FW_IFV_ANCH") {
+                transportUnit.setHasMoved(false);
             }
-        } else if (unitID === "FW_IFV") {
-            var variables = transportUnit.getVariables();
-            var displayIconVar = variables.createVariable("displayIcon");
-            var displayIcon = displayIconVar.readDataString();
-            if (displayIcon === "+anch") {
-                if (unit.getUnitType() === GameEnums.UnitType_Naval) {
-                    transportUnit.setHasMoved(false);
-                }
+        } else if (unit.getUnitType() === GameEnums.UnitType_Air) {
+            if (unitID === "FW_INFANTRY_PARA") {
+                transportUnit.setHasMoved(false);
             }
         }
     }
@@ -61,8 +47,8 @@ UNIT.getSound = function (unit) {
 }
 
 UNIT.loadSprites = function (unit) {
-    unit.loadSpriteV2(unit.getUnitID() + "+mask", GameEnums.Recoloring_Matrix);
-    unit.loadSpriteV2(unit.getUnitID(), GameEnums.Recoloring_None);
+    unit.loadSpriteV2(UNIT.getSpriteReference(unit) + "+mask", GameEnums.Recoloring_Matrix);
+    unit.loadSpriteV2(UNIT.getSpriteReference(unit), GameEnums.Recoloring_None);
     var variables = unit.getVariables();
     var displayIconVar = variables.createVariable("displayIcon");
     var displayIcon = displayIconVar.readDataString();
@@ -73,7 +59,7 @@ UNIT.loadSprites = function (unit) {
 UNIT.doWalkingAnimation = function (action, map) {
     var unit = action.getTargetUnit();
     var animation = GameAnimationFactory.createWalkingAnimation(map, unit, action);
-    var unitID = unit.getUnitID().toLowerCase();
+    var unitID = UNIT.getSpriteReference(unit).toLowerCase();
     animation.loadSpriteV2(unitID + "+mask", GameEnums.Recoloring_Matrix, 1);
     animation.loadSpriteV2(unitID, GameEnums.Recoloring_None, 1);
     animation.setSound(UNIT.getSound(unit), -2);
@@ -81,10 +67,8 @@ UNIT.doWalkingAnimation = function (action, map) {
 };
 
 UNIT.canAttackStealthedUnit = function (attacker, defender, map) {
-    if (defender.getUnitID() == "FW_SS") {
-        if (attacker.getWeapon1ID() == "FW_WEP_DC" || attacker.getWeapon2ID() == "FW_WEP_DC") {
-            return true;
-        }
+    if (attacker.getWeapon1ID() == "FW_WEP_DC" || attacker.getWeapon2ID() == "FW_WEP_DC") {
+        return true;
     }
     if (defender.getCloaked() && !defender.getHidden()) {
         return true;
@@ -99,158 +83,165 @@ UNIT.initForMods = function (unit) {
 var defaultValues = [];
 
 UNIT.buildedUnit = function (unit, player, map) {
-    unit.defaultValues = []
-
-    if (unit.getWeapon1ID() != null) {
-        unit.defaultValues.push(unit.getAmmo1()); //0
-        unit.defaultValues.push(unit.getMaxAmmo1()); //1
-        unit.defaultValues.push(unit.getWeapon1ID()); //2
-    } else {
-        unit.defaultValues.push(""); //0
-        unit.defaultValues.push(0); //1
-        unit.defaultValues.push(0); //2
-    }
-
-    if (unit.getWeapon2ID() != null) {
-        unit.defaultValues.push(unit.getAmmo2()); //0
-        unit.defaultValues.push(unit.getMaxAmmo2()); //1
-        unit.defaultValues.push(unit.getWeapon2ID()); //2
-    } else {
-        unit.defaultValues.push(""); //0
-        unit.defaultValues.push(0); //1
-        unit.defaultValues.push(0); //2
-    }
-
-    unit.defaultValues.push(unit.getMaxFuel()); //6
-    unit.defaultValues.push(unit.getBaseMovementPoints()); //7
-    unit.defaultValues.push(unit.getBaseMinRange()); //8
-    unit.defaultValues.push(unit.getBaseMaxRange()); //9
-    unit.defaultValues.push(unit.getBaseVision()); //10
-
-    unit.defaultValues.push(unit.canMoveAndFire(Qt.point(unit.x, unit.y))); //11
-    unit.defaultValues.push(unit.getTypeOfWeapon1()); //12
-    unit.defaultValues.push(unit.getTypeOfWeapon2()); //13
-
-    if (unit.getVisionHigh() != null) {
-        unit.defaultValues.push(unit.getVisionHigh()); //14
-    } else {
-        unit.defaultValues.push(0); //2
-    }
-
-    unit.defaultValues.push(unit.getMovementType()); //15
-    unit.defaultValues.push(unit.getLoadingPlace()); //16
 }
 
-UNIT.onGameStarted = function() {
-    GameConsole.print("UoGS",1);
-}
-
-UNIT.getBasicActions = function (unit, map, extraActions = "") {
-    var captureCapable = ["FW_IFV","FW_FF"];
-    var hasResupply = ["FW_TRUCK","FW_APC","FW_AX","FW_TRANSPORT"];
-    var hasRepair = ["FW_AX"];
-    var hasFactoryLoad = ["FW_IFV","FW_TRUCK","FW_APC","FW_THELI","FW_HALFTRACK","FW_TR"];
-    var hasStealth = ["FW_SS"];
-    var isIdle = ["FW_SEAMINE","FW_LANDMINE"];
-    var isMinelayer = ["FW_ML"];
-    var isSweeper = ["FW_ML"];
-    var basicActions = [];
-    var unitID = unit.getUnitID()
-    var unitType = unit.getUnitType()
-    if (unit.getWeapon1ID() != "" || unit.getWeapon2ID() != "") {
-        basicActions.push("ACTION_FIRE");
-    }
-    if (unitType === GameEnums.UnitType_Infantry || captureCapable.includes(unitID)) {
-        basicActions.push("ACTION_MISSILE");
-        basicActions.push("ACTION_CAPTURE");
-    }
-    if (hasFactoryLoad.includes(unitID)) {
-        basicActions.push("ACTION_BUILD_CARRY");
-    }
-    if (hasRepair.includes(unitID)) {
-        basicActions.push("ACTION_SUPPORTSINGLE_REPAIR");
-    }
-    if (hasResupply.includes(unitID)) {
-        basicActions.push("ACTION_SUPPORTALL_RATION");
-    }
-    if ((unit.getWeapon1ID() === "" && unit.getMaxAmmo1() > 0) || (unit.getWeapon2ID() === "" && unit.getMaxAmmo2() > 0)) {
-        basicActions.push("ACTION_RESTOCK");
-    }
-    if (unit.getMovementType() === "MOVE_HELI" || unit.getMovementType() === "MOVE_HELI_LANDED") {
-        basicActions.push("ACTION_LAND");
-        basicActions.push("ACTION_LIFT");
-    }
-    if (hasStealth.includes(unitID)) {
-        basicActions.push("ACTION_STEALTH");
-        basicActions.push("ACTION_UNSTEALTH");
-    }
-    if (isMinelayer.includes(unitID)) {
-        if(unitType === GameEnums.UnitType_Infantry || unitType === GameEnums.UnitType_Ground) {
-            basicActions.push("ACTION_PLACE_LANDMINE");
-        } else {
-            basicActions.push("ACTION_PLACE_WATERMINE");
-        }
-    }
-    if (isSweeper.includes(unitID)) {
-        basicActions.push("ACTION_DISABLE_MINE");
-    }
-    if(extraActions != "") {
-        for(var i = 0; i < extraActions.length; i++) {
-            basicActions.push(extraActions[i]);
-        }
-    }
-
-    if (isIdle.includes(unitID)) {
-        basicActions.push("ACTION_DISARM");
-        basicActions.push("ACTION_WAIT");
-    } else {
-        basicActions.push("ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_UNLOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1")
-    }
-
-    return basicActions;
-}
-/*
 UNIT.getActions = function (unit, map) {
-    var baseActions = UNIT.getBasicActions(unit,map);
-
-    return baseActions;
     // returns a string id list of the actions this unit can perform
-};
+    var unitActions = Global[unit.getUnitID()].actionList;
+    if (unitActions != "") {
+        return Global[unit.getUnitID()].actionList + "," + UNIT.actionList;
+    } else {
+        return UNIT.actionList;
+    }
+}
+
+this.builtBeforeToday = false;
+/*
+UNIT.getTransportUnits = function (unit, map) {
+    allUnits = ["FW_ACAR", "FW_AHELI", "FW_AHELI_TRN", "FW_ANTIAIR", "FW_COMV", "FW_APC", "FW_APC_ANTIMINE", "FW_ARTILLERY", "FW_ASSAULT_GUN", "FW_AST_INFANTRY", "FW_ATGUN", "FW_ATTACKER", "FW_ATTACKER_AA", "FW_ATTACKER_ANTIRADAR", "FW_ATTACKER_ASM", "FW_AX", "FW_BB", "FW_BOMBER", "FW_BOMBER_ARTY", "FW_BOMBER_ASM", "FW_CA", "FW_CIWS", "FW_CL", "FW_CL_ARTY", "FW_CV", "FW_CV_TRN", "FW_CV_UPGRD", "FW_DD", "FW_DD_AA", "FW_DD_ASM", "FW_DD_MINE", "FW_DOZER", "FW_DOZER_FUEL", "FW_DOZER_UPGRD", "FW_FAERIE_DREAMWEAVER", "FW_FAERIE_INFANTRY", "FW_FF", "FW_FIGHTER", "FW_FIGHTER_BOMB", "FW_FIGHTER_FUEL", "FW_FIGHTER_GUN", "FW_FLAK", "FW_FLAK_AA", "FW_HALFTRACK", "FW_HALFTRACK_AA", "FW_HALFTRACK_ARTY", "FW_HALFTRACK_AT", "FW_HALFTRACK_HMR", "FW_HOWITZER", "FW_HOWITZER_ARTY", "FW_HTANK", "FW_HVY_ARTILLERY", "FW_HVY_INFANTRY", "FW_HVY_INFANTRY_AA", "FW_HVY_INFANTRY_ARTY", "FW_IFV", "FW_IFV_AA", "FW_IFV_ANCH", "FW_IFV_ANTIMINE", "FW_IFV_ARTY", "FW_IFV_AT", "FW_IFV_HMR", "FW_IFV_MOVE", "FW_IFV_RADAR", "FW_IGUN", "FW_INFANTRY", "FW_INFANTRY_ANCH", "FW_INFANTRY_AT", "FW_INFANTRY_GUN", "FW_INFANTRY_PARA", "FW_LHELI", "FW_LHELI_AA", "FW_LHELI_ASM", "FW_LHELI_RADAR", "FW_LTANK", "FW_ML", "FW_MOTOR", "FW_MTANK", "FW_MTANK_ANTIMINE", "FW_PROP", "FW_PROP_AA", "FW_PROP_ASM", "FW_PROP_AT", "FW_RECON", "FW_RECON_AT", "FW_ROCKET", "FW_ROCKET_ASM", "FW_ROCKET_MOVE", "FW_SAM", "FW_SAM_ASM", "FW_SAM_MOVE", "FW_SAM_UPGRD", "FW_SEAPLANE", "FW_SEAPLANE_AA", "FW_SEAPLANE_ANTIRADAR", "FW_SEAPLANE_ASM", "FW_SHTANK", "FW_SS", "FW_SS_AA", "FW_SS_ANTIRADAR", "FW_SS_ARTY", "FW_SS_ASM", "FW_SS_RADAR", "FW_SS_TRN", "FW_TANK_DESTROYER", "FW_THELI", "FW_THELI_FUEL", "FW_THELI_TRN", "FW_TR", "FW_TRANSPORT", "FW_TRANSPORT_BOMB", "FW_TRANSPORT_FUEL", "FW_TRANSPORT_RADAR", "FW_TRUCK"];
+
+    var baseList = Global[unit.getUnitID()].transportList;
+
+    var carryList = [];
+
+    for (var i = 0; i < baseList.length; i++) {
+        var unit = baseList[i];
+        var variantList = ACTION_HANDLER.grabVariants(unit);
+        for (var x = 0; x < variantList.length; x++) {
+            carryList.push(variantList[x]);
+        }
+    }
+
+    return carryList;
+}
 */
-UNIT.actionList = ["ACTION_FIRE", "ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_UNLOAD", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"],
+UNIT.getTransportUnits = function (unit, map) {
+    allUnits = ["FW_ACAR", "FW_AHELI", "FW_AHELI_TRN", "FW_ANTIAIR", "FW_COMV", "FW_APC", "FW_APC_ANTIMINE", "FW_ARTILLERY", "FW_ASSAULT_GUN", "FW_AST_INFANTRY", "FW_ATGUN", "FW_ATTACKER", "FW_ATTACKER_AA", "FW_ATTACKER_ANTIRADAR", "FW_ATTACKER_ASM", "FW_AX", "FW_BB", "FW_BOMBER", "FW_BOMBER_ARTY", "FW_BOMBER_ASM", "FW_CA", "FW_CIWS", "FW_CL", "FW_CL_ARTY", "FW_CV", "FW_CV_TRN", "FW_CV_UPGRD", "FW_DD", "FW_DD_AA", "FW_DD_ASM", "FW_DD_MINE", "FW_DOZER", "FW_DOZER_FUEL", "FW_DOZER_UPGRD", "FW_FAERIE_DREAMWEAVER", "FW_FAERIE_INFANTRY", "FW_FF", "FW_FIGHTER", "FW_FIGHTER_BOMB", "FW_FIGHTER_FUEL", "FW_FIGHTER_GUN", "FW_FLAK", "FW_FLAK_AA", "FW_HALFTRACK", "FW_HALFTRACK_AA", "FW_HALFTRACK_ARTY", "FW_HALFTRACK_AT", "FW_HALFTRACK_HMR", "FW_HOWITZER", "FW_HOWITZER_ARTY", "FW_HTANK", "FW_HVY_ARTILLERY", "FW_HVY_INFANTRY", "FW_HVY_INFANTRY_AA", "FW_HVY_INFANTRY_ARTY", "FW_IFV", "FW_IFV_AA", "FW_IFV_ANCH", "FW_IFV_ANTIMINE", "FW_IFV_ARTY", "FW_IFV_AT", "FW_IFV_HMR", "FW_IFV_MOVE", "FW_IFV_RADAR", "FW_IGUN", "FW_INFANTRY", "FW_INFANTRY_ANCH", "FW_INFANTRY_AT", "FW_INFANTRY_GUN", "FW_INFANTRY_PARA", "FW_LHELI", "FW_LHELI_AA", "FW_LHELI_ASM", "FW_LHELI_RADAR", "FW_LTANK", "FW_ML", "FW_MOTOR", "FW_MTANK", "FW_MTANK_ANTIMINE", "FW_PROP", "FW_PROP_AA", "FW_PROP_ASM", "FW_PROP_AT", "FW_RECON", "FW_RECON_AT", "FW_ROCKET", "FW_ROCKET_ASM", "FW_ROCKET_MOVE", "FW_SAM", "FW_SAM_ASM", "FW_SAM_MOVE", "FW_SAM_UPGRD", "FW_SEAPLANE", "FW_SEAPLANE_AA", "FW_SEAPLANE_ANTIRADAR", "FW_SEAPLANE_ASM", "FW_SHTANK", "FW_SS", "FW_SS_AA", "FW_SS_ANTIRADAR", "FW_SS_ARTY", "FW_SS_ASM", "FW_SS_RADAR", "FW_SS_TRN", "FW_TANK_DESTROYER", "FW_THELI", "FW_THELI_FUEL", "FW_THELI_TRN", "FW_TR", "FW_TRANSPORT", "FW_TRANSPORT_BOMB", "FW_TRANSPORT_FUEL", "FW_TRANSPORT_RADAR", "FW_TRUCK"];
 
-    UNIT.startOfTurn = function (unit, map) {
-        if (typeof map !== 'undefined') {
+    var baseList = Global[unit.getUnitID()].transportList;
 
-            if (map.getCurrentDay() < 2) {
-                var playerCounter = map.getPlayerCount();
-                for (var i2 = 0; i2 < playerCounter; i2++) {
-                    var otherPlayer = map.getPlayer(i2);
+    var carryList = [];
 
-                    var units = otherPlayer.getUnits();
-                    units.randomize();
-                    for (i = 0; i < units.size(); i++) {
-                        var unit = units.at(i);
-                        if (unit !== null) {
-                            if (!unit.getUnitID().includes("FW_")) {
-                                ACTION_REPLACEDEFAULTUNIT.replace(unit);
-                                unit.refill(false);
-                            }
-                        }
-
-                    }
-                    units.remove();
+    for (var i = 0; i < allUnits.length; i++) {
+        var foundUnit = allUnits[i];
+        var unitType = Global[foundUnit].getUnitType();
+        var unitDomain = UNIT.unitTypeToDomain(unitType);
+        var isVariant = Global[foundUnit].variant;
+        var parent = "";
+        if(isVariant) {
+            parent = Global[foundUnit].variantList[0];
+        }
+        switch(unit.getUnitID()) {
+            case "FW_TR":
+                if(unitDomain === GameEnums.UnitType_Ground) {
+                    carryList.push(foundUnit);
                 }
-            }
+            break;
+            case "FW_TRUCK":
+            case "FW_HALFTRACK_AA":
+            case "FW_HALFTRACK_ARTY":
+            case "FW_HALFTRACK_AT":
+            case "FW_HALFTRACK_HMR":
+            case "FW_HALFTRACK":
+                if(unitType === GameEnums.UnitType_Infantry || unitType === GameEnums.UnitType_Fieldgun) {
+                    if(foundUnit != "FW_MOTOR" && parent != "FW_MOTOR") {
+                        carryList.push(foundUnit);
+                    }
+                }
+            break;
+            case "FW_APC_ANTIMINE":
+            case "FW_APC":
+            case "FW_THELI":
+            case "FW_AHELI_TRN":
+                if(unitType === GameEnums.UnitType_Infantry) {
+                    if(foundUnit != "FW_MOTOR" && parent != "FW_MOTOR") {
+                        carryList.push(foundUnit);
+                    }
+                }
+            break;
+            case "FW_CL_ARTY":
+            case "FW_CL":
+                if(unitType === GameEnums.UnitType_Heli) {
+                    carryList.push(foundUnit);
+                }
+            break;
+            case "FW_CV_TRN":
+            case "FW_CV":
+                if(unitType === GameEnums.UnitType_Heli || unitType === GameEnums.UnitType_Plane) {
+                    carryList.push(foundUnit);
+                }
+            break;
+            case "FW_CV_UPGRD":
+                if(unitDomain === GameEnums.UnitType_Air) {
+                    carryList.push(foundUnit);
+                }
+            break;
+            case "FW_SS_AA":
+                if(unitType === GameEnums.UnitType_Heli || foundUnit === "FW_SEAPLANE" || parent === "FW_SEAPLANE") {
+                    carryList.push(foundUnit);
+                }
+            break;
+            case "FW_TRANSPORT":
+                if(unitDomain === GameEnums.UnitType_Ground && unitType != GameEnums.UnitType_Vehicle_Heavy) {
+                    carryList.push(foundUnit);
+                }
+            break;
+            case "FW_SS_TRN":
+            case "FW_THELI_TRN":
+                if(unitType === GameEnums.UnitType_Infantry || unitType === GameEnums.UnitType_Fieldgun || unitType === GameEnums.UnitType_Vehicle_Light) {
+                    carryList.push(foundUnit);
+                }
+            break;
         }
-        /*
-        if(!unit.getActionList().includes("ACTION_LOADOUT")) {
-        }
-        */
-    };
+    }
+
+    return carryList;
+}
+
+UNIT.actionList = ["ACTION_LOADOUT", "ACTION_JOIN", "ACTION_LOAD", "ACTION_UNLOAD", "ACTION_RESTOCK", "ACTION_LIFT", "ACTION_LAND", "ACTION_WAIT", "ACTION_CO_UNIT_0", "ACTION_CO_UNIT_1"];
+
+UNIT.startOfTurn = function (unit, map) {
+    ACTION_HANDLER.handleStartOfTurn(unit, map);
+};
+
+UNIT.endOfTurn = function (unit, map) {
+    ACTION_HANDLER.handleEndOfTurn(unit, map);
+}
+
+UNIT.postBattleActions = function (unit, damage, otherUnit, gotAttacked, weapon, action) {
+    ACTION_HANDLER.handlePostBattleActions(unit, damage, otherUnit, gotAttacked, weapon, action);
+}
+
+UNIT.postAction = function (unit, action, map) {
+    ACTION_HANDLER.handlePostAction(unit, action, map);
+}
 
 UNIT.getShowInEditor = function () {
     return false;
+}
+
+UNIT.getWeatherImmune = function (unit, map) {
+    var submarines = ["FW_SS", "FW_SS_ARTY", "FW_SS_ASM", "FW_SS_RADAR", "FW_SS_ANTIRADAR", "FW_SS_AA", "FW_SS_TRN"]
+    if (unit.getHidden() && submarines.includes(unit.getUnitID())) {
+        return true;
+    }
+    return false;
+};
+
+UNIT.variant = false;
+UNIT.upgradeCost = 0;
+UNIT.variantList = [];
+UNIT.fuelConsumption = 0;
+
+UNIT.isVariantUnit = false;
+
+UNIT.getSpriteReference = function (unit) {
+    var unitID = unit.getUnitID();
+
+    if (Global[unitID].variant) {
+        return Global[unitID].variantList[0];
+    }
+    return unitID;
 }
 
 UNIT.getTypeOfWeapon1 = function (unit) {
@@ -280,3 +271,153 @@ UNIT.getTypeOfWeapon2 = function (unit) {
             return GameEnums.WeaponType_Direct;
     }
 };
+
+UNIT.createExplosionAnimation = function (x, y, unit, map) {
+    if ((UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air && unit.getMovementType() != "MOVE_HELI_LANDED")) {
+        var animation = GameAnimationFactory.createAnimation(map, x, y);
+        animation.addSprite("explosion + air", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
+        animation.setSound("explosion + air.wav");
+        return animation;
+    } else if (UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Naval) {
+        var animation = GameAnimationFactory.createAnimation(map, x, y);
+        animation.addSprite("explosion + water", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
+        animation.setSound("explosion + water.wav");
+        return animation;
+    } else {
+        var animation = GameAnimationFactory.createAnimation(map, x, y);
+        animation.addSprite("explosion+land", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
+        animation.setSound("explosion+land.wav");
+        return animation;
+    }
+};
+
+UNIT.getTerrainAnimationBase = function (unit, terrain, defender, map) {
+    if ((UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air && unit.getMovementType() != "MOVE_HELI_LANDED") || UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Naval) {
+        var weatherModifier = TERRAIN.getWeatherModifier(map);
+        return "base_" + weatherModifier + "air";
+    }
+    if (Global[terrain.getID()].getTerrainAnimationBase !== null) {
+        return Global[terrain.getID()].getTerrainAnimationBase(unit, terrain, defender, map);
+
+    }
+    else {
+        return "";
+    }
+};
+
+UNIT.getTerrainAnimationMoveSpeed = function (unit) {
+    if ((UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air && unit.getMovementType() != "MOVE_HELI_LANDED") || UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Naval) {
+        return 1;
+    }
+    return 0;
+};
+
+UNIT.getTerrainAnimationForeground = function (unit, terrain, defender, map) {
+    if ((UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air && unit.getMovementType() != "MOVE_HELI_LANDED") || UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Naval) {
+        return "";
+    }
+    if (Global[terrain.getID()].getTerrainAnimationForeground !== null) {
+        return Global[terrain.getID()].getTerrainAnimationForeground(unit, terrain, defender, map);
+    }
+    else {
+        return "";
+    }
+};
+
+UNIT.getTerrainAnimationBackground = function (unit, terrain, defender, map) {
+    if (UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Naval) {
+        var weatherModifier = TERRAIN.getWeatherModifier(map);
+        return "back_" + weatherModifier + "sea";
+    } else if ((UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air && unit.getMovementType() != "MOVE_HELI_LANDED")) {
+
+    } else {
+        if (Global[terrain.getID()].getTerrainAnimationBackground !== null) {
+            return Global[terrain.getID()].getTerrainAnimationBackground(unit, terrain, defender, map);
+        }
+        else {
+            return "";
+        }
+    }
+};
+
+UNIT.unitTypeToGround = function (unitType, map) {
+    if (unitType === GameEnums.UnitType_Hovercraft ||
+        unitType === GameEnums.UnitType_Ground ||
+        unitType === GameEnums.UnitType_Vehicle_Light ||
+        unitType === GameEnums.UnitType_Vehicle_Medium ||
+        unitType === GameEnums.UnitType_Vehicle_Heavy ||
+        unitType === GameEnums.UnitType_Fieldgun) {
+        return GameEnums.UnitType_Ground;
+    }
+    return unitType;
+};
+
+UNIT.unitTypeToDomain = function (unitType, map) {
+    if (unitType === GameEnums.UnitType_Vehicle_Light ||
+        unitType === GameEnums.UnitType_Vehicle_Medium ||
+        unitType === GameEnums.UnitType_Vehicle_Heavy ||
+        unitType === GameEnums.UnitType_Fieldgun ||
+        unitType === GameEnums.UnitType_Infantry) {
+        return GameEnums.UnitType_Ground;
+    }
+    if (unitType === GameEnums.UnitType_Plane ||
+        unitType === GameEnums.UnitType_Plane_Large ||
+        unitType === GameEnums.UnitType_Heli) {
+        return GameEnums.UnitType_Air;
+    }
+    if (unitType === GameEnums.UnitType_Naval_Light ||
+        unitType === GameEnums.UnitType_Naval_Medium ||
+        unitType === GameEnums.UnitType_Naval_Heavy) {
+        return GameEnums.UnitType_Naval;
+    }
+    return unitType;
+};
+
+UNIT.getUnitTypeText = function (unitType, map) {
+    switch (unitType) {
+        case GameEnums.UnitType_Air:
+            return qsTr("Air");
+        case GameEnums.UnitType_Naval:
+            return qsTr("Naval");
+        case GameEnums.UnitType_Ground:
+            return qsTr("Ground");
+        case GameEnums.UnitType_Infantry:
+            return qsTr("Infantry");
+        case GameEnums.UnitType_Hovercraft:
+            return qsTr("Hovercraft");
+        case GameEnums.UnitType_Vehicle_Light:
+            return qsTr("Light Vehicle");
+        case GameEnums.UnitType_Vehicle_Medium:
+            return qsTr("Medium Vehicle");
+        case GameEnums.UnitType_Vehicle_Heavy:
+            return qsTr("Heavy Vehicle");
+        case GameEnums.UnitType_Fieldgun:
+            return qsTr("Field Gun");
+        case GameEnums.UnitType_Plane:
+            return qsTr("Plane");
+        case GameEnums.UnitType_Plane_Large:
+            return qsTr("Large Plane");
+        case GameEnums.UnitType_Heli:
+            return qsTr("Helicopter");
+        case GameEnums.UnitType_Naval_Light:
+            return qsTr("Light Ship");
+        case GameEnums.UnitType_Naval_Medium:
+            return qsTr("Medium Ship");
+        case GameEnums.UnitType_Naval_Heavy:
+            return qsTr("Heavy Ship");
+    }
+    return tr("Ground");
+};
+
+UNIT.unitTypeSortList = [GameEnums.UnitType_Infantry,
+                        GameEnums.UnitType_Fieldgun,
+                        GameEnums.UnitType_Vehicle_Light,
+                        GameEnums.UnitType_Vehicle_Medium,
+                        GameEnums.UnitType_Vehicle_Heavy,
+                        GameEnums.UnitType_Heli,
+                        GameEnums.UnitType_Plane,
+                        GameEnums.UnitType_Plane_Large,
+                        GameEnums.UnitType_Naval_Light,
+                        GameEnums.UnitType_Naval_Medium,
+                        GameEnums.UnitType_Naval_Heavy
+];

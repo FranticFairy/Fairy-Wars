@@ -13,3 +13,6 @@ TOWER.loadSprites = function(building, neutral, map)
 TOWER.onWeatherChanged = function(building, weather, map)
 {	
 };
+TOWER.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};

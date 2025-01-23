@@ -13,3 +13,6 @@ RADAR.loadSprites = function(building, neutral, map)
 RADAR.onWeatherChanged = function(building, weather, map)
 {	
 };
+RADAR.getConstructionList = function (building) {
+    return BUILDING.assembleConstructionList(building);
+};

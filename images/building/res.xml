@@ -80,6 +80,9 @@
         <image file="opengate+e+w+mask.png" />
         <image file="opengate+n+s.png" />
         <image file="opengate+n+s+mask.png" />
+		<image file="telegate+mask.png" />
+		<image file="telegate+neutral.png" />
+		<image file="telegate.png" />
         
         <!-- weld -->
         <image file="weld+E+W.png" />

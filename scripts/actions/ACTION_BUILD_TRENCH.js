@@ -3,7 +3,7 @@ var Constructor = function () {
         var unit = action.getTargetUnit();
         var actionTargetField = action.getActionTarget();
         var targetField = action.getTarget();
-        if (ACTION.isEmptyFieldAndHasNotMoved(action, unit, actionTargetField, targetField, map)) {
+        if (unit.getHasMoved() === false) {
             if (ACTION_BUILD_TRENCH.getTrenchFields(action, map).length > 0) {
                 return true;
             }
@@ -13,9 +13,9 @@ var Constructor = function () {
     this.getTrenchFields = function (action, map) {
         var targetField = action.getActionTarget();
         var targetFields = [Qt.point(targetField.x + 1, targetField.y),
-        Qt.point(targetField.x - 1, targetField.y),
-        Qt.point(targetField.x, targetField.y - 1),
-        Qt.point(targetField.x, targetField.y + 1)];
+                            Qt.point(targetField.x - 1, targetField.y),
+                            Qt.point(targetField.x, targetField.y - 1),
+                            Qt.point(targetField.x, targetField.y + 1)];
         var unit = action.getTargetUnit();
         var targetTerrain = map.getTerrain(targetField.x, targetField.y);
         var ret = [];
@@ -28,7 +28,7 @@ var Constructor = function () {
                 var plains = ["PLAINS", "SNOW", "DESERT", "WASTE"];
                 var terrainId = terrain.getID();
                 var building = terrain.getBuilding();
-                if ((plains.includes(targetTerrain.getTerrainID())) && (defUnit === null) && building === null) {
+                if ((plains.includes(terrainId)) && (defUnit === null) && building === null) {
                     ret.push(targetFields[i]);
                 }
             }
