@@ -32,7 +32,7 @@ var Constructor = function () {
                     var defUnit = terrain.getUnit();
                     // can the transported unit move over the terrain?
                     var terrainId = terrain.getID();
-                    var bridgeBlockers = ["RIVER"]
+                    var bridgeBlockers = ["PONTOON"]
                     if (bridgeBlockers.includes(terrainId)) {
                         if (defUnit === null) {
                             var tF = map.getTerrain(targetField.x,targetField.y);
@@ -48,7 +48,7 @@ var Constructor = function () {
     };
 
     this.getActionText = function (map) {
-        return qsTr("Build Pontoon Bridge");
+        return qsTr("Build Bridge");
     };
     this.getIcon = function (map) {
         return "build";
@@ -99,7 +99,7 @@ var Constructor = function () {
         // unloading the units here :)
         var player = ACTION_PLACE_PONTOON.postAnimationMineOwner;
 
-        map.replaceTerrain("PONTOON", ACTION_PLACE_PONTOON.postAnimationMinePosX, ACTION_PLACE_PONTOON.postAnimationMinePosY, true, true, false)
+        map.replaceTerrain("BRIDGE", ACTION_PLACE_PONTOON.postAnimationMinePosX, ACTION_PLACE_PONTOON.postAnimationMinePosY, true, true, false)
 
         /*
         var unit = map.spawnUnit(ACTION_PLACE_PONTOON.postAnimationMinePosX,
@@ -118,12 +118,12 @@ var Constructor = function () {
         ACTION_PLACE_PONTOON.postAnimationMineOwner = null;
     };
     this.getName = function () {
-        return qsTr("Build Pontoon");
+        return qsTr("Build Bridge");
     };
     this.getDescription = function () {
-        return qsTr("Build a pontoon bridge to cross a river. Heavy land vehicles cannot traverse this.");
+        return qsTr("Build a bridge to cross a river.");
     };
 }
 
 Constructor.prototype = ACTION;
-var ACTION_PLACE_PONTOON = new Constructor();
+var ACTION_PLACE_BRIDGE = new Constructor();

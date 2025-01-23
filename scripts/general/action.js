@@ -1,1 +1,1 @@
-ACTION.emptyFieldActions.push("ACTION_PERKLIST");
+//ACTION.emptyFieldActions.push("ACTION_PERKLIST");

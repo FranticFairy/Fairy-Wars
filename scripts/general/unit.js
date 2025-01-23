@@ -273,12 +273,12 @@ UNIT.getTypeOfWeapon2 = function (unit) {
 };
 
 UNIT.createExplosionAnimation = function (x, y, unit, map) {
-    if ((unit.getUnitType() === GameEnums.UnitType_Air && unit.getMovementType() != "MOVE_HELI_LANDED")) {
+    if ((UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air && unit.getMovementType() != "MOVE_HELI_LANDED")) {
         var animation = GameAnimationFactory.createAnimation(map, x, y);
         animation.addSprite("explosion + air", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
         animation.setSound("explosion + air.wav");
         return animation;
-    } else if (unit.getUnitType() === GameEnums.UnitType_Naval) {
+    } else if (UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Naval) {
         var animation = GameAnimationFactory.createAnimation(map, x, y);
         animation.addSprite("explosion + water", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
         animation.setSound("explosion + water.wav");
@@ -292,7 +292,7 @@ UNIT.createExplosionAnimation = function (x, y, unit, map) {
 };
 
 UNIT.getTerrainAnimationBase = function (unit, terrain, defender, map) {
-    if ((unit.getUnitType() === GameEnums.UnitType_Air && unit.getMovementType() != "MOVE_HELI_LANDED") || unit.getUnitType() === GameEnums.UnitType_Naval) {
+    if ((UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air && unit.getMovementType() != "MOVE_HELI_LANDED") || UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Naval) {
         var weatherModifier = TERRAIN.getWeatherModifier(map);
         return "base_" + weatherModifier + "air";
     }
@@ -306,14 +306,14 @@ UNIT.getTerrainAnimationBase = function (unit, terrain, defender, map) {
 };
 
 UNIT.getTerrainAnimationMoveSpeed = function (unit) {
-    if ((unit.getUnitType() === GameEnums.UnitType_Air && unit.getMovementType() != "MOVE_HELI_LANDED") || unit.getUnitType() === GameEnums.UnitType_Naval) {
+    if ((UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air && unit.getMovementType() != "MOVE_HELI_LANDED") || UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Naval) {
         return 1;
     }
     return 0;
 };
 
 UNIT.getTerrainAnimationForeground = function (unit, terrain, defender, map) {
-    if ((unit.getUnitType() === GameEnums.UnitType_Air && unit.getMovementType() != "MOVE_HELI_LANDED") || unit.getUnitType() === GameEnums.UnitType_Naval) {
+    if ((UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air && unit.getMovementType() != "MOVE_HELI_LANDED") || UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Naval) {
         return "";
     }
     if (Global[terrain.getID()].getTerrainAnimationForeground !== null) {
@@ -325,10 +325,10 @@ UNIT.getTerrainAnimationForeground = function (unit, terrain, defender, map) {
 };
 
 UNIT.getTerrainAnimationBackground = function (unit, terrain, defender, map) {
-    if (unit.getUnitType() === GameEnums.UnitType_Naval) {
+    if (UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Naval) {
         var weatherModifier = TERRAIN.getWeatherModifier(map);
         return "back_" + weatherModifier + "sea";
-    } else if ((unit.getUnitType() === GameEnums.UnitType_Air && unit.getMovementType() != "MOVE_HELI_LANDED")) {
+    } else if ((UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air && unit.getMovementType() != "MOVE_HELI_LANDED")) {
 
     } else {
         if (Global[terrain.getID()].getTerrainAnimationBackground !== null) {
