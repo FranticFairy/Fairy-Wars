@@ -17,8 +17,11 @@ var Constructor = function () {
         if ((currentUnit !== null && unit !== null) &&
             (unit.getOwner().isEnemy(currentUnit.getOwner()))) {
             if (!currentUnit.isStealthed(unit.getOwner()) || trapChecking) {
-                if (currentUnit.getUnitType() !== GameEnums.UnitType_Air) {
-                    if (currentUnit.getUnitType() === GameEnums.UnitType_Naval && unit.getHidden() && !currentUnit.getHidden()) {
+                if (UNIT.unitTypeToDomain(currentUnit.getUnitType()) !== GameEnums.UnitType_Air)
+                {
+                    if(UNIT.unitTypeToDomain(currentUnit.getUnitType() === GameEnums.UnitType_Ground && id === "BRIDGE")) {
+
+                    } else if (currentUnit.getUnitType() === GameEnums.UnitType_Naval && unit.getHidden() && !currentUnit.getHidden()) {
 
                     } else {
                         return -1;

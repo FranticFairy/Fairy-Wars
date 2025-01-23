@@ -69,7 +69,7 @@ var Constructor = function()
 
     this.getTypeOfWeapon1 = function(unit)
     {
-        return GameEnums.WeaponType_Direct;
+        return GameEnums.WeaponType_Indirect;
     };
 
     this.actionList = ["ACTION_FIRE"];

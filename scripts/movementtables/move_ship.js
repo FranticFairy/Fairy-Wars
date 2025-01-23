@@ -21,9 +21,11 @@ var Constructor = function()
         {
             if (!currentUnit.isStealthed(unit.getOwner()) || trapChecking)
             {
-                if (currentUnit.getUnitType() !== GameEnums.UnitType_Air && unit.getUnitID() != "FW_SEAMINE")
+                if (UNIT.unitTypeToDomain(currentUnit.getUnitType()) !== GameEnums.UnitType_Air)
                 {
-                    if(!currentUnit.getHidden()) {
+                    if(UNIT.unitTypeToDomain(currentUnit.getUnitType() === GameEnums.UnitType_Ground && id === "BRIDGE")) {
+
+                    } else if(!currentUnit.getHidden()) {
                         return -1;
                     }
                 }

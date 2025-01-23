@@ -80,9 +80,13 @@ var Constructor = function()
         {
             if (!currentUnit.isStealthed(unit.getOwner()) || trapChecking)
             {
-                if (currentUnit.getUnitType() !== GameEnums.UnitType_Air)
+                if (UNIT.unitTypeToDomain(currentUnit.getUnitType()) !== GameEnums.UnitType_Air)
                 {
-                    return -1;
+                    if(UNIT.unitTypeToDomain(currentUnit.getUnitType() === GameEnums.UnitType_Naval && id === "BRIDGE")) {
+
+                    } else if(!currentUnit.getHidden()) {
+                        return -1;
+                    }
                 }
             }
         }

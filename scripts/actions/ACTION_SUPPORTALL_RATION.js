@@ -5,16 +5,16 @@ ACTION_SUPPORTALL_RATION.checkUnit = function (unit, x, y, map) {
             if (target.getOwner() === unit.getOwner() &&
                 target !== unit) {
                 if (unit.getUnitID() === "FW_AX") {
-                    switch (target.getUnitType()) {
+                    switch (UNIT.unitTypeToDomain(target.getUnitType())) {
                         case GameEnums.UnitType_Naval:
                             return true;
                     }
                 } else if (unit.getUnitID() === "FW_TRANSPORT_FUEL") {
-                    if (target.getUnitType() === GameEnums.UnitType_Air && target.getMovementType() != "MOVE_HELI_LANDED") {
+                    if (UNIT.unitTypeToDomain(target.getUnitType()) === GameEnums.UnitType_Air && target.getMovementType() != "MOVE_HELI_LANDED") {
                         return true;
                     }
                 } else {
-                    switch (target.getUnitType()) {
+                    switch (UNIT.unitTypeToDomain(target.getUnitType())) {
                         case GameEnums.UnitType_Ground:
                         case GameEnums.UnitType_Infantry:
                             return true;

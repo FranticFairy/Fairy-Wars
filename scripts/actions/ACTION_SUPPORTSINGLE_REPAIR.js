@@ -17,7 +17,7 @@ ACTION_SUPPORTSINGLE_REPAIR.getRepairFields = function(action, map)
             // can we repair the unit?
             if (repairUnit !== null &&
                 repairUnit.getOwner() === unit.getOwner() &&
-                repairUnit !== unit && repairUnit.getUnitType() == unit.getUnitType())
+                repairUnit !== unit && UNIT.unitTypeToDomain(repairUnit.getUnitType()) == UNIT.unitTypeToDomain(unit.getUnitType()))
             {
                 ret.push(targetFields[i]);
             }
