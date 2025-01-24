@@ -61,7 +61,7 @@ var Constructor = function() {
     }
 
     let canPlaceOnTile = function(action, map, placing) {
-        let target = action.getTarget()
+        let target = action.getActionTarget()
         let terrain = map.getTerrain(target.x, target.y)
 
         let id = terrain.getTerrainID()
@@ -96,7 +96,11 @@ var Constructor = function() {
         return false
     }
     this.canBePerformed = function(action, map) {
-        if (!action.getTargetUnit() && !checkIsTeina()) return false
+        let unit = action.getTargetUnit()
+        if (!unit && !checkIsTeina(action, map)) return false
+        let actionTargetField = action.getActionTarget();
+        let targetField = action.getTarget();
+        if (unit && !ACTION.isEmptyFieldAndHasNotMoved(action, unit, actionTargetField, targetField, map)) return false
         if (!canPlaceAnyOnTile(action, map)) return false
         return true
     }
@@ -125,20 +129,25 @@ var Constructor = function() {
         data.addData("Create Plains", "plains", "icon_dreamweaving_plains", 0, canPlaceOnTile(action, map, PLACING_PLAINS))
         data.addData("Create Forest", "forest", "icon_dreamweaving_forest", 0, canPlaceOnTile(action, map, PLACING_FOREST))
         data.addData("Create Street", "street", "icon_dreamweaving_street", 0, canPlaceOnTile(action, map, PLACING_STREET))
-
+        GameConsole.print("Hello world! 1", 1)
     };
 
-    this.perform = function (action) {
+    this.perform = function (action, map) {
+        GameConsole.print("Hello world! 2", 1)
+
         action.startReading();
 
         // Read action data
-        let target = action.getTarget()
+        let unit = action.getTargetUnit()
+        let target = action.getActionTarget()
 
+        let placingStr = action.readDataString()
         let placing
-        switch (action.readDataString()) {
-            case "plains": placing = PLACING_PLAINS
-            case "forest": placing = PLACING_FOREST
-            case "street": placing = PLACING_STREET
+        GameConsole.print(placingStr+" "+target.x+" "+target.y, 1)
+        switch (placingStr) {
+            case "plains": placing = PLACING_PLAINS; break
+            case "forest": placing = PLACING_FOREST; break
+            case "street": placing = PLACING_STREET; break
             default: return
         }
 
@@ -146,10 +155,16 @@ var Constructor = function() {
         let terrain = map.getTerrain(target.x, target.y)
         let info = terrainInfo[terrain.getTerrainID()]
         map.replaceTerrainOnly(placeResult(placing, info), target.x, target.y, true, false)
-        ACTION_TERRAIN_LOADSPRITES.perform(unitX, unitY)
+        ACTION_TERRAIN_LOADSPRITES.perform(target.x, target.y)
+
+        // Check the unit
+        if (unit) {
+            Global[unit.getUnitID()].moveUnit(unit, action, map);
+            unit.setHasMoved(true);
+            return;
+        }
 
         // Reduce dreamweaving "ammo" for COP
-        if (action.getTargetUnit()) return
         for (let i = 0; i < map.getCurrentPlayer().getCoCount(); i++) {
             let co = map.getCurrentPlayer().getCO(i)
             if (co && co.getCoID() === "CO_TEINA") {

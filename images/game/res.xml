@@ -88,6 +88,9 @@
         <image file="statistics.png" />
         <image file="calculator.png" />
         <image file="transferUnit.png" />        
+        <image file="icon_dreamweaving_forest.png" />
+        <image file="icon_dreamweaving_plains.png" />
+        <image file="icon_dreamweaving_street.png" />
         
         <!-- z information label -->
         <image file="z_information_label.png" cols = "8" />
