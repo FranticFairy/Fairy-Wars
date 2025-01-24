@@ -419,7 +419,7 @@ var Constructor = function () {
         qsTr("Oh. Er. Hrm. That. Hm. I. Uh. Hrm. Uhm. Hm.")];
     };
     this.getName = function () {
-        return qsTr("Fai");
+        return qsTr("Faye");
     };
 }
 

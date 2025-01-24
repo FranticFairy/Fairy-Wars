@@ -37,7 +37,7 @@ PLAYER.defaultColors = [
 PLAYER.startOfTurn = function(player, map)
 {
     if(player.getCO(0) === null) {
-        player.setCO("CO_EMPTY_OS",0)
+        player.setCO("CO_FIELD_CO",0)
     }
 };
 

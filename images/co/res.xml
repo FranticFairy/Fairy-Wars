@@ -15,5 +15,8 @@
         <image file="co_teina+mini.png" />
         <image file="co_teina+face.png" cols = "3" />
         <image file="co_teina+nrm.png" scale_factor = "0.75" />
+        <image file="co_field_co+nrm.png" />
+        <image file="co_field_co+info.png" />
+        <image file="co_field_co+face.png" cols = "3" />
     </atlas>
 </resources>
