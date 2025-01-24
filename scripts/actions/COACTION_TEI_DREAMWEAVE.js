@@ -64,6 +64,9 @@ var Constructor = function() {
         let target = action.getActionTarget()
         let terrain = map.getTerrain(target.x, target.y)
 
+        if (terrain.getBuilding())
+            return PLACE_IMPOSSIBLE
+
         let id = terrain.getTerrainID()
         let info = terrainInfo[id]
         if (info && placeResult(placing, info) !== id) {
@@ -76,9 +79,9 @@ var Constructor = function() {
         }
     }
     let canPlaceAnyOnTile = function(action, map) {
-        if (canPlaceOnTile(action, map, PLACING_PLAINS)) return true
-        if (canPlaceOnTile(action, map, PLACING_FOREST)) return true
-        if (canPlaceOnTile(action, map, PLACING_STREET)) return true
+        if (canPlaceOnTile(action, map, PLACING_PLAINS) !== PLACE_IMPOSSIBLE) return true
+        if (canPlaceOnTile(action, map, PLACING_FOREST) !== PLACE_IMPOSSIBLE) return true
+        if (canPlaceOnTile(action, map, PLACING_STREET) !== PLACE_IMPOSSIBLE) return true
         return false
     }
 
@@ -97,11 +100,21 @@ var Constructor = function() {
     }
     this.canBePerformed = function(action, map) {
         let unit = action.getTargetUnit()
-        if (!unit && !checkIsTeina(action, map)) return false
-        let actionTargetField = action.getActionTarget();
-        let targetField = action.getTarget();
-        if (unit && !ACTION.isEmptyFieldAndHasNotMoved(action, unit, actionTargetField, targetField, map)) return false
-        if (!canPlaceAnyOnTile(action, map)) return false
+        if (!unit) {
+            if (!checkIsTeina(action, map))
+                return false
+            var viewplayer = map.getCurrentViewPlayer();
+            let target = action.getActionTarget();
+            if (!viewplayer.getFieldVisible(target.x, target.y))
+                return false
+        } else {
+            let actionTargetField = action.getActionTarget();
+            let targetField = action.getTarget();
+            if (!ACTION.isEmptyFieldAndHasNotMoved(action, unit, actionTargetField, targetField, map))
+                return false
+        }
+        if (!canPlaceAnyOnTile(action, map))
+            return false
         return true
     }
 
@@ -126,9 +139,9 @@ var Constructor = function() {
     }
 
     this.getStepData = function(action, data, map) {
-        data.addData("Create Plains", "plains", "icon_dreamweaving_plains", 0, canPlaceOnTile(action, map, PLACING_PLAINS))
-        data.addData("Create Forest", "forest", "icon_dreamweaving_forest", 0, canPlaceOnTile(action, map, PLACING_FOREST))
-        data.addData("Create Street", "street", "icon_dreamweaving_street", 0, canPlaceOnTile(action, map, PLACING_STREET))
+        data.addData("Create Plains", "plains", "icon_dreamweaving_plains", 0, canPlaceOnTile(action, map, PLACING_PLAINS) !== PLACE_IMPOSSIBLE)
+        data.addData("Create Forest", "forest", "icon_dreamweaving_forest", 0, canPlaceOnTile(action, map, PLACING_FOREST) !== PLACE_IMPOSSIBLE)
+        data.addData("Create Street", "street", "icon_dreamweaving_street", 0, canPlaceOnTile(action, map, PLACING_STREET) !== PLACE_IMPOSSIBLE)
         GameConsole.print("Hello world! 1", 1)
     };
 

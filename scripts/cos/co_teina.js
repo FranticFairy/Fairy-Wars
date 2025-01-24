@@ -254,7 +254,7 @@ var Constructor = function() {
         return qsTr("Fairytale Fantasia")
     }
     this.getPowerDescription = function(co) {
-        let text = qsTr("This turn, Teina can use Dreamweaving 6 times and place one unclaimed Dreamscape on unoccupied tiles.")
+        let text = qsTr("This turn, Teina can use Dreamweaving 6 times and build one unclaimed Dreamscape on visible empty tiles.")
         return text
     }
     this.activatePower = function(co, map) {
@@ -267,7 +267,7 @@ var Constructor = function() {
         return qsTr("Fabricated Elysium")
     }
     this.getSuperPowerDescription = function(co) {
-        let text = qsTr("This turn, Teina can use Dreamweaving 6 times and place one owned Dreamscape on unoccupied tiles. All non-temporary structures she owns gain +200 income permanently.")
+        let text = qsTr("This turn, Teina can use Dreamweaving 6 times and build one owned Dreamscape on visible empty tiles. All non-temporary structures she owns gain +200 income permanently.")
         return text
     }
     let disallowedSites = ["BUILDSITE", "DREAM", "TEMPORARY_AIRPORT", "TEMPORARY_HARBOUR", "DEPOT"]
@@ -281,14 +281,14 @@ var Constructor = function() {
         let size = buildings.size();
         for (let i = 0; i < size; i++) {
             let building = buildings.at(i)
-            if (!disallowedSites.contains(building.getBuildingID())) {
+            if (!disallowedSites.includes(building.getBuildingID())) {
                 let incomeVar = building.getVariables().createVariable(VAR_INCOME_BONUS)
                 incomeVar.writeDataInt32(incomeVar.readDataInt32() + 1)
             }
         }
     }
     this.getBonusIncome = function(co, building, income, map) {
-        let variable = co.getVariables().getVariable(VAR_INCOME_BONUS)
+        let variable = building.getVariables().getVariable(VAR_INCOME_BONUS)
         if (variable)
             return 200 * variable.readDataInt32()
         else
