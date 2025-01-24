@@ -161,54 +161,57 @@ var Constructor = function() {
     }
 
     let coZoneHealing = 1
+    let healUnit = function(co, map, unit, viewplayer, info) {
+        UNIT.repairUnit(unit, coZoneHealing, map)
+
+        let delay = globals.randInt(135, 265)
+        if (info.animations.length < 5) {
+            delay *= info.animations.length
+        }
+
+        let animation = GameAnimationFactory.createAnimation(map, unit.getX(), unit.getY())
+        animation.setSound("power0.wav", 1, delay)
+        if (info.animations.length < 5) {
+            animation.addSprite("power0", -map.getImageSize() * 1.27, -map.getImageSize() * 1.27, 0, 2, delay)
+            info.animations.push(animation)
+        } else {
+            animation.addSprite("power0", -map.getImageSize() * 1.27, -map.getImageSize() * 1.27, 0, 2, delay)
+            info.animations[info.counter].queueAnimation(animation)
+            info.animations[info.counter] = animation
+            info.counter++
+            if (info.counter >= info.animations.length) {
+                info.counter = 0
+            }
+        }
+        if (!viewplayer.getFieldVisible(unitX, unitY)) {
+            animation.setVisible(false)
+        }
+    }
     this.startOfTurn = function(co, map) {
         if (CO.isActive(co)) {
             let player = co.getOwner()
             if (!player.getIsDefeated()) {
                 let counit = co.getCOUnit()
                 let coRange = co.getCORange()
-                let animations = []
-                let animation = null
-                let counter = 0
+                let info = {
+                    animations: [],
+                    counter: 0,
+                }
                 let viewplayer = map.getCurrentViewPlayer()
-                let size = 0
-                let delay = 0
-                let unit = null
                 if (counit !== null) {
-                    UNIT.repairUnit(counit, coZoneHealing, map)
                     let fields = globals.getCircle(1, coRange)
                     let x = counit.getX()
                     let y = counit.getY()
-                    size = fields.size()
+                    let size = fields.size()
+                    healUnit(co, map, counit, viewplayer, info)
                     for (var i = 0; i < size; i++) {
                         let point = fields.at(i)
                         let unitX = x + point.x
                         let unitY = y + point.y
                         if (map.onMap(unitX, unitY)) {
-                            unit = map.getTerrain(unitX, unitY).getUnit()
+                            let unit = map.getTerrain(unitX, unitY).getUnit()
                             if ((unit !== null) && (unit.getOwner() === counit.getOwner())) {
-                                UNIT.repairUnit(unit, coZoneHealing, map)
-                                delay = globals.randInt(135, 265)
-                                if (animations.length < 5) {
-                                    delay *= i
-                                }
-                                animation = GameAnimationFactory.createAnimation(map, unitX, unitY)
-                                animation.setSound("power0.wav", 1, delay)
-                                if (animations.length < 5) {
-                                    animation.addSprite("power0", -map.getImageSize() * 1.27, -map.getImageSize() * 1.27, 0, 2, delay)
-                                    animations.push(animation)
-                                } else {
-                                    animation.addSprite("power0", -map.getImageSize() * 1.27, -map.getImageSize() * 1.27, 0, 2, delay)
-                                    animations[counter].queueAnimation(animation)
-                                    animations[counter] = animation
-                                    counter++
-                                    if (counter >= animations.length) {
-                                        counter = 0
-                                    }
-                                }
-                                if (!viewplayer.getFieldVisible(unitX, unitY)) {
-                                    animation.setVisible(false)
-                                }
+                                healUnit(co, map, unit, viewplayer, info)
                             }
                         }
                     }
@@ -237,10 +240,12 @@ var Constructor = function() {
         dialogAnimation.queueAnimation(powerNameAnimation)
 
         let animation = GameAnimationFactory.createAnimation(map, 0, 0)
-        animation.addSprite2("white_pixel", 0, 0, 3200, map.getMapWidth(), map.getMapHeight())
-        animation.addTweenColor(0, "#00fbdbff", "#FFfbdbff", 3000, true)
+        animation.addSprite2("white_pixel", 0, 0, 1200, map.getMapWidth(), map.getMapHeight())
+        animation.addTweenColor(0, "#00fbdbff", "#FFfbdbff", 1000, true)
         animation.setSound("mixkit-fairy-teleport-868.wav")
         powerNameAnimation.queueAnimation(animation)
+
+        return animation
     }
     let enableDreamweaving = function(co, map, isSuperPower) {
         let variables = co.getVariables()
@@ -251,7 +256,7 @@ var Constructor = function() {
 
     // CO Power
     this.getPowerName = function(co) {
-        return qsTr("Fairytale Fantasia")
+        return qsTr("Fantasia")
     }
     this.getPowerDescription = function(co) {
         let text = qsTr("This turn, Teina can use Dreamweaving 6 times and build one unclaimed Dreamscape on visible empty tiles.")
@@ -272,27 +277,56 @@ var Constructor = function() {
     }
     let disallowedSites = ["BUILDSITE", "DREAM", "TEMPORARY_AIRPORT", "TEMPORARY_HARBOUR", "DEPOT"]
     this.activateSuperpower = function(co, powerMode, map) {
-        activeCoPowerAnimation(co, map, powerMode)
+        let copAnim = activeCoPowerAnimation(co, map, powerMode)
         enableDreamweaving(co, map, true)
 
         // Apply bonus to all buildings the player owns.
-        // TODO: Animation
         let buildings = co.getOwner().getBuildings();
+        buildings.randomize();
         let size = buildings.size();
+        let animations = []
+        let counter = 0
+
+        let viewplayer = map.getCurrentViewPlayer()
         for (let i = 0; i < size; i++) {
             let building = buildings.at(i)
+
             if (!disallowedSites.includes(building.getBuildingID())) {
                 let incomeVar = building.getVariables().createVariable(VAR_INCOME_BONUS)
                 incomeVar.writeDataInt32(incomeVar.readDataInt32() + 1)
+
+                // Play animation
+                let delay = globals.randInt(250, 280)
+                if (animations.length < 5) {
+                    delay *= animations.length
+                }
+
+                let animation = GameAnimationFactory.createAnimation(map, building.getX(), building.getY())
+                if (animations.length < 5) {
+                    animation.addSprite("power10", -map.getImageSize() * 1.27, -map.getImageSize() * 1.27, 0, 2, delay)
+                    animations.push(animation)
+                    copAnim.queueAnimation(animation)
+                } else {
+                    animation.addSprite("power10", -map.getImageSize() * 1.27, -map.getImageSize() * 1.27, 0, 2, delay)
+                    animations[counter].queueAnimation(animation)
+                    animations[counter] = animation
+                    counter++
+                    if (counter >= animations.length) {
+                        counter = 0
+                    }
+                }
+                animation.setSound("mixkit-magic-wand-sparkle-3062.wav", 1, delay)
+
+                if (!viewplayer.getFieldVisible(building.getX(), building.getY())) {
+                    animation.setVisible(false)
+                }
             }
         }
     }
     this.getBonusIncome = function(co, building, income, map) {
         let variable = building.getVariables().getVariable(VAR_INCOME_BONUS)
-        if (variable)
-            return 100 * variable.readDataInt32()
-        else
-            return 0
+        if (variable) return 100 * variable.readDataInt32()
+        else return 0
     }
 }
 
