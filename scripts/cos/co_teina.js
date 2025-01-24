@@ -54,33 +54,33 @@ var Constructor = function() {
         return qsTr("Sleeping, mischief")
     }
     this.getMiss = function(co) {
-        return qsTr("Serious people")
+        return qsTr("Serious people, bad urban planning")
     }
 
     let powerQuotes = [
         qsTr("Welcome to my magical realm~!"),
-        qsTr("Just a few brushstrokes here, and a few adjustments there..."),
+        qsTr("Just a few brushstrokes here and there...~"),
         qsTr("This place needs a makeover!"),
-        qsTr("I like pretty things!")
+        qsTr("I like pretty things!"),
     ]
     let superPowerQuotes = [
-        qsTr("Let's have a tea party!"),
-        qsTr("Geez, not even any public transit?! Time to dream up a subway."),
+        qsTr("Come over and visit! We have tea parties here~"),
+        qsTr("Geez, not even any busses?!"),
         qsTr("Come on, this is TERRIBLE urban planning, get your acts together!!"),
-        qsTr("How are you going to hold hands on a date in the park if you have no parks!?")
+        qsTr("How are you going to hold hands on a date in the park if you have no parks!?"),
     ]
     let powerQuotesTag = [
         qsTr("Cover for me!"),
         qsTr("Go cause them problems!"),
         qsTr("I'll sit back and you can blow them up!"),
-        qsTr("I'm helping!!")
+        qsTr("I'm helping!!"),
     ]
     let powerQuotesTagFai = [
         qsTr("Are you sure about this, Fai?"),
         qsTr("Wait, wait, wait! Calm down!!"),
         qsTr("Heeey!! Wait for me!"),
         qsTr("Hold on hold on, where are you going, where you taking the tanks??!"),
-        qsTr("Make sure to not break the decorations!")
+        qsTr("Make sure to not break the decorations!"),
     ]
 
     this.getPowerSentences = function(co) {
@@ -267,7 +267,7 @@ var Constructor = function() {
         return qsTr("Fabricated Elysium")
     }
     this.getSuperPowerDescription = function(co) {
-        let text = qsTr("This turn, Teina can use Dreamweaving 6 times and build one owned Dreamscape on visible empty tiles. All non-temporary structures she owns gain +200 income permanently.")
+        let text = qsTr("This turn, Teina can use Dreamweaving 6 times and build one owned Dreamscape on visible empty tiles. All non-temporary structures she owns gain +100 income permanently.")
         return text
     }
     let disallowedSites = ["BUILDSITE", "DREAM", "TEMPORARY_AIRPORT", "TEMPORARY_HARBOUR", "DEPOT"]
@@ -290,7 +290,7 @@ var Constructor = function() {
     this.getBonusIncome = function(co, building, income, map) {
         let variable = building.getVariables().getVariable(VAR_INCOME_BONUS)
         if (variable)
-            return 200 * variable.readDataInt32()
+            return 100 * variable.readDataInt32()
         else
             return 0
     }
