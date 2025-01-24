@@ -2,7 +2,6 @@ var Constructor = function() {
     let VAR_INCOME_BONUS = "fw_co_teina_INCOME_BONUS"
     let VAR_DREAMWEAVING_COUNT = "fw_co_teina_DREAMWEAVING_COUNT"
     let VAR_PLACESITE_COUNT = "fw_co_teina_PLACESITE_COUNT"
-    let VAR_SCOP = "fw_co_teina_SCOP"
 
     this.init = function(co, map) {
         co.setPowerStars(3)
@@ -65,8 +64,8 @@ var Constructor = function() {
     ]
     let superPowerQuotes = [
         qsTr("Come over and visit! We have tea parties here~"),
-        qsTr("Geez, not even any busses?!"),
-        qsTr("Come on, this is TERRIBLE urban planning, get your acts together!!"),
+        qsTr("Public transit and lots of plushies for everyone!!"),
+        qsTr("Flowers everywhere~~! :D"),
         qsTr("How are you going to hold hands on a date in the park if you have no parks!?"),
     ]
     let powerQuotesTag = [
@@ -106,14 +105,14 @@ var Constructor = function() {
         return [
             qsTr("Oh no! Did I play too hard?"),
             qsTr("Opps... I think I broke something..."),
-            qsTr("That was fun! Wanna go again?")
+            qsTr("That was fun! Wanna go again?"),
         ]
     }
     this.getDefeatSentences = function(co) {
         return [
             qsTr("Ow...!"),
             qsTr("I don't like this game anymore... D:"),
-            qsTr("Hey, no fair, I didn't get to make my dream castle! ;.;")
+            qsTr("Hey, no fair, I didn't get to build any castles! ;.;"),
         ]
     }
 
@@ -172,10 +171,10 @@ var Constructor = function() {
         let animation = GameAnimationFactory.createAnimation(map, unit.getX(), unit.getY())
         animation.setSound("power0.wav", 1, delay)
         if (info.animations.length < 5) {
-            animation.addSprite("power0", -map.getImageSize() * 1.27, -map.getImageSize() * 1.27, 0, 2, delay)
+            animation.addSprite("power0", -map.getImageSize() * 1.27, -map.getImageSize() * 1.4, 0, 2, delay)
             info.animations.push(animation)
         } else {
-            animation.addSprite("power0", -map.getImageSize() * 1.27, -map.getImageSize() * 1.27, 0, 2, delay)
+            animation.addSprite("power0", -map.getImageSize() * 1.27, -map.getImageSize() * 1.4, 0, 2, delay)
             info.animations[info.counter].queueAnimation(animation)
             info.animations[info.counter] = animation
             info.counter++
@@ -183,7 +182,7 @@ var Constructor = function() {
                 info.counter = 0
             }
         }
-        if (!viewplayer.getFieldVisible(unitX, unitY)) {
+        if (!viewplayer.getFieldVisible(unit.getX(), unit.getY())) {
             animation.setVisible(false)
         }
     }
@@ -222,8 +221,6 @@ var Constructor = function() {
     this.endOfTurn = function(co, map) {
         let variables = co.getVariables()
         variables.createVariable(VAR_DREAMWEAVING_COUNT).writeDataInt32(0)
-        variables.createVariable(VAR_PLACESITE_COUNT).writeDataInt32(0)
-        variables.createVariable(VAR_SCOP).writeDataInt32(0)
     }
 
     this.getCOUnitRange = function(co, map) {
@@ -240,9 +237,9 @@ var Constructor = function() {
         dialogAnimation.queueAnimation(powerNameAnimation)
 
         let animation = GameAnimationFactory.createAnimation(map, 0, 0)
-        animation.addSprite2("white_pixel", 0, 0, 1200, map.getMapWidth(), map.getMapHeight())
+        animation.addSprite2("white_pixel", 0, 0, 1100, map.getMapWidth(), map.getMapHeight())
         animation.addTweenColor(0, "#00fbdbff", "#FFfbdbff", 1000, true)
-        animation.setSound("mixkit-fairy-teleport-868.wav")
+        animation.setSound("teipower.wav")
         powerNameAnimation.queueAnimation(animation)
 
         return animation
@@ -250,8 +247,8 @@ var Constructor = function() {
     let enableDreamweaving = function(co, map, isSuperPower) {
         let variables = co.getVariables()
         variables.createVariable(VAR_DREAMWEAVING_COUNT).writeDataInt32(6)
-        variables.createVariable(VAR_PLACESITE_COUNT).writeDataInt32(1)
-        variables.createVariable(VAR_SCOP).writeDataInt32(isSuperPower ? 1 : 0)
+        let varPlacesite = variables.createVariable(VAR_PLACESITE_COUNT)
+        varPlacesite.writeDataInt32(varPlacesite.readDataInt32() + 1)
     }
 
     // CO Power
@@ -259,7 +256,7 @@ var Constructor = function() {
         return qsTr("Fantasia")
     }
     this.getPowerDescription = function(co) {
-        let text = qsTr("This turn, Teina can use Dreamweaving 6 times and build one unclaimed Dreamscape on visible empty tiles.")
+        let text = qsTr("Allows Teina to use Dreamweaving 6 times this turn on empty tiles, and her Dreamweavers to construct one Dreamscape.")
         return text
     }
     this.activatePower = function(co, map) {
@@ -272,7 +269,7 @@ var Constructor = function() {
         return qsTr("Fabricated Elysium")
     }
     this.getSuperPowerDescription = function(co) {
-        let text = qsTr("This turn, Teina can use Dreamweaving 6 times and build one owned Dreamscape on visible empty tiles. All non-temporary structures she owns gain +100 income permanently.")
+        let text = qsTr("Allows Teina to use Dreamweaving 6 times this turn on empty tiles, and her Dreamweavers to construct one Dreamscape. All non-temporary structures she owns gain +100 income permanently.")
         return text
     }
     let disallowedSites = ["BUILDSITE", "DREAM", "TEMPORARY_AIRPORT", "TEMPORARY_HARBOUR", "DEPOT"]
@@ -296,12 +293,13 @@ var Constructor = function() {
                 incomeVar.writeDataInt32(incomeVar.readDataInt32() + 1)
 
                 // Play animation
-                let delay = globals.randInt(250, 280)
+                let delay = globals.randInt(100, 125)
                 if (animations.length < 5) {
                     delay *= animations.length
                 }
 
                 let animation = GameAnimationFactory.createAnimation(map, building.getX(), building.getY())
+                animation.setSound("teibuffbuilding.wav", 1, delay)
                 if (animations.length < 5) {
                     animation.addSprite("power10", -map.getImageSize() * 1.27, -map.getImageSize() * 1.27, 0, 2, delay)
                     animations.push(animation)
@@ -315,7 +313,6 @@ var Constructor = function() {
                         counter = 0
                     }
                 }
-                animation.setSound("mixkit-magic-wand-sparkle-3062.wav", 1, delay)
 
                 if (!viewplayer.getFieldVisible(building.getX(), building.getY())) {
                     animation.setVisible(false)
