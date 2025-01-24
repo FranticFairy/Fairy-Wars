@@ -86,7 +86,7 @@ var Constructor = function() {
     }
 
     // Action implementation
-    let checkIsTeina = function(action, map) {
+    let checkTeinaCopCharges = function(action, map) {
         // check if this is Teina's global action
         for (let i = 0; i < map.getCurrentPlayer().getCoCount(); i++) {
             let co = map.getCurrentPlayer().getCO(i)
@@ -101,13 +101,15 @@ var Constructor = function() {
     this.canBePerformed = function(action, map) {
         let unit = action.getTargetUnit()
         if (!unit) {
-            if (!checkIsTeina(action, map))
+            if (!checkTeinaCopCharges(action, map))
                 return false
             var viewplayer = map.getCurrentViewPlayer();
             let target = action.getActionTarget();
             if (!viewplayer.getFieldVisible(target.x, target.y))
                 return false
         } else {
+            if (unit.getPlayer().getPlayerID() != map.getCurrentPlayer().getPlayerID())
+                return false
             let actionTargetField = action.getActionTarget();
             let targetField = action.getTarget();
             if (!ACTION.isEmptyFieldAndHasNotMoved(action, unit, actionTargetField, targetField, map))
