@@ -91,6 +91,9 @@
         <image file="icon_dreamweaving_forest.png" />
         <image file="icon_dreamweaving_plains.png" />
         <image file="icon_dreamweaving_street.png" />
+		
+        <image file="fa.png" />
+        <image file="icon_fa.png" />        
         
         <!-- z information label -->
         <image file="z_information_label.png" cols = "8" />

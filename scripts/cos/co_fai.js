@@ -100,7 +100,7 @@ var Constructor = function () {
         return 2;
     };
     this.getCOArmy = function () {
-        return "BH";
+        return "FA";
     };
 
     this.startOfTurn = function (co) {

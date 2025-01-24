@@ -8,7 +8,7 @@ var Constructor = function() {
         co.setSuperpowerStars(3)
     }
     this.getCOArmy = function() {
-        return "AC"
+        return "FA"
     }
 
     this.loadCOMusic = function(co, map) {

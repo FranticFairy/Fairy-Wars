@@ -27,6 +27,7 @@ var Constructor = function () {
     this.getStepData = function (action, data, map) {
         var player = map.getCurrentPlayer();
         var funds = player.getFunds();
+        GameConsole.print(player.getCO(0),1);
         
         var perkData = [];
         for (i = 0; i < allPerks.length; i++) {
@@ -39,9 +40,10 @@ var Constructor = function () {
         }
         for (i = 0; i < perkData.length; i++) {
             var name = Global[perkData[i][1]].getName();
-            var icon = Global[perkData[i][1]].getIcon().toUpperCase();
+            var icon = Global[perkData[i][1]].getIcon();
+            //GameConsole.print(icon,1);
 
-            data.addData(name + " " + perkData[i][0].toString(), perkData[i][1], "icon_fire", perkData[i][0]);
+            data.addData(name + " " + perkData[i][0].toString(), perkData[i][1], icon, perkData[i][0]);
         }
     };
 
@@ -49,7 +51,8 @@ var Constructor = function () {
     this.perform = function(action, map)
     {
         action.startReading();
-        GameConsole.print(action.readDataString(),1);
+        var player = map.getCurrentPlayer();
+        player.getCO(0).addPerk(action.readDataString());
 
         
     };

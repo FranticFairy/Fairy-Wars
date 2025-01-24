@@ -30,5 +30,16 @@ PLAYER.defaultColors = [
 ["#bd00a4", "#474370", "",   "cacophony",], // cacophany
 ["#cd4c18", "#CC8060", "",   "silmor",], // silmor
 ["#46324c", "#8F541A", "",   "fumomance",], // fumomance
+["#FF66CC", "#FF66CC", "",   "fairy_alliance",], // fairy_alliance
 ["#908890", "#908890", "",   "neutral"], // neutral
 ];
+
+PLAYER.startOfTurn = function(player, map)
+{
+    if(player.getCO(0) === null) {
+        player.setCO("CO_EMPTY_OS",0)
+    }
+};
+
+PLAYER.armies.push("FA");
+PLAYER.armyNames.push("Fairy Alliance");
