@@ -108,7 +108,7 @@ var Constructor = function() {
             if (!viewplayer.getFieldVisible(target.x, target.y))
                 return false
         } else {
-            if (unit.getPlayer().getPlayerID() != map.getCurrentPlayer().getPlayerID())
+            if (unit.getOwner().getPlayerID() != map.getCurrentPlayer().getPlayerID())
                 return false
             let actionTargetField = action.getActionTarget();
             let targetField = action.getTarget();
