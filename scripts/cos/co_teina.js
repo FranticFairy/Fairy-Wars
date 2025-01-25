@@ -42,7 +42,7 @@ var Constructor = function() {
         let text =
             qsTr("\nSpecial Unit:\nFaerie Infantry (replaces Motorcycle Infantry)\nDreamweaver Faerie (replaces Dozer and Minelayer)") +
             qsTr("\n\nGlobal Effect: \nCO Power does not increase in cost with usages.") +
-            qsTr("\n\nCO Zone Effect: \nUnits in Teina's CO zone recover 1 HP at the start of each turn.")
+            qsTr("\n\nCO Zone Effect: \nUnits in Teina's CO zone repair 1 HP for free at the start of each turn.")
         return text
     }
 
@@ -161,13 +161,18 @@ var Constructor = function() {
 
     let coZoneHealing = 1
     let healUnit = function(co, map, unit, viewplayer, info) {
-        UNIT.repairUnit(unit, coZoneHealing, map)
+        // Heal the unit
+        var hp = unit.getHpRounded();
+        hp += coZoneHealing;
+        if (hp > 10) hp = 10;
+        unit.setHp(hp);
 
-        let delay = globals.randInt(135, 265)
+        let delay = globals.randInt(100, 175)
         if (info.animations.length < 5) {
             delay *= info.animations.length
         }
 
+        // Play the healing animation
         let animation = GameAnimationFactory.createAnimation(map, unit.getX(), unit.getY())
         animation.setSound("power0.wav", 1, delay)
         if (info.animations.length < 5) {
@@ -224,7 +229,7 @@ var Constructor = function() {
     }
 
     this.getCOUnitRange = function(co, map) {
-        return 2
+        return 1
     }
     this.getAiCoUnitBonus = function(co, unit, map) {
         return 1
