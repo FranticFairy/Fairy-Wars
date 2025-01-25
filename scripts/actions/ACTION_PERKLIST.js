@@ -37,8 +37,9 @@ var Constructor = function () {
         for (i = 0; i < allPerks.length; i++) {
             var forPerk = allPerks[i];
             var selectable = Global[forPerk].isSelectable();
+            var enabled = Global[forPerk].getPerkEnabled(co,map);
             var cost = Global[forPerk].getCosts();
-            if(!perks.includes(forPerk) && selectable) {
+            if(!perks.includes(forPerk) && selectable && enabled) {
                 perkData.push([cost, allPerks[i]]);
             }
 
@@ -62,8 +63,9 @@ var Constructor = function () {
         for (i = 0; i < allPerks.length; i++) {
             var forPerk = allPerks[i];
             var selectable = Global[forPerk].isSelectable();
+            var enabled = Global[forPerk].getPerkEnabled(co,map);
             var cost = Global[forPerk].getCosts();
-            if(cost >= 0 && cost <= stars && !perks.includes(forPerk) && selectable) {
+            if(cost >= 0 && cost <= stars && !perks.includes(forPerk) && selectable && enabled) {
                 perkData.push([cost, allPerks[i]]);
             }
 

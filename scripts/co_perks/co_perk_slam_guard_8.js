@@ -24,7 +24,7 @@ var Constructor = function()
     };
     this.getName = function()
     {
-        return qsTr("Indirect Defense+");
+        return qsTr("Direct Defense+");
     };
     this.getGroup = function()
     {
@@ -33,6 +33,9 @@ var Constructor = function()
     this.getCosts = function()
     {
         return 2;
+    };
+    this.getPerkEnabled = function(co,map) {
+        return false;
     };
 };
 

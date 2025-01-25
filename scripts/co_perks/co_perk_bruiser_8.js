@@ -7,7 +7,7 @@ var Constructor = function()
 		{
 			if (attacker.getBaseMaxRange() === 1)
 			{
-				return 8;
+				return 5;
 			}
 		}
         return 0;
@@ -15,7 +15,7 @@ var Constructor = function()
 	// Perk - Intel
     this.getDescription = function()
     {
-        return qsTr("Increases the direct attack of units by 8%.");
+        return qsTr("Increases the direct attack of units by another 5%.");
     };
     this.getIcon = function(map)
     {
@@ -32,6 +32,9 @@ var Constructor = function()
     this.getCosts = function()
     {
         return 3;
+    };
+    this.getPerkEnabled = function(co,map) {
+        return false;
     };
 };
 

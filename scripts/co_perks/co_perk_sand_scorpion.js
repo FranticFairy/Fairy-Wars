@@ -37,6 +37,9 @@ var Constructor = function()
     {
         return 2;
     };
+    this.getPerkEnabled = function(co,map) {
+        return false;
+    };
 };
 
 Constructor.prototype = CO_PERK;
