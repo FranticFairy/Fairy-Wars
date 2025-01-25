@@ -12,7 +12,7 @@ ACTION_TRAP.seaMineExplosion = function (queueAnimation, targetUnit, trapX, trap
             var owner = unit.getOwner();
             var explode = false;
             if (owner.isEnemyUnit(targetUnit)) {
-                if (targetUnit.getUnitType() == unit.getUnitType()) {
+                if (UNIT.unitTypeToDomain(targetUnit.getUnitType()) == UNIT.unitTypeToDomain(unit.getUnitType())) {
                     explode = true;
                 }
             }
@@ -23,7 +23,7 @@ ACTION_TRAP.seaMineExplosion = function (queueAnimation, targetUnit, trapX, trap
                     var animation = GameAnimationFactory.createAnimation(map, xPos, yPos);
                     animation.writeDataInt32(xPos);
                     animation.writeDataInt32(yPos);
-                    if(unit.getUnitType() == GameEnums.UnitType_Ground) {
+                    if(UNIT.unitTypeToDomain(unit.getUnitType()) == GameEnums.UnitType_Ground) {
                         animation.addSprite("explosion", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
                     } else {
                         animation.addSprite("explosion+water", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
@@ -37,7 +37,7 @@ ACTION_TRAP.seaMineExplosion = function (queueAnimation, targetUnit, trapX, trap
                 animation = GameAnimationFactory.createAnimation(map, trapX, trapY);
                 animation.writeDataInt32(trapX);
                 animation.writeDataInt32(trapY);
-                if(unit.getUnitType() == GameEnums.UnitType_Ground) {
+                if(UNIT.unitTypeToDomain(unit.getUnitType()) == GameEnums.UnitType_Ground) {
                     animation.addSprite("explosion", -map.getImageSize() / 2, -map.getImageSize(), 0, 2);
                     animation.setSound("explosion.wav");
                 } else {
@@ -64,7 +64,7 @@ ACTION_TRAP.postAnimationMineDamge = function(postAnimation, map)
     var attackerWeapon = mine.getWeapon1ID();
     
     if (targetUnit !== null &&
-        targetUnit.getUnitType() !== GameEnums.UnitType_Air)
+        UNIT.unitTypeToDomain(targetUnit.getUnitType()) !== GameEnums.UnitType_Air)
     {
         var specialDestruction = map.getGameRules().getSpecialDestruction();
 
@@ -91,8 +91,8 @@ ACTION_TRAP.isTrap = function(action, moveUnit, targetFieldUnit, targetX, target
     // the engine takes care of checking the path in the correct order and cutting the path.
     if (targetFieldUnit !== null)
     {
-        var moveUnitType = moveUnit.getUnitType();
-        var targetFieldUnitType = targetFieldUnit.getUnitType();
+        var moveUnitType = UNIT.unitTypeToDomain(moveUnit.getUnitType());
+        var targetFieldUnitType = UNIT.unitTypeToDomain(targetFieldUnit.getUnitType());
         if ((targetFieldUnit.isStealthed(moveUnit.getOwner()) &&
              ((moveUnitType === targetFieldUnitType) || 
              (moveUnitType !== GameEnums.UnitType_Air && targetFieldUnitType !== GameEnums.UnitType_Air)) &&
