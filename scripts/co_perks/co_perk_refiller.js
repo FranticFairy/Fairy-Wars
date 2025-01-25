@@ -1,0 +1,50 @@
+var Constructor = function()
+{
+	this.activatePower = function(co, map)
+    {
+		CO_PERK_REFILLER.refill(co);
+    };
+
+    this.activateSuperpower = function(co, powerMode, map)
+    {
+		CO_PERK_REFILLER.refill(co);
+    };
+	this.refill = function(co)
+	{
+		if (CO_PERK.isActive(co))
+		{
+			var units = co.getOwner().getUnits();
+			units.randomize();
+            var size = units.size();
+            for (var i = 0; i < size; i++)
+			{
+				var unit = units.at(i);
+				unit.refill();
+            }
+		}
+	};
+	// Perk - Intel
+    this.getDescription = function()
+    {
+        return qsTr("Refills ammo and fuel for all your units during Power and Superpower.");
+    };
+    this.getIcon = function(map)
+    {
+        return "ration";
+    };
+    this.getName = function()
+    {
+        return qsTr("Power Resupply");
+    };
+    this.getGroup = function()
+    {
+        return qsTr("Power");
+    };
+    this.getCosts = function()
+    {
+        return 1;
+    };
+};
+
+Constructor.prototype = CO_PERK;
+var CO_PERK_REFILLER = new Constructor();

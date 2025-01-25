@@ -1,0 +1,52 @@
+var Constructor = function()
+{
+    this.getMovementcostModifier = function(co, unit, posX, posY, map)
+    {
+        if (CO_PERK.isActive(co))
+        {
+            if (unit.getOwner() === co.getOwner())
+            {
+                if (map !== null)
+                {
+                    if (map.onMap(posX, posY))
+                    {
+                        var terrainID = map.getTerrain(posX, posY).getID();
+                        var isMountain = terrainID === "MOUNTAIN" ||
+                                         terrainID === "DESERT_ROCK" ||
+                                         terrainID === "SNOW_MOUNTAIN" ||
+                                         terrainID === "WASTE_MOUNTAIN";
+                        if (isMountain)
+                        {
+                            return -999;
+                        }
+                    }
+                }
+            }
+        }
+        return 0;
+    };
+    // Perk - Intel
+    this.getDescription = function()
+    {
+        return qsTr("Sets movement costs over mountains to 1.");
+    };
+    this.getIcon = function(map)
+    {
+        return "mountaineer";
+    };
+    this.getName = function()
+    {
+        return qsTr("Mountain Move 1");
+    };
+    this.getGroup = function()
+    {
+        return qsTr("Terrain");
+    };
+    this.getCosts = function()
+    {
+        return 2;
+    };
+};
+
+Constructor.prototype = CO_PERK;
+var CO_PERK_CLIMBER = new Constructor();

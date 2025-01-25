@@ -4,7 +4,7 @@ var Constructor = function () {
         var actionTargetField = action.getActionTarget();
         var targetField = action.getTarget();
         if (ACTION.isEmptyFieldAndHasNotMoved(action, unit, actionTargetField, targetField, map)) {
-            if (ACTION_PLACE_PONTOON.getBridgeFields(action, map).length > 0) {
+            if (ACTION_PLACE_BRIDGE.getBridgeFields(action, map).length > 0) {
                 return true;
             }
         }
@@ -70,7 +70,7 @@ var Constructor = function () {
         var unit = action.getTargetUnit();
         var actionTargetField = action.getActionTarget();
         data.setColor("#C800FF00");
-        var fields = ACTION_PLACE_PONTOON.getBridgeFields(action, map);
+        var fields = ACTION_PLACE_BRIDGE.getBridgeFields(action, map);
         for (var i3 = 0; i3 < fields.length; i3++) {
             data.addPoint(Qt.point(fields[i3].x, fields[i3].y));
         }
@@ -82,7 +82,7 @@ var Constructor = function () {
         // we need to move the unit to the target position
         var unit = action.getTargetUnit();
         var animation = Global[unit.getUnitID()].doWalkingAnimation(action, map);
-        animation.setEndOfAnimationCall("ACTION_PLACE_PONTOON", "performPostAnimation");
+        animation.setEndOfAnimationCall("ACTION_PLACE_BRIDGE", "performPostAnimation");
         // move unit to target position
         Global[unit.getUnitID()].moveUnit(unit, action, map);
         // disable unit commandments for this turn
@@ -91,19 +91,19 @@ var Constructor = function () {
         action.startReading();
         var x = action.readDataInt32();
         var y = action.readDataInt32();
-        ACTION_PLACE_PONTOON.postAnimationMinePosX = x;
-        ACTION_PLACE_PONTOON.postAnimationMinePosY = y;
-        ACTION_PLACE_PONTOON.postAnimationMineOwner = unit.getOwner();
+        ACTION_PLACE_BRIDGE.postAnimationMinePosX = x;
+        ACTION_PLACE_BRIDGE.postAnimationMinePosY = y;
+        ACTION_PLACE_BRIDGE.postAnimationMineOwner = unit.getOwner();
     };
     this.performPostAnimation = function (postAnimation, map) {
         // unloading the units here :)
-        var player = ACTION_PLACE_PONTOON.postAnimationMineOwner;
+        var player = ACTION_PLACE_BRIDGE.postAnimationMineOwner;
 
-        map.replaceTerrain("BRIDGE", ACTION_PLACE_PONTOON.postAnimationMinePosX, ACTION_PLACE_PONTOON.postAnimationMinePosY, true, true, false)
+        map.replaceTerrain("BRIDGE", ACTION_PLACE_BRIDGE.postAnimationMinePosX, ACTION_PLACE_BRIDGE.postAnimationMinePosY, true, true, false)
 
         /*
-        var unit = map.spawnUnit(ACTION_PLACE_PONTOON.postAnimationMinePosX,
-                                 ACTION_PLACE_PONTOON.postAnimationMinePosY,
+        var unit = map.spawnUnit(ACTION_PLACE_BRIDGE.postAnimationMinePosX,
+                                 ACTION_PLACE_BRIDGE.postAnimationMinePosY,
                                  "WATERMINE", player);
         if (unit !== null)
         {
@@ -113,9 +113,9 @@ var Constructor = function () {
         player.buildedUnit(unit);
         */
         audio.playSound("unload.wav");
-        ACTION_PLACE_PONTOON.postAnimationMinePosX = -1;
-        ACTION_PLACE_PONTOON.postAnimationMinePosY = -1;
-        ACTION_PLACE_PONTOON.postAnimationMineOwner = null;
+        ACTION_PLACE_BRIDGE.postAnimationMinePosX = -1;
+        ACTION_PLACE_BRIDGE.postAnimationMinePosY = -1;
+        ACTION_PLACE_BRIDGE.postAnimationMineOwner = null;
     };
     this.getName = function () {
         return qsTr("Build Bridge");

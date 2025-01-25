@@ -26,7 +26,7 @@ PLAYER.defaultColors = [
 ["#77aa08", "#617C0E", "",   "gloomwood",], // gloomwood
 ["#d39c36", "#FCC400", "",   "heavensong",], // heavensong
 ["#8227b4", "#A58C31", "",   "requiem",], // requiem
-["#20918b", "#4C7458", "",   "aurania",], // aurania
+["#20918b", "#4A7352", "",   "aurania",], // aurania
 ["#bd00a4", "#474370", "",   "cacophony",], // cacophany
 ["#cd4c18", "#CC8060", "",   "silmor",], // silmor
 ["#46324c", "#8F541A", "",   "fumomance",], // fumomance
