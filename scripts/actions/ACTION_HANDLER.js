@@ -13,6 +13,14 @@ var Constructor = function () {
         return output;
     }
 
+    this.getBase = function(unitID) {
+        var isVariant = Global[unitID].variant;
+        if(isVariant) {
+            return Global[unitID].variantList[0];
+        }
+        return unitID;
+    }
+
     this.replaceVanillaUnits = function (unit, map) {
         if (map.getCurrentDay() < 2) {
             var playerCounter = map.getPlayerCount();

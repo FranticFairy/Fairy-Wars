@@ -16,6 +16,7 @@
         <image file="fw_heli+atk.png" />
         <image file="fw_heli+def.png" />
         <image file="fw_heli+mov.png" />
+        <image file="fw_heli+rng.png" />
         <image file="fw_heli+vis.png" />
         <image file="fw_hship+atk.png" />
         <image file="fw_hship+def.png" />
@@ -71,8 +72,8 @@
         <image file="fw_tank+def.png" />
         <image file="fw_tank+mov.png" />
         <image file="fw_tank+vis.png" />
-        <image file="fw_trans+def.png" />
-        <image file="fw_trans+mov.png" />
+        <image file="fw_trns+def.png" />
+        <image file="fw_trns+mov.png" />
 
         <image file="apcboost.png" />
         <image file="apcguard.png" />
