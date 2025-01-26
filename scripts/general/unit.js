@@ -10,11 +10,11 @@ UNIT.transporterRefilling = function (unit, map) {
         var refresh = map.getGameRules().getTransporterRefresh();
         if (unitID === "FW_AST_INFANTRY" || unitID === "FW_SEAPLANE") {
             transportUnit.setHasMoved(false);
-        } else if (unit.getUnitType() === GameEnums.UnitType_Naval) {
+        } else if (UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Naval) {
             if (unitID === "FW_INFANTRY_ANCH" || unitID === "FW_IFV_ANCH") {
                 transportUnit.setHasMoved(false);
             }
-        } else if (unit.getUnitType() === GameEnums.UnitType_Air) {
+        } else if (UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air) {
             if (unitID === "FW_INFANTRY_PARA") {
                 transportUnit.setHasMoved(false);
             }

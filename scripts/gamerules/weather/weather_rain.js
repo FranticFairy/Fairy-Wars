@@ -24,7 +24,7 @@ var Constructor = function () {
 
     this.getMovementCostModifier = function (weather, unit, terrain, map) {
         var id = terrain.getID();
-        if ((unit.getUnitType() === GameEnums.UnitType_Air)) {
+        if ((UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air)) {
             return 1;
         }
         return 0;

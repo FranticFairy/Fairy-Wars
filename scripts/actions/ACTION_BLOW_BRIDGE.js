@@ -38,6 +38,8 @@ var Constructor = function () {
                     if (blowableBridges.includes(terrainId) && riverID === "RIVER") {
                         if (defUnit === null) {
                             ret.push(targetFields[i]);
+                        } else if((UNIT.unitTypeToDomain(defUnit.getUnitType()) === GameEnums.UnitType_Air)) {
+                            ret.push(targetFields[i]);
                         }
                     }
                 }
