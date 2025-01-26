@@ -22,3 +22,7 @@ BRIDGE.init = function (terrain) {
     }
     terrain.setSupportPalette(false);
 };
+BRIDGE.getName = function()
+{
+    return qsTr("Bridge");
+};

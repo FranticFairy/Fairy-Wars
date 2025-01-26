@@ -1,21 +1,21 @@
 var Constructor = function () {
 
-    this.grabVariants = function(unitID) {
+    this.grabVariants = function (unitID) {
         var output = [];
         output.push(unitID);
         var variants = Global[unitID].variantList;
 
         for (var i = 0; i < variants.length; i++) {
-            if(!output.includes(variants[i])) {
+            if (!output.includes(variants[i])) {
                 output.push(variants[i]);
             }
         }
         return output;
     }
 
-    this.getBase = function(unitID) {
+    this.getBase = function (unitID) {
         var isVariant = Global[unitID].variant;
-        if(isVariant) {
+        if (isVariant) {
             return Global[unitID].variantList[0];
         }
         return unitID;
@@ -44,12 +44,77 @@ var Constructor = function () {
         }
     }
 
+    this.replaceUnusedTerrains = function (map) {
+        for (var x = 0; x < map.getMapWidth(); x++) {
+            for (var y = 0; y < map.getMapHeight(); y++) {
+                var tile = map.getTerrain(x, y);
+                if (tile.getBuilding() === null) {
+                    switch (tile.getTerrainID()) {
+                        case "FOREST1":
+                        case "FOREST2":
+                        case "FOREST3":
+                        case "WASTE_FOREST":
+                        case "DESERT_FOREST":
+                        case "DESERT_FOREST_1":
+                        case "CREEPER":
+                            map.replaceTerrain("FOREST", x, y, true, true, false);
+                            break;
+                        case "BRIDGE1":
+                        case "BRIDGE2":
+                            map.replaceTerrain("BRIDGE", x, y, true, true, false);
+                            break;
+                        case "DESERT_DESTROYEDWELD":
+                        case "WASTE_DESTROYEDWELD":
+                            map.replaceTerrain("DESTROYEDWELD", x, y, true, true, false);
+                            break;
+                        case "DESERT_PATH":
+                        case "DESERT_PATH1":
+                        case "STREET1":
+                        case "WASTE_PATH":
+                            map.replaceTerrain("STREET", x, y, true, true, false);
+                            break;
+                        case "DESERT":
+                        case "WASTE":
+                        case "PLAINS_PLASMA":
+                            map.replaceTerrain("PLAINS", x, y, true, true, false);
+                            break;
+                        case "DESERT_ROCK":
+                        case "WASTE_MOUNTAIN":
+                            map.replaceTerrain("MOUNTAIN", x, y, true, true, false);
+                            break;
+                        case "DESERT_PIPELINE":
+                        case "WASTE_PIPELINE":
+                            map.replaceTerrain("PIPELINE", x, y, true, true, false);
+                            break;
+                        case "DESERT_RUIN":
+                        case "SNOW_RUIN":
+                        case "WASTE_RUIN":
+                            map.replaceTerrain("RUIN", x, y, true, true, false);
+                            break;
+                        case "DESERT_WELD":
+                        case "WASTE_WELD":
+                            map.replaceTerrain("WELD", x, y, true, true, false);
+                            break;
+                        case "FOG":
+                        case "ROUGH_SEA":
+                            map.replaceTerrain("REAF", x, y, true, true, false);
+                            break;
+                        case "DESERT_WASTELAND":
+                        case "WASTE_WASTELAND":
+                            map.replaceTerrain("WASTELAND", x, y, true, true, false);
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
     this.handleStartOfTurn = function (unit, map) {
 
         var variables = unit.getVariables();
         var builtVar = variables.createVariable("built");
         var built = builtVar.readDataString();
-        if(built === "") {
+        if (built === "") {
             built = "true";
             builtVar.writeDataString(built);
         }
@@ -82,8 +147,8 @@ var Constructor = function () {
 
         }
         if (typeof map !== 'undefined') {
-            var tile =  map.getTerrain(unit.getX(), unit.getY());
-            if(tile != null && tile.getTerrainID() === "TELEPORTTILE") {
+            var tile = map.getTerrain(unit.getX(), unit.getY());
+            if (tile != null && tile.getTerrainID() === "TELEPORTTILE") {
                 unit.killUnit();
             }
         }
@@ -95,8 +160,8 @@ var Constructor = function () {
             ACTION_HANDLER.pingCheck(unit, map)
         }
         if (typeof map !== 'undefined') {
-            var tile =  map.getTerrain(unit.getX(), unit.getY());
-            if(tile != null && tile.getTerrainID() === "TELEPORTTILE") {
+            var tile = map.getTerrain(unit.getX(), unit.getY());
+            if (tile != null && tile.getTerrainID() === "TELEPORTTILE") {
                 unit.killUnit();
             }
         }
@@ -118,22 +183,22 @@ var Constructor = function () {
         switch (unit.getUnitID()) {
             case "FW_ATTACKER_ANTIRADAR":
             case "FW_SEAPLANE_ANTIRADAR":
-                ACTION_PING.pingID(unit, 4, "FW_SAM,FW_SAM_MOVE,FW_FLAK_AA", false,map);
+                ACTION_PING.pingID(unit, 4, "FW_SAM,FW_SAM_MOVE,FW_FLAK_AA", false, map);
                 break;
             case "FW_DD":
             case "FW_DD_ASM":
             case "FW_BOMBER_ASM":
-                ACTION_PING.pingID(unit, 3, "FW_SS,FW_SS_AA,FW_SS_ARTY,FW_SS_ASM,FW_SS_TRN,FW_SS_RADAR", true,map);
+                ACTION_PING.pingID(unit, 3, "FW_SS,FW_SS_AA,FW_SS_ARTY,FW_SS_ASM,FW_SS_TRN,FW_SS_RADAR", true, map);
                 break;
             case "FW_DD_MINE":
             case "FW_ML":
-                ACTION_PING.pingID(unit, 3, "FW_SEAMINE", true,map);
+                ACTION_PING.pingID(unit, 3, "FW_SEAMINE", true, map);
                 break;
             case "FW_SAM":
             case "FW_SAM_MOVE":
             case "FW_SAM_UPGRD":
             case "FW_TRANSPORT_RADAR":
-                ACTION_PING.pingType(unit, 4, GameEnums.UnitType_Air, false,map);
+                ACTION_PING.pingType(unit, 4, GameEnums.UnitType_Air, false, map);
                 break;
             case "FW_SS":
             case "FW_SS_AA":
@@ -141,12 +206,12 @@ var Constructor = function () {
             case "FW_SS_ARTY":
             case "FW_SS_ASM":
             case "FW_SS_TRN":
-                ACTION_PING.pingType(unit, 3, GameEnums.UnitType_Naval, false,map);
-                ACTION_PING.pingID(unit, 3, "FW_SS,FW_SS_AA,FW_SS_ARTY,FW_SS_ASM,FW_SS_TRN,FW_SS_RADAR", true,map);
-            break;
+                ACTION_PING.pingType(unit, 3, GameEnums.UnitType_Naval, false, map);
+                ACTION_PING.pingID(unit, 3, "FW_SS,FW_SS_AA,FW_SS_ARTY,FW_SS_ASM,FW_SS_TRN,FW_SS_RADAR", true, map);
+                break;
             case "FW_SS_RADAR":
-                ACTION_PING.pingType(unit, 5, GameEnums.UnitType_Naval, true,map);
-            break;
+                ACTION_PING.pingType(unit, 5, GameEnums.UnitType_Naval, true, map);
+                break;
         }
     }
 
