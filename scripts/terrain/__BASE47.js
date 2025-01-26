@@ -12,10 +12,13 @@ var Constructor = function()
 
     this.loadBase = function(terrain, spriteId, map, surroundingsIn, surroundingsDirectIn,paraIn,paraDirectIn)
     {
-        var surroundings = terrain.getSurroundings(surroundingsIn, parseInt(paraIn.charAt(0)), parseInt(paraIn.charAt(1)), GameEnums.Directions_All, parseInt(paraIn.charAt(2)), parseInt(paraIn.charAt(3)));
-        var surroundingsDirect = terrain.getSurroundings(surroundingsDirectIn, parseInt(paraDirectIn.charAt(0)), parseInt(paraDirectIn.charAt(1)), GameEnums.Directions_Direct, parseInt(paraDirectIn.charAt(2)), parseInt(paraDirectIn.charAt(3)));
+        if(terrain != null && map != null) {
+            var surroundings = terrain.getSurroundings(surroundingsIn, parseInt(paraIn.charAt(0)), parseInt(paraIn.charAt(1)), GameEnums.Directions_All, parseInt(paraIn.charAt(2)), parseInt(paraIn.charAt(3)));
+            var surroundingsDirect = terrain.getSurroundings(surroundingsDirectIn, parseInt(paraDirectIn.charAt(0)), parseInt(paraDirectIn.charAt(1)), GameEnums.Directions_Direct, parseInt(paraDirectIn.charAt(2)), parseInt(paraDirectIn.charAt(3)));
+    
+            var mapTest = map.getTerrain(terrain.getX(), terrain.getY());
+        }
 
-        var mapTest = map.getTerrain(terrain.getX(), terrain.getY());
         if(mapTest != null) {
             if (surroundings.includes("+NE")) {
                 if (!(surroundingsDirect.includes("+N")) || !(surroundingsDirect.includes("+E"))) {

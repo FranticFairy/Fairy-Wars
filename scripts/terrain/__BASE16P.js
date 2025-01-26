@@ -12,11 +12,14 @@ var Constructor = function()
 
     this.loadBase = function(terrain, spriteId, map, surroundingsIn,paraIn)
     {
-        var surroundings = terrain.getSurroundings(surroundingsIn, parseInt(paraIn.charAt(0)), parseInt(paraIn.charAt(1)), GameEnums.Directions_Direct, parseInt(paraIn.charAt(2)), parseInt(paraIn.charAt(3)));
-        var x = terrain.getX();
-        var y = terrain.getY();
+        if(terrain != null && map != null) {
+            var surroundings = terrain.getSurroundings(surroundingsIn, parseInt(paraIn.charAt(0)), parseInt(paraIn.charAt(1)), GameEnums.Directions_Direct, parseInt(paraIn.charAt(2)), parseInt(paraIn.charAt(3)));
+            var x = terrain.getX();
+            var y = terrain.getY();
+    
+            var mapTest = map.getTerrain(terrain.getX(), terrain.getY());
+        }
 
-        var mapTest = map.getTerrain(terrain.getX(), terrain.getY());
         if(mapTest != null) {
             if (map !== null)
             {

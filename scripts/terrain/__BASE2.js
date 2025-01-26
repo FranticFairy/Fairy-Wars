@@ -9,30 +9,33 @@ var Constructor = function () {
     };
 
     this.loadBase = function (terrain, spriteId, map, surroundingsIn, paraIn) {
-        var surroundings = terrain.getSurroundings(surroundingsIn, parseInt(paraIn.charAt(0)), parseInt(paraIn.charAt(1)), GameEnums.Directions_Direct, parseInt(paraIn.charAt(2)), parseInt(paraIn.charAt(3)));
+        if(terrain != null && map != null) {
+            var surroundings = terrain.getSurroundings(surroundingsIn, parseInt(paraIn.charAt(0)), parseInt(paraIn.charAt(1)), GameEnums.Directions_Direct, parseInt(paraIn.charAt(2)), parseInt(paraIn.charAt(3)));
 
-        /*
-        if (surroundings.indexOf("+W") >= 0)
-        {
-            surroundings = surroundings.replace("+W", "+S+W");
-        }
-        else
-        {
-            surroundings += "+S";
-        }
-        */
-
-        if (surroundings.includes("+N") || surroundings.includes("+S")) {
-            if (surroundings != "+E+S+W" && surroundings != "+N+E+W") {
-                surroundings = "+N+S";
+            /*
+            if (surroundings.indexOf("+W") >= 0)
+            {
+                surroundings = surroundings.replace("+W", "+S+W");
+            }
+            else
+            {
+                surroundings += "+S";
+            }
+            */
+    
+            if (surroundings.includes("+N") || surroundings.includes("+S")) {
+                if (surroundings != "+E+S+W" && surroundings != "+N+E+W") {
+                    surroundings = "+N+S";
+                } else {
+                    surroundings = "+E+W";
+                }
             } else {
                 surroundings = "+E+W";
             }
-        } else {
-            surroundings = "+E+W";
+    
+            var mapTest = map.getTerrain(terrain.getX(), terrain.getY());
         }
 
-        var mapTest = map.getTerrain(terrain.getX(), terrain.getY());
         if (mapTest != null) {
             terrain.loadBaseSprite(spriteId + surroundings);
         } else {

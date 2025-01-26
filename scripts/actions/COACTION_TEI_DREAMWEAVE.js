@@ -144,12 +144,9 @@ var Constructor = function() {
         data.addData("Create Plains", "plains", "icon_dreamweaving_plains", 0, canPlaceOnTile(action, map, PLACING_PLAINS) !== PLACE_IMPOSSIBLE)
         data.addData("Create Forest", "forest", "icon_dreamweaving_forest", 0, canPlaceOnTile(action, map, PLACING_FOREST) !== PLACE_IMPOSSIBLE)
         data.addData("Create Street", "street", "icon_dreamweaving_street", 0, canPlaceOnTile(action, map, PLACING_STREET) !== PLACE_IMPOSSIBLE)
-        GameConsole.print("Hello world! 1", 1)
     };
 
     this.perform = function (action, map) {
-        GameConsole.print("Hello world! 2", 1)
-
         action.startReading();
 
         // Read action data
@@ -158,7 +155,6 @@ var Constructor = function() {
 
         let placingStr = action.readDataString()
         let placing
-        GameConsole.print(placingStr+" "+target.x+" "+target.y, 1)
         switch (placingStr) {
             case "plains": placing = PLACING_PLAINS; break
             case "forest": placing = PLACING_FOREST; break

@@ -35,7 +35,6 @@ var Constructor = function()
         return -1;
     };
     this.getPerkEnabled = function(co,map) {
-        GameConsole.print("A",1);
         return false;
     };
 };
