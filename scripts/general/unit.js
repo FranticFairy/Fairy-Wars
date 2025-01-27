@@ -214,8 +214,8 @@ UNIT.postBattleActions = function (unit, damage, otherUnit, gotAttacked, weapon,
 UNIT.postAction = function (unit, action, map) {
     ACTION_HANDLER.handlePostAction(unit, action, map);
     if(unit.getUnitID().includes("FW_SUPER_") && !unit.getUnitID().includes("SEGMENT")) {
-        GameConsole.print("Handling!",1)
         ACTION_SUPERUNIT_HANDLER.handlePath(map,unit,action);
+        unit.refill(true);
     }
 }
 

@@ -13,7 +13,7 @@ var Constructor = function()
 
         unit.setFuel(50);
         unit.setMaxFuel(50);
-        unit.setBaseMovementPoints(5);
+        unit.setBaseMovementPoints(10);
         unit.setMinRange(1);
         unit.setMaxRange(1);
         unit.setVision(1);
@@ -47,7 +47,7 @@ var Constructor = function()
 
     this.getMovementType = function()
     {
-        return "MOVE_TANK_HEAVY";
+        return "MOVE_TANK_SUPER";
     };
 
     this.getUnitType = function()

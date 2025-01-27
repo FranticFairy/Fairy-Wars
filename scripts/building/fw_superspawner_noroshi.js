@@ -12,7 +12,15 @@ var Constructor = function()
     
     this.loadSprites = function(building, neutral, map)
     {
-        building.loadSpriteV2("fw_superspawner_noroshi", GameEnums.Recoloring_None);
+        if (building.getOwnerID() >= 0 && !neutral)
+        {
+            building.loadSprite("fw_superspawner_noroshi", false);
+            building.loadSpriteV2("fw_superspawner_noroshi+mask", GameEnums.Recoloring_Matrix);
+        }
+        else
+        {
+            building.loadSprite("fw_superspawner_noroshi+neutral", false);
+        }
     };
     this.getBaseIncome = function()
     {

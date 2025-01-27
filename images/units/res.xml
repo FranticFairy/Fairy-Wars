@@ -61,7 +61,7 @@
         <image file="FW_SUPER_NOROSHI_CORE+W.png"  />
 		
         <image file="FW_SUPER_NOROSHI_E.png"  />
-        <image file="FW_SUPER_NOROSHI_M.png"  />
+        <image file="FW_SUPER_NOROSHI_S.png"  />
         <image file="FW_SUPER_NOROSHI_N.png"  />
         <image file="FW_SUPER_NOROSHI_NE.png"  />
         <image file="FW_SUPER_NOROSHI_NW.png"  />
@@ -70,7 +70,7 @@
         <image file="FW_SUPER_NOROSHI_W.png"  />
 		
         <image file="FW_SUPER_NOROSHI_E+N.png"  />
-        <image file="FW_SUPER_NOROSHI_M+N.png"  />
+        <image file="FW_SUPER_NOROSHI_S+N.png"  />
         <image file="FW_SUPER_NOROSHI_N+N.png"  />
         <image file="FW_SUPER_NOROSHI_NE+N.png"  />
         <image file="FW_SUPER_NOROSHI_NW+N.png"  />
@@ -79,7 +79,7 @@
         <image file="FW_SUPER_NOROSHI_W+N.png"  />
 		
         <image file="FW_SUPER_NOROSHI_E+E.png"  />
-        <image file="FW_SUPER_NOROSHI_M+E.png"  />
+        <image file="FW_SUPER_NOROSHI_S+E.png"  />
         <image file="FW_SUPER_NOROSHI_N+E.png"  />
         <image file="FW_SUPER_NOROSHI_NE+E.png"  />
         <image file="FW_SUPER_NOROSHI_NW+E.png"  />
@@ -88,7 +88,7 @@
         <image file="FW_SUPER_NOROSHI_W+E.png"  />
 		
         <image file="FW_SUPER_NOROSHI_E+W.png"  />
-        <image file="FW_SUPER_NOROSHI_M+W.png"  />
+        <image file="FW_SUPER_NOROSHI_S+W.png"  />
         <image file="FW_SUPER_NOROSHI_N+W.png"  />
         <image file="FW_SUPER_NOROSHI_NE+W.png"  />
         <image file="FW_SUPER_NOROSHI_NW+W.png"  />

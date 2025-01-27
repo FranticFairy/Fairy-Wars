@@ -22,13 +22,14 @@ var Constructor = function () {
         var unitList = [];
         var unitInfoList = [];
 
-        var unit = map.spawnUnit(tiles[2][1].x,tiles[2][1].y,"FW_SUPER_NOROSHI_CORE", player);
+        var unit = map.spawnUnit(tiles[1][1].x,tiles[1][1].y,"FW_SUPER_NOROSHI_CORE", player);
         if (unit !== null) {
             map.getGameRecorder().buildUnit(player.getPlayerID(), unit.getUnitID(), player.getPlayerID());
             player.buildedUnit(unit);
         }
         unitList.push(unit);
         unitInfoList.push("CORE");
+        unit.setMovementType("MOVE_TANK_SUPER");
         unit = map.spawnUnit(tiles[0][0].x,tiles[0][0].y,"FW_SUPER_UNARMEDSEGMENT", player);
         unitList.push(unit);
         unitInfoList.push("NW");
@@ -42,9 +43,11 @@ var Constructor = function () {
         unit = map.spawnUnit(tiles[1][0].x,tiles[1][0].y,"FW_SUPER_UNARMEDSEGMENT", player);
         unitList.push(unit);
         unitInfoList.push("W");
+        /*
         unit = map.spawnUnit(tiles[1][1].x,tiles[1][1].y,"FW_SUPER_UNARMEDSEGMENT", player);
         unitList.push(unit);
         unitInfoList.push("M");
+        */
         unit = map.spawnUnit(tiles[1][2].x,tiles[1][2].y,"FW_SUPER_UNARMEDSEGMENT", player);
         unitList.push(unit);
         unitInfoList.push("E");
@@ -52,6 +55,9 @@ var Constructor = function () {
         unit = map.spawnUnit(tiles[2][0].x,tiles[2][0].y,"FW_SUPER_UNARMEDSEGMENT", player);
         unitList.push(unit);
         unitInfoList.push("SW");
+        unit = map.spawnUnit(tiles[2][1].x,tiles[2][1].y,"FW_SUPER_UNARMEDSEGMENT", player);
+        unitList.push(unit);
+        unitInfoList.push("S");
         unit = map.spawnUnit(tiles[2][2].x,tiles[2][2].y,"FW_SUPER_UNARMEDSEGMENT", player);
         unitList.push(unit);
         unitInfoList.push("SE");
@@ -86,6 +92,7 @@ var Constructor = function () {
 
         }
 
+
     }
 
     var lastPath;
@@ -101,6 +108,17 @@ var Constructor = function () {
         var startX = path[path.length-1].x;
         var startY = path[path.length-1].y;
 
+        if(ACTION_HANDLER.getDirection(unit.getX(),unit.getY(),pos.x,pos.y) != "S") {
+            direction = "+" + ACTION_HANDLER.getDirection(unit.getX(),unit.getY(),pos.x,pos.y);
+        } else {
+            direction = ""
+        }
+        if(direction === "+S" || direction === "S") {
+            direction = "+N";
+        }
+        
+
+        /*
         if (pos.x != unit.getX() || pos.y != unit.getY()) {
             if (pos.x != unit.getX()) {
                 if (pos.x < unit.getX()) {
@@ -120,6 +138,7 @@ var Constructor = function () {
                 }
             }
         }
+        */
         directionVar.writeDataString(direction);
         unit.updateSprites(false);
         unit.setHasMoved(false);
@@ -129,11 +148,31 @@ var Constructor = function () {
             var components = componentsVar.readDataString();
             var segments = components.split(",");
             var paths = [];
+            GameConsole.print(lastPath,1);
+            for(var q = 0; q < path.length; q++) {
+                
+            }
             for(var fv = 0; fv < segments.length; fv++) {
                 var segmentUnit = map.getUnit(segments[fv]);
+                var segX = segmentUnit.getX();
+                var segY = segmentUnit.getY();
                 var segmentVariables = segmentUnit.getVariables();
 
-                var segmentPath = path;
+                var tempSegmentPath = [];
+                var segmentPath = lastPath;
+                
+                /*
+                for(var q = path.length-1; q > 0; q--) {
+                    var newCoords = ACTION_HANDLER.shiftCoordinates(path[q-1].x,path[q-1].y,path[q].x,path[q].y,segX,segY)
+                    segX = newCoords.x;
+                    segY = newCoords.y;
+                    tempSegmentPath.push(newCoords);
+                }
+                
+                for(var r = tempSegmentPath.length-1; r > 0; r--) {
+                    segmentPath.push(tempSegmentPath[r]);
+                }
+                */
 
                 var segmentVar = segmentVariables.createVariable("segmentID");
                 var segmentID = segmentVar.readDataString();
@@ -151,78 +190,78 @@ var Constructor = function () {
                         switch(segmentID) {
                             case "N":
                                 rightMod = 0;
-                                downMod = 2;
+                                downMod = 1;
                             break;
                             case "E":
                                 rightMod = -1;
-                                downMod = 1;
+                                downMod = 0;
                             break;
                             case "S":
                                 rightMod = 0;
-                                downMod = 0;
+                                downMod = -1;
                             break;
                             case "W":
                                 rightMod = 1;
-                                downMod = 1;
+                                downMod = 0;
                             break;
                             case "NE":
                                 rightMod = -1;
-                                downMod = 2;
+                                downMod = 1;
                             break;
                             case "SE":
                                 rightMod = -1;
-                                downMod = 0;
+                                downMod = -1;
                             break;
                             case "SW":
                                 rightMod = 1;
-                                downMod = 0;
+                                downMod = -1;
                             break;
                             case "NW":
                                 rightMod = 1;
-                                downMod = 2;
+                                downMod = 1;
                             break;
                             case "M":
                                 rightMod = 0;
-                                downMod = 1;
+                                downMod = 0;
                             break;
                         }
                     break;
                     case "+E":
                         switch(segmentID) {
                             case "N":
-                                rightMod = -2;
+                                rightMod = -1;
                                 downMod = 0;
                             break;
                             case "E":
-                                rightMod = -1;
+                                rightMod = 0;
                                 downMod = -1;
                             break;
                             case "S":
-                                rightMod = 0;
+                                rightMod = 1;
                                 downMod = 0;
                             break;
                             case "W":
-                                rightMod = -1;
+                                rightMod = 0;
                                 downMod = 1;
                             break;
                             case "NE":
-                                rightMod = -2;
+                                rightMod = -1;
                                 downMod = -1;
                             break;
                             case "SE":
-                                rightMod = 0;
+                                rightMod = 1;
                                 downMod = -1;
                             break;
                             case "SW":
-                                rightMod = 0;
+                                rightMod = 1;
                                 downMod = 1;
                             break;
                             case "NW":
-                                rightMod = -2;
+                                rightMod = -1;
                                 downMod = 1;
                             break;
                             case "M":
-                                rightMod = -1;
+                                rightMod = 0;
                                 downMod = 0;
                             break;
                         }
@@ -230,39 +269,39 @@ var Constructor = function () {
                     case "+W":
                         switch(segmentID) {
                             case "N":
-                                rightMod = 2;
+                                rightMod = 1;
                                 downMod = 0;
                             break;
                             case "E":
-                                rightMod = 1;
+                                rightMod = 0;
                                 downMod = 1;
                             break;
                             case "S":
-                                rightMod = 0;
+                                rightMod = -1;
                                 downMod = 0;
                             break;
                             case "W":
-                                rightMod = 1;
+                                rightMod = 0;
                                 downMod = -1;
                             break;
                             case "NE":
-                                rightMod = 2;
+                                rightMod = 1;
                                 downMod = 1;
                             break;
                             case "SE":
-                                rightMod = 0;
+                                rightMod = -1;
                                 downMod = 1;
                             break;
                             case "SW":
-                                rightMod = 0;
+                                rightMod = -1;
                                 downMod = -1;
                             break;
                             case "NW":
-                                rightMod = 2;
+                                rightMod = 1;
                                 downMod = -1;
                             break;
                             case "M":
-                                rightMod = 1;
+                                rightMod = 0;
                                 downMod = 0;
                             break;
                         }
@@ -271,43 +310,54 @@ var Constructor = function () {
                         switch(segmentID) {
                             case "N":
                                 rightMod = 0;
-                                downMod = -2;
+                                downMod = -1;
                             break;
                             case "E":
                                 rightMod = 1;
-                                downMod = -1;
+                                downMod = 0;
                             break;
                             case "S":
                                 rightMod = 0;
-                                downMod = 0;
+                                downMod = 1;
                             break;
                             case "W":
                                 rightMod = -1;
-                                downMod = -1;
+                                downMod = 0;
                             break;
                             case "NE":
                                 rightMod = 1;
-                                downMod = -2;
+                                downMod = -1;
                             break;
                             case "SE":
                                 rightMod = 1;
-                                downMod = 0;
+                                downMod = 1;
                             break;
                             case "SW":
                                 rightMod = -1;
-                                downMod = 0;
+                                downMod = 1;
                             break;
                             case "NW":
                                 rightMod = -1;
-                                downMod = -2;
+                                downMod = -1;
                             break;
                             case "M":
                                 rightMod = 0;
-                                downMod = -1;
+                                downMod = 0;
                             break;
                         }
                     break;
                 }
+
+                /*
+
+                for(var suffer = 0; suffer < lastPath.length; suffer++) {
+                    segmentPath[suffer].x = lastPath[suffer].x;
+                    segmentPath[suffer].x += rightMod;
+                    segmentPath[suffer].y = lastPath[suffer].y;
+                    segmentPath[suffer].y += downMod;
+                }
+
+                */
 
                 segmentPath[0].x = unit.getX() + rightMod;
                 segmentPath[0].y = unit.getY() + downMod;

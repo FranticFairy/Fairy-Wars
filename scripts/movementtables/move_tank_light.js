@@ -2,7 +2,7 @@ var Constructor = function()
 {
     this.getName = function()
     {
-        return qsTr("Tracks");
+        return qsTr("Light Tracks");
     };
     this.movementpointsTable = [["PLAINS", 1],
                                 ["PLAINS_DESTROYED", 1],
@@ -11,6 +11,7 @@ var Constructor = function()
                                 ["BRIDGE", 1],
                                 ["BRIDGE1", 1],
                                 ["BRIDGE2", 1],
+                                ["PONTOON", 1],
                                 ["DESTROYEDWELD", 1],
                                 ["RUIN", 1],
                                 ["STREET", 1],
@@ -100,8 +101,8 @@ var Constructor = function()
         {
             return 0;
         }
-        return MOVEMENTTABLE.getMovementpointsFromTable(terrain, MOVE_TANK.movementpointsTable);
+        return MOVEMENTTABLE.getMovementpointsFromTable(terrain, MOVE_TANK_LIGHT.movementpointsTable);
     };
 };
 Constructor.prototype = MOVEMENTTABLE;
-var MOVE_TANK = new Constructor();
+var MOVE_TANK_LIGHT = new Constructor();
