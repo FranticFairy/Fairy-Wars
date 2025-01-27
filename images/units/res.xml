@@ -56,44 +56,78 @@
 		<!-- Experimental/Super Units -->
         <image file="FW_SUPER_NOROSHI_CORE+mask.png"  />
         <image file="FW_SUPER_NOROSHI_CORE.png"  />
-        <image file="FW_SUPER_NOROSHI_CORE+N.png"  />
-        <image file="FW_SUPER_NOROSHI_CORE+E.png"  />
-        <image file="FW_SUPER_NOROSHI_CORE+W.png"  />
-		
+        <image file="FW_SUPER_NOROSHI_E+mask.png"  />
         <image file="FW_SUPER_NOROSHI_E.png"  />
-        <image file="FW_SUPER_NOROSHI_S.png"  />
+        <image file="FW_SUPER_NOROSHI_N+mask.png"  />
         <image file="FW_SUPER_NOROSHI_N.png"  />
+        <image file="FW_SUPER_NOROSHI_NE+mask.png"  />
         <image file="FW_SUPER_NOROSHI_NE.png"  />
+        <image file="FW_SUPER_NOROSHI_NW+mask.png"  />
         <image file="FW_SUPER_NOROSHI_NW.png"  />
+        <image file="FW_SUPER_NOROSHI_S+mask.png"  />
+        <image file="FW_SUPER_NOROSHI_S.png"  />
+        <image file="FW_SUPER_NOROSHI_SE+mask.png"  />
         <image file="FW_SUPER_NOROSHI_SE.png"  />
+        <image file="FW_SUPER_NOROSHI_SW+mask.png"  />
         <image file="FW_SUPER_NOROSHI_SW.png"  />
+        <image file="FW_SUPER_NOROSHI_W+mask.png"  />
         <image file="FW_SUPER_NOROSHI_W.png"  />
 		
+		<image file="FW_SUPER_NOROSHI_CORE+mask+N.png"  />
+        <image file="FW_SUPER_NOROSHI_CORE+N.png"  />
+        <image file="FW_SUPER_NOROSHI_E+mask+N.png"  />
         <image file="FW_SUPER_NOROSHI_E+N.png"  />
-        <image file="FW_SUPER_NOROSHI_S+N.png"  />
+        <image file="FW_SUPER_NOROSHI_N+mask+N.png"  />
         <image file="FW_SUPER_NOROSHI_N+N.png"  />
+        <image file="FW_SUPER_NOROSHI_NE+mask+N.png"  />
         <image file="FW_SUPER_NOROSHI_NE+N.png"  />
+        <image file="FW_SUPER_NOROSHI_NW+mask+N.png"  />
         <image file="FW_SUPER_NOROSHI_NW+N.png"  />
+        <image file="FW_SUPER_NOROSHI_S+mask+N.png"  />
+        <image file="FW_SUPER_NOROSHI_S+N.png"  />
+        <image file="FW_SUPER_NOROSHI_SE+mask+N.png"  />
         <image file="FW_SUPER_NOROSHI_SE+N.png"  />
+        <image file="FW_SUPER_NOROSHI_SW+mask+N.png"  />
         <image file="FW_SUPER_NOROSHI_SW+N.png"  />
+        <image file="FW_SUPER_NOROSHI_W+mask+N.png"  />
         <image file="FW_SUPER_NOROSHI_W+N.png"  />
-		
+
+        <image file="FW_SUPER_NOROSHI_CORE+mask+E.png"  />
+        <image file="FW_SUPER_NOROSHI_CORE+E.png"  />
+        <image file="FW_SUPER_NOROSHI_E+mask+E.png"  />
         <image file="FW_SUPER_NOROSHI_E+E.png"  />
-        <image file="FW_SUPER_NOROSHI_S+E.png"  />
+        <image file="FW_SUPER_NOROSHI_N+mask+E.png"  />
         <image file="FW_SUPER_NOROSHI_N+E.png"  />
+        <image file="FW_SUPER_NOROSHI_NE+mask+E.png"  />
         <image file="FW_SUPER_NOROSHI_NE+E.png"  />
+        <image file="FW_SUPER_NOROSHI_NW+mask+E.png"  />
         <image file="FW_SUPER_NOROSHI_NW+E.png"  />
+        <image file="FW_SUPER_NOROSHI_S+mask+E.png"  />
+        <image file="FW_SUPER_NOROSHI_S+E.png"  />
+        <image file="FW_SUPER_NOROSHI_SE+mask+E.png"  />
         <image file="FW_SUPER_NOROSHI_SE+E.png"  />
+        <image file="FW_SUPER_NOROSHI_SW+mask+E.png"  />
         <image file="FW_SUPER_NOROSHI_SW+E.png"  />
+        <image file="FW_SUPER_NOROSHI_W+mask+E.png"  />
         <image file="FW_SUPER_NOROSHI_W+E.png"  />
 		
+        <image file="FW_SUPER_NOROSHI_CORE+mask+W.png"  />
+        <image file="FW_SUPER_NOROSHI_CORE+W.png"  />
+        <image file="FW_SUPER_NOROSHI_E+mask+W.png"  />
         <image file="FW_SUPER_NOROSHI_E+W.png"  />
-        <image file="FW_SUPER_NOROSHI_S+W.png"  />
+        <image file="FW_SUPER_NOROSHI_N+mask+W.png"  />
         <image file="FW_SUPER_NOROSHI_N+W.png"  />
+        <image file="FW_SUPER_NOROSHI_NE+mask+W.png"  />
         <image file="FW_SUPER_NOROSHI_NE+W.png"  />
+        <image file="FW_SUPER_NOROSHI_NW+mask+W.png"  />
         <image file="FW_SUPER_NOROSHI_NW+W.png"  />
+        <image file="FW_SUPER_NOROSHI_S+mask+W.png"  />
+        <image file="FW_SUPER_NOROSHI_S+W.png"  />
+        <image file="FW_SUPER_NOROSHI_SE+mask+W.png"  />
         <image file="FW_SUPER_NOROSHI_SE+W.png"  />
+        <image file="FW_SUPER_NOROSHI_SW+mask+W.png"  />
         <image file="FW_SUPER_NOROSHI_SW+W.png"  />
+        <image file="FW_SUPER_NOROSHI_W+mask+W.png"  />
         <image file="FW_SUPER_NOROSHI_W+W.png"  />
 		<!-- CO Units -->
         <image file="FW_IFV+mask.png"  />

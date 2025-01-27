@@ -27,7 +27,7 @@ var Constructor = function()
         var directionVar = variables.createVariable("direction");
         var direction = directionVar.readDataString();
         directionVar.writeDataString(direction);
-        unit.loadSpriteV2(UNIT.getSpriteReference(unit) + "+mask", GameEnums.Recoloring_Matrix);
+        unit.loadSpriteV2(UNIT.getSpriteReference(unit) + "+mask" + direction, GameEnums.Recoloring_Matrix);
         unit.loadSpriteV2(UNIT.getSpriteReference(unit) + direction, GameEnums.Recoloring_None);
         var displayIconVar = variables.createVariable("displayIcon");
         var displayIcon = displayIconVar.readDataString();
