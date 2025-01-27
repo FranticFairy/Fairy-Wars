@@ -224,6 +224,9 @@ UNIT.getWeatherImmune = function (unit, map) {
     if (unit.getHidden() && submarines.includes(unit.getUnitID())) {
         return true;
     }
+    if(unit.getUnitID().includes("FW_SUPER_")) {
+        return true;
+    }
     return false;
 };
 
@@ -345,7 +348,8 @@ UNIT.unitTypeToGround = function (unitType, map) {
         unitType === GameEnums.UnitType_Vehicle_Light ||
         unitType === GameEnums.UnitType_Vehicle_Medium ||
         unitType === GameEnums.UnitType_Vehicle_Heavy ||
-        unitType === GameEnums.UnitType_Fieldgun) {
+        unitType === GameEnums.UnitType_Fieldgun ||
+        unitType === GameEnums.UnitType_Vehicle_Super) {
         return GameEnums.UnitType_Ground;
     }
     return unitType;
@@ -356,17 +360,20 @@ UNIT.unitTypeToDomain = function (unitType, map) {
         unitType === GameEnums.UnitType_Vehicle_Medium ||
         unitType === GameEnums.UnitType_Vehicle_Heavy ||
         unitType === GameEnums.UnitType_Fieldgun ||
-        unitType === GameEnums.UnitType_Infantry) {
+        unitType === GameEnums.UnitType_Infantry ||
+        unitType === GameEnums.UnitType_Vehicle_Super) {
         return GameEnums.UnitType_Ground;
     }
     if (unitType === GameEnums.UnitType_Plane ||
         unitType === GameEnums.UnitType_Plane_Large ||
-        unitType === GameEnums.UnitType_Heli) {
+        unitType === GameEnums.UnitType_Heli ||
+        unitType === GameEnums.UnitType_Plane_Super) {
         return GameEnums.UnitType_Air;
     }
     if (unitType === GameEnums.UnitType_Naval_Light ||
         unitType === GameEnums.UnitType_Naval_Medium ||
-        unitType === GameEnums.UnitType_Naval_Heavy) {
+        unitType === GameEnums.UnitType_Naval_Heavy ||
+        unitType === GameEnums.UnitType_Naval_Super) {
         return GameEnums.UnitType_Naval;
     }
     return unitType;
@@ -404,6 +411,12 @@ UNIT.getUnitTypeText = function (unitType, map) {
             return qsTr("Medium Ship");
         case GameEnums.UnitType_Naval_Heavy:
             return qsTr("Heavy Ship");
+        case GameEnums.UnitType_Vehicle_Super:
+            return qsTr("Experimental Vehicle");
+        case GameEnums.UnitType_Plane_Super:
+            return qsTr("Experimental Plane");
+        case GameEnums.UnitType_Naval_Super:
+            return qsTr("Experimental Ship");
     }
     return tr("Ground");
 };
@@ -418,5 +431,8 @@ UNIT.unitTypeSortList = [GameEnums.UnitType_Infantry,
                         GameEnums.UnitType_Plane_Large,
                         GameEnums.UnitType_Naval_Light,
                         GameEnums.UnitType_Naval_Medium,
-                        GameEnums.UnitType_Naval_Heavy
+                        GameEnums.UnitType_Naval_Heavy,
+                        GameEnums.UnitType_Vehicle_Super,
+                        GameEnums.UnitType_Plane_Super,
+                        GameEnums.UnitType_Naval_Super
 ];

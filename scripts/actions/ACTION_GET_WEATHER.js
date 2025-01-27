@@ -8,19 +8,15 @@ var Constructor = function () {
     };
 
     this.isFinalStep = function (action, map) {
-        return true;
-    };
-    this.perform = function (action, map) {
-        var gameRules = map.getGameRules();
-        var currentPlayer = map.getCurrentPlayer();
-        for(var x = 0; x < (map.getCurrentDay()+32); x++) {
-            var weather = gameRules.getWeatherAtDay(x,currentPlayer);
-            if(weather === null) {
-                x = map.getCurrentDay()+1000;
-            } else {
-                GameConsole.print(map.getCurrentDay()+x + ": " + ACTION_WEATHER_CONTROL.translateWeatherToCode(weather),1);
-            }
+        if (action.getInputStep() === 0) {
+            return false;
         }
+        else {
+            return true;
+        }
+    };
+
+    this.perform = function (action, map) {
     };
 
     this.getValue = function() {
@@ -29,6 +25,39 @@ var Constructor = function () {
     this.getIcon = function(map)
     {
         return "weather_symbol_partlycloudy";
+    };
+    this.isFinalStep = function (action, map) {
+        if (action.getInputStep() === 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+
+    this.getStepInputType = function (action, map) {
+        // supported types are MENU and FIELD
+        if (action.getInputStep() === 0) {
+            return "MENU";
+        }
+        return "";
+    };
+
+    this.getStepData = function (action, data, map) {
+        var gameRules = map.getGameRules();
+        var currentPlayer = map.getCurrentPlayer();
+        for(var x = 0; x < (map.getCurrentDay()+20); x++) {
+            var weather = gameRules.getWeatherAtDay(x,currentPlayer);
+            if(weather === null) {
+                x = map.getCurrentDay()+1000;
+            } else {
+                var ID = ACTION_WEATHER_CONTROL.translateWeatherToCode(weather);
+                var name = weather.getWeatherName()
+                var icon = weather.getWeatherSymbol()
+                var day = map.getCurrentDay()+x
+                data.addData(day + " " + name, ID, icon, day, true);
+            }
+        }
     };
 
     this.setValue = function(inputValue) {

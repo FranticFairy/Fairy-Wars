@@ -19,7 +19,7 @@ var Constructor = function()
     this.getWeatherTerrainSprite = function()
     {
 
-        return "weather_rain";
+        return "weather_storm";
     };
 
     this.getVisionrangeModifier = function()

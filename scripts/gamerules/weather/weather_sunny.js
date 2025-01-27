@@ -48,7 +48,7 @@ var Constructor = function()
     };
     
     this.getDefaultWeatherChance = function () {
-        return 0;
+        return 100;
     };
 }
 

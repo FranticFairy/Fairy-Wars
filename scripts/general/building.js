@@ -71,8 +71,6 @@ BUILDING.assembleConstructionList = function (building) {
         case "AMPHIBIOUSFACTORY":
             switch (bestAdjacent) {
                 case "SEA":
-                    buildingDomain = "LIGHTSEA";
-                    break;
                 case "BEACH":
                     buildingDomain = "LIGHTBEACH";
                     break;

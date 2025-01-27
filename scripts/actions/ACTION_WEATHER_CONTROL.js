@@ -24,12 +24,18 @@ var Constructor = function () {
     var FOG = [["MISTY",25], ["MIST",35], ["FOG",25], ["SHROUD",15]];
     var SHROUD = [["MISTY",20], ["MIST",25], ["FOG",35], ["SHROUD",20]];
 
+    this.resetLDT = function() {
+        lastDayTriggered = 0;
+    }
+
     this.handleWeather = function(map) {
         var gameRules = map.getGameRules();
         var currentPlayer = map.getCurrentPlayer();
         if(lastDayTriggered === 0) {
-            for(var x = 1; x < 30; x++) {
-                ACTION_WEATHER_CONTROL.handleWeatherGetAndSet(gameRules,currentPlayer,x);
+            if(map.getCurrentDay() < 2){
+                for(var x = 1; x < 30; x++) {
+                    ACTION_WEATHER_CONTROL.handleWeatherGetAndSet(gameRules,currentPlayer,x);
+                }
             }
             lastDayTriggered = map.getCurrentDay();
         }
@@ -121,6 +127,11 @@ var Constructor = function () {
             return "FOG"
             case "Shroud":
             return "SHROUD"
+
+            case "Clear Weather":
+            return "SUNNY"
+            case "Storm":
+            return "THUNDERSTORM"
 
             default:
             return "SUNNY"

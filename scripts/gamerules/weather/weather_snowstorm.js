@@ -13,7 +13,7 @@ var Constructor = function()
 
     this.getWeatherTerrainSprite = function()
     {
-        return "weather_snow";
+        return "weather_snowstorm";
     };
 
     this.getMovementCostModifier = function(weather, unit, terrain, map)

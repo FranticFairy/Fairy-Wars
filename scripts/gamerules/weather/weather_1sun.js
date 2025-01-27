@@ -49,7 +49,7 @@ var Constructor = function()
 
     this.getDefaultWeatherChance = function()
     {
-        return 50;
+        return 0;
     };
 }
 
