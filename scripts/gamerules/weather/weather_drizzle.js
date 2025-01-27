@@ -1,29 +1,25 @@
-var Constructor = function () {
-    this.getWeatherName = function () {
-
-        return qsTr("Rain");
-    };
-
-    this.getWeatherTerrainSprite = function () {
-
-        return "weather_rain";
-    };
-
-    this.getDescription = function () {
-        return qsTr("Rainfall hinders air operations.");
-    };
-
-    this.getWeatherSymbol = function () {
-        return "weather_symbol_rain_light";
-    };
-
-    this.getMovementCostModifier = function(weather, unit, terrain, map)
+var Constructor = function()
+{
+    this.getWeatherName = function()
     {
-        if (UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air)
-        {
-            return 1;
-        }
-        return 0;
+
+        return qsTr("Drizzle");
+    };
+
+    this.getDescription = function()
+    {
+        return qsTr("Light rain, not enough to be a hinderance. Can lead to worse rainstorms, or clear up again.");
+    };
+
+    this.getWeatherTerrainSprite = function()
+    {
+
+        return "weather_drizzle";
+    };
+
+    this.getWeatherSymbol = function()
+    {
+        return "weather_symbol_rain_alt";
     };
 
     this.activate = function(weather, map)
@@ -57,10 +53,12 @@ var Constructor = function () {
         }
     };
 
-    this.getDefaultWeatherChance = function () {
+    this.getDefaultWeatherChance = function()
+    {
         return 0;
     };
 }
 
 Constructor.prototype = WEATHER;
-var WEATHER_RAIN = new Constructor();
+var WEATHER_DRIZZLE = new Constructor();
+

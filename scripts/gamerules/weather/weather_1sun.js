@@ -27,14 +27,12 @@ var Constructor = function()
         var animation = GameAnimationFactory.createAnimation(map, 0, 0);
         animation.addSprite2("white_pixel", 0, 0, 3200, map.getMapWidth(), map.getMapHeight());
         animation.addTweenColor(0, "#00FFFFFF", "#FFFFFFFF", 3000, true);
-        animation.setSound("sun.wav");
         animation.setStartOfAnimationCall("ANIMATION", "preOnAnimationChangedAnimation");
         if (queueAnimation !== null)
         {
             queueAnimation.queueAnimation(animation);
         }
-        var fogMode = map.getGameRules().getFogMode();
-        if (fogMode != GameEnums.Fog_OfWar)
+        if (map.getGameRules().getFogMode() === GameEnums.Fog_OfShroud)
         {
             map.getGameRules().setFogMode(GameEnums.Fog_OfWar);
             for(var x = 0; x < map.getMapWidth(); x++) {

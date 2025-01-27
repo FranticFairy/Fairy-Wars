@@ -1,25 +1,48 @@
-var Constructor = function () {
-    this.getWeatherName = function () {
+var Constructor = function()
+{
+    this.getWeatherName = function()
+    {
 
-        return qsTr("Rain");
+        return qsTr("Rainstorm");
     };
 
-    this.getWeatherTerrainSprite = function () {
+    this.getDescription = function()
+    {
+        return qsTr("Heavy rain makes the ground muddy, and turns the seas choppy. Hinders movement and reduces vision.");
+    };
+
+    this.getWeatherSymbol = function()
+    {
+        return "weather_symbol_rain";
+    };
+
+    this.getWeatherTerrainSprite = function()
+    {
 
         return "weather_rain";
     };
 
-    this.getDescription = function () {
-        return qsTr("Rainfall hinders air operations.");
-    };
+    this.getVisionrangeModifier = function()
+    {
 
-    this.getWeatherSymbol = function () {
-        return "weather_symbol_rain_light";
+        return -1;
     };
 
     this.getMovementCostModifier = function(weather, unit, terrain, map)
     {
-        if (UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air)
+        var id = terrain.getID();
+        if (UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air || UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_NAVAL ||
+            (id !== "STREET" &&
+             id !== "STREET1" &&
+             id !== "SNOW_STREET" &&
+             id !== "BRIDGE" &&
+             id !== "BRIDGE1" &&
+             id !== "BRIDGE2" &&
+             id !== "WASTE_PATH" &&
+             id !== "DESERT_PATH" &&
+             id !== "DESERT_PATH1" &&
+             id !== "TELEPORTTILE" &&
+            terrain.getBuilding() === null))
         {
             return 1;
         }
@@ -56,11 +79,12 @@ var Constructor = function () {
             }
         }
     };
-
+    
     this.getDefaultWeatherChance = function () {
         return 0;
     };
 }
 
 Constructor.prototype = WEATHER;
-var WEATHER_RAIN = new Constructor();
+var WEATHER_RAINSTORM = new Constructor();
+

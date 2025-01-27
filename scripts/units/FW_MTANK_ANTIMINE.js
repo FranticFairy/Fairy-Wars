@@ -63,7 +63,7 @@ var Constructor = function()
 
     this.getBaseCost = function()
     {
-        return 9500;
+        return 9000;
     };
 
 	this.canMoveAndFire = function()

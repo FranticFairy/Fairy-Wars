@@ -1,29 +1,45 @@
-var Constructor = function () {
-    this.getWeatherName = function () {
+var Constructor = function()
+{
+    this.getWeatherName = function()
+    {
 
-        return qsTr("Rain");
+        return qsTr("Snowfall");
     };
 
-    this.getWeatherTerrainSprite = function () {
-
-        return "weather_rain";
+    this.getDescription = function()
+    {
+        return qsTr("Snowfall hinders land and air unit operations. Turns the landscape snowy.");
     };
 
-    this.getDescription = function () {
-        return qsTr("Rainfall hinders air operations.");
-    };
-
-    this.getWeatherSymbol = function () {
-        return "weather_symbol_rain_light";
+    this.getWeatherTerrainSprite = function()
+    {
+        return "weather_snow";
     };
 
     this.getMovementCostModifier = function(weather, unit, terrain, map)
     {
-        if (UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air)
+        var id = terrain.getID();
+        if ((UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air) ||
+            (id !== "STREET" &&
+             id !== "STREET1" &&
+             id !== "SNOW_STREET" &&
+             id !== "BRIDGE" &&
+             id !== "BRIDGE1" &&
+             id !== "BRIDGE2" &&
+             id !== "WASTE_PATH" &&
+             id !== "DESERT_PATH" &&
+             id !== "DESERT_PATH1" &&
+             id !== "TELEPORTTILE" &&
+            terrain.getBuilding() === null))
         {
             return 1;
         }
         return 0;
+    };
+
+    this.getWeatherSymbol = function()
+    {
+        return "weather_symbol_snow_light";
     };
 
     this.activate = function(weather, map)
@@ -56,11 +72,12 @@ var Constructor = function () {
             }
         }
     };
-
+    
     this.getDefaultWeatherChance = function () {
         return 0;
     };
 }
 
 Constructor.prototype = WEATHER;
-var WEATHER_RAIN = new Constructor();
+var WEATHER_SNOWFALL = new Constructor();
+

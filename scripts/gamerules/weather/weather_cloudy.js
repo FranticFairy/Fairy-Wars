@@ -1,29 +1,19 @@
-var Constructor = function () {
-    this.getWeatherName = function () {
-
-        return qsTr("Rain");
-    };
-
-    this.getWeatherTerrainSprite = function () {
-
-        return "weather_rain";
-    };
-
-    this.getDescription = function () {
-        return qsTr("Rainfall hinders air operations.");
-    };
-
-    this.getWeatherSymbol = function () {
-        return "weather_symbol_rain_light";
-    };
-
-    this.getMovementCostModifier = function(weather, unit, terrain, map)
+var Constructor = function()
+{
+    this.getWeatherName = function()
     {
-        if (UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air)
-        {
-            return 1;
-        }
-        return 0;
+
+        return qsTr("Cloudy");
+    };
+
+    this.getDescription = function()
+    {
+        return qsTr("Overcast skies, but not bad enough to cause hinderance. Can lead to foul weather.");
+    };
+
+    this.getWeatherSymbol = function()
+    {
+        return "weather_symbol_partlycloudy";
     };
 
     this.activate = function(weather, map)
@@ -57,10 +47,12 @@ var Constructor = function () {
         }
     };
 
-    this.getDefaultWeatherChance = function () {
+    this.getDefaultWeatherChance = function()
+    {
         return 0;
     };
 }
 
 Constructor.prototype = WEATHER;
-var WEATHER_RAIN = new Constructor();
+var WEATHER_CLOUDY = new Constructor();
+

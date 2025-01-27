@@ -1,29 +1,30 @@
-var Constructor = function () {
-    this.getWeatherName = function () {
+var Constructor = function()
+{
+    this.getWeatherName = function()
+    {
 
-        return qsTr("Rain");
+        return qsTr("Fog");
+    };
+
+    this.getDescription = function()
+    {
+        return qsTr("Fog hinders vision further than mist does.");
+    };
+
+    this.getWeatherSymbol = function()
+    {
+        return "weather_symbol_fog";
     };
 
     this.getWeatherTerrainSprite = function () {
 
-        return "weather_rain";
+        return "weather_mist";
     };
 
-    this.getDescription = function () {
-        return qsTr("Rainfall hinders air operations.");
-    };
-
-    this.getWeatherSymbol = function () {
-        return "weather_symbol_rain_light";
-    };
-
-    this.getMovementCostModifier = function(weather, unit, terrain, map)
+    this.getVisionrangeModifier = function()
     {
-        if (UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air)
-        {
-            return 1;
-        }
-        return 0;
+
+        return -2;
     };
 
     this.activate = function(weather, map)
@@ -57,10 +58,12 @@ var Constructor = function () {
         }
     };
 
-    this.getDefaultWeatherChance = function () {
+    this.getDefaultWeatherChance = function()
+    {
         return 0;
     };
 }
 
 Constructor.prototype = WEATHER;
-var WEATHER_RAIN = new Constructor();
+var WEATHER_FOG = new Constructor();
+

@@ -1,29 +1,30 @@
-var Constructor = function () {
-    this.getWeatherName = function () {
+var Constructor = function()
+{
+    this.getWeatherName = function()
+    {
 
-        return qsTr("Rain");
+        return qsTr("Shroud");
+    };
+
+    this.getDescription = function()
+    {
+        return qsTr("Very dense fog that makes seeing ahead almost impossible. Reduces vision to 1 and inflicts Shroud.");
+    };
+
+    this.getWeatherSymbol = function()
+    {
+        return "weather_symbol_shroud";
     };
 
     this.getWeatherTerrainSprite = function () {
 
-        return "weather_rain";
+        return "weather_mist";
     };
 
-    this.getDescription = function () {
-        return qsTr("Rainfall hinders air operations.");
-    };
-
-    this.getWeatherSymbol = function () {
-        return "weather_symbol_rain_light";
-    };
-
-    this.getMovementCostModifier = function(weather, unit, terrain, map)
+    this.getVisionrangeModifier = function()
     {
-        if (UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air)
-        {
-            return 1;
-        }
-        return 0;
+
+        return -3;
     };
 
     this.activate = function(weather, map)
@@ -42,25 +43,26 @@ var Constructor = function () {
         {
             queueAnimation.queueAnimation(animation);
         }
-        if (map.getGameRules().getFogMode() === GameEnums.Fog_OfShroud)
+        if (map.getGameRules().getFogMode() != GameEnums.Fog_OfShroud)
         {
-            map.getGameRules().setFogMode(GameEnums.Fog_OfWar);
+            map.getGameRules().setFogMode(GameEnums.Fog_OfShroud);
             for(var x = 0; x < map.getMapWidth(); x++) {
                 for(var y = 0; y < map.getMapHeight(); y++) {
                     var playerCount = map.getPlayerCount();
                     for(var c = 0; c < playerCount;  c++) {
                         var player = map.getPlayer(c);
-                        player.addVisionField(x,y,0,false,GameEnums.VisionType_Fogged)
+                        player.addVisionField(x,y,0,false,GameEnums.VisionType_Shrouded)
                     }
                 }
             }
         }
     };
-
+    
     this.getDefaultWeatherChance = function () {
         return 0;
     };
 }
 
 Constructor.prototype = WEATHER;
-var WEATHER_RAIN = new Constructor();
+var WEATHER_SHROUD = new Constructor();
+

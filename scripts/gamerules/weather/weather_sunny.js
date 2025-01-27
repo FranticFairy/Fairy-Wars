@@ -1,29 +1,19 @@
-var Constructor = function () {
-    this.getWeatherName = function () {
-
-        return qsTr("Rain");
-    };
-
-    this.getWeatherTerrainSprite = function () {
-
-        return "weather_rain";
-    };
-
-    this.getDescription = function () {
-        return qsTr("Rainfall hinders air operations.");
-    };
-
-    this.getWeatherSymbol = function () {
-        return "weather_symbol_rain_light";
-    };
-
-    this.getMovementCostModifier = function(weather, unit, terrain, map)
+var Constructor = function()
+{
+    this.getWeatherName = function()
     {
-        if (UNIT.unitTypeToDomain(unit.getUnitType()) === GameEnums.UnitType_Air)
-        {
-            return 1;
-        }
-        return 0;
+
+        return qsTr("Sunny");
+    };
+
+    this.getDescription = function()
+    {
+        return qsTr("Clear skies, low likelihood of foul weather. No negative effects.");
+    };
+
+    this.getWeatherSymbol = function()
+    {
+        return "weather_symbol_sun";
     };
 
     this.activate = function(weather, map)
@@ -56,11 +46,12 @@ var Constructor = function () {
             }
         }
     };
-
+    
     this.getDefaultWeatherChance = function () {
         return 0;
     };
 }
 
 Constructor.prototype = WEATHER;
-var WEATHER_RAIN = new Constructor();
+var WEATHER_SUNNY = new Constructor();
+
