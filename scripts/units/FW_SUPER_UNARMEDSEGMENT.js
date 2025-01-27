@@ -13,22 +13,29 @@ var Constructor = function()
 
         unit.setFuel(50);
         unit.setMaxFuel(50);
-        unit.setBaseMovementPoints(5);
+        unit.setBaseMovementPoints(0);
         unit.setMinRange(1);
         unit.setMaxRange(1);
         unit.setVision(1);
 
         var variables = unit.getVariables();
+        var coreIDVar = variables.createVariable("coreID");
+        var coreID = coreIDVar.readDataString();
+        coreIDVar.writeDataString("FW_SUPER_NOROSHI");
 
     };
 
     this.loadSprites = function (unit) {
         var variables = unit.getVariables();
+        var coreIDVar = variables.createVariable("coreID");
+        var coreID = coreIDVar.readDataString();
+        coreIDVar.writeDataString(coreID);
         var directionVar = variables.createVariable("direction");
         var direction = directionVar.readDataString();
         directionVar.writeDataString(direction);
-        unit.loadSpriteV2(UNIT.getSpriteReference(unit) + "+mask", GameEnums.Recoloring_Matrix);
-        unit.loadSpriteV2(UNIT.getSpriteReference(unit) + direction, GameEnums.Recoloring_None);
+        
+        unit.loadSpriteV2("FW_SUPER_NOROSHI_CORE+mask", GameEnums.Recoloring_Matrix);
+        unit.loadSpriteV2(coreID + direction, GameEnums.Recoloring_None);
         var displayIconVar = variables.createVariable("displayIcon");
         var displayIcon = displayIconVar.readDataString();
         displayIconVar.writeDataString(displayIcon);
@@ -57,12 +64,12 @@ var Constructor = function()
 
     this.getName = function()
     {
-        return qsTr("Experimental Superheavy Cruising Tank 'NOROSHI'");
+        return qsTr("Superunit Segment");
     };
 
     this.getDescription = function()
     {
-        return qsTr("The core of the Experimental Superheavy Cruising Tank 'NOROSHI'");
+        return qsTr("A segment of an experimental superunit");
     };
 
     this.getBaseCost = function()
@@ -93,4 +100,4 @@ var Constructor = function()
 }
 
 Constructor.prototype = UNIT;
-var FW_SUPER_NOROSHI_CORE = new Constructor();
+var FW_SUPER_UNARMEDSEGMENT = new Constructor();
