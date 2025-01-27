@@ -5,7 +5,7 @@ var Constructor = function() {
 
     this.init = function(co, map) {
         co.setPowerStars(3)
-        co.setSuperpowerStars(3)
+        co.setSuperpowerStars(2)
     }
     this.getCOArmy = function() {
         return "FA"
@@ -229,7 +229,7 @@ var Constructor = function() {
     }
 
     this.getCOUnitRange = function(co, map) {
-        return 1
+        return 2
     }
     this.getAiCoUnitBonus = function(co, unit, map) {
         return 1
