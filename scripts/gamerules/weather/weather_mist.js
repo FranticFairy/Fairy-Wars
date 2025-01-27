@@ -1,7 +1,7 @@
 var Constructor = function () {
     this.getWeatherName = function () {
 
-        return qsTr("Foggy Weather");
+        return qsTr("Mist");
     };
 
     this.getWeatherSymbol = function () {
@@ -13,49 +13,49 @@ var Constructor = function () {
         return "weather_mist";
     };
 
-    this.getDescription = function () {
-        return qsTr("Foggy weather hinders vision slightly.");
+    this.getVisionrangeModifier = function()
+    {
+
+        return -1;
     };
 
-    this.activate = function (weather, map) {
+    this.getDescription = function () {
+        return qsTr("Hinders vision slightly, but provides no other obstructions.");
+    };
+
+    this.activate = function(weather, map)
+    {
         var animationCount = GameAnimationFactory.getAnimationCount();
         var queueAnimation = null;
-        if (animationCount > 0) {
+        if (animationCount > 0)
+        {
             queueAnimation = GameAnimationFactory.getAnimation(animationCount - 1);
         }
         var animation = GameAnimationFactory.createAnimation(map, 0, 0);
         animation.addSprite2("white_pixel", 0, 0, 3200, map.getMapWidth(), map.getMapHeight());
         animation.addTweenColor(0, "#00FFFFFF", "#FFFFFFFF", 3000, true);
         animation.setStartOfAnimationCall("ANIMATION", "preOnAnimationChangedAnimation");
-        animation.setSound("rain.wav");
-        var variable = weather.getVariables().createVariable("FOGMODE");
-        var fogMode = map.getGameRules().getFogMode();
-        variable.writeDataInt32(fogMode);
-        // only apply fog of war if the fog rules are softer
-        if (fogMode != GameEnums.Fog_OfWar) {
+        if (queueAnimation !== null)
+        {
+            queueAnimation.queueAnimation(animation);
+        }
+        if (map.getGameRules().getFogMode() === GameEnums.Fog_OfShroud)
+        {
             map.getGameRules().setFogMode(GameEnums.Fog_OfWar);
-            for (var x = 0; x < map.getMapWidth(); x++) {
-                for (var y = 0; y < map.getMapHeight(); y++) {
+            for(var x = 0; x < map.getMapWidth(); x++) {
+                for(var y = 0; y < map.getMapHeight(); y++) {
                     var playerCount = map.getPlayerCount();
-                    for (var c = 0; c < playerCount; c++) {
+                    for(var c = 0; c < playerCount;  c++) {
                         var player = map.getPlayer(c);
-                        player.addVisionField(x, y, 0, false, GameEnums.VisionType_Fogged)
+                        player.addVisionField(x,y,0,false,GameEnums.VisionType_Fogged)
                     }
                 }
             }
         }
-        if (queueAnimation !== null) {
-            queueAnimation.queueAnimation(animation);
-        }
     };
-
-    this.getVisionrangeModifier = function () {
-
-        return -1;
-    };
-
+    
     this.getDefaultWeatherChance = function () {
-        return 20;
+        return 0;
     };
 }
 

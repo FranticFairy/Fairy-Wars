@@ -39,6 +39,7 @@ PLAYER.startOfTurn = function(player, map)
     if(player.getCO(0) === null) {
         player.setCO("CO_FIELD_CO",0)
     }
+    ACTION_WEATHER_CONTROL.handleWeather(map);
 };
 
 PLAYER.armies.push("FA");

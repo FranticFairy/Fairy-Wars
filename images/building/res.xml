@@ -2,6 +2,10 @@
 <resources>
     <set path = "mods/fairy-wars/images/building/" />
     <atlas linearFilter = "false">	
+		<image file="fw_superspawner_noroshi.png" />
+		<image file="fw_superspawner_noroshi+mask.png" />
+		<image file="fw_superspawner_noroshi+neutral.png" />
+		
 		<image file="airport+mask.png" />
 		<image file="airport+neutral.png" />
 		<image file="airport.png" />

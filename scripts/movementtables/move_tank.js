@@ -11,7 +11,6 @@ var Constructor = function()
                                 ["BRIDGE", 1],
                                 ["BRIDGE1", 1],
                                 ["BRIDGE2", 1],
-                                ["PONTOON", 1],
                                 ["DESTROYEDWELD", 1],
                                 ["RUIN", 1],
                                 ["STREET", 1],

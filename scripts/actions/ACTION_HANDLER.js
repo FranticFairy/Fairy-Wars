@@ -167,6 +167,140 @@ var Constructor = function () {
         }
     }
 
+    this.flipArray = function (array) {
+        var key, tmp_ar = {};
+
+        for (key in array) {
+            if (array.hasOwnProperty(key)) {
+                tmp_ar[array[key]] = key;
+            }
+        }
+
+        return tmp_ar;
+    }
+
+    this.shiftCoordinates = function (newX, newY, oldX, oldY, shiftedX, shiftedY) {
+        if (newX === oldX && newY === oldY) {
+            return Qt.point(shiftedX, shiftedY)
+        } else {
+            switch (ACTION_HANDLER.getDirection(newX, newY, oldX, oldY)) {
+                case "W": //Came from Right
+                    return Qt.point(shiftedX - 1, shiftedY);
+                case "E": //Came from Left
+                    return Qt.point(shiftedX + 1, shiftedY);
+                case "N": //Came from Below
+                    return Qt.point(shiftedX, shiftedY - 1);
+                case "S": //Came from Above
+                    return Qt.point(shiftedX, shiftedY + 1);
+            }
+        }
+    }
+
+    this.getDirection = function (newX, newY, oldX, oldY) {
+        if (newX === oldX && newY === oldY) {
+            return ""
+        } else {
+            if (newX < oldX) {
+                return "W";
+            }
+            if (newX > oldX) {
+                return "E";
+            }
+            if (newY < oldY) {
+                return "N";
+            }
+            if (newY > oldY) {
+                return "S";
+            }
+        }
+    }
+
+    this.mapCheckSuperUnitFit = function (map, terrain) {
+        var targetFields = [
+            Qt.point(terrain.getX() - 1, terrain.getY() - 1), Qt.point(terrain.getX(), terrain.getY() - 1), Qt.point(terrain.getX() + 1, terrain.getY() - 1),
+            Qt.point(terrain.getX() - 1, terrain.getY()), Qt.point(terrain.getX(), terrain.getY()), Qt.point(terrain.getX() + 1, terrain.getY()),
+            Qt.point(terrain.getX() - 1, terrain.getY() + 1), Qt.point(terrain.getX(), terrain.getY() + 1), Qt.point(terrain.getX() + 1, terrain.getY() + 1)];
+        for (var i = 0; i < targetFields.length; i++) {
+            if (map.onMap(targetFields[i].x, targetFields[i].y)) {
+                var foundTerrain = map.getTerrain(targetFields[i].x, targetFields[i].y);
+                if (MOVEMENTTABLE.getMovementpointsFromTable(foundTerrain, MOVE_TANK_SUPER.movementpointsTable) < 1) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    this.mapCheckSuperUnit = function (map, terrainCoords) {
+        var terrain = map.getTerrain(terrainCoords.x, terrainCoords.y)
+        var targetFields = [
+            Qt.point(terrain.getX() - 1, terrain.getY() - 1), Qt.point(terrain.getX(), terrain.getY() - 1), Qt.point(terrain.getX() + 1, terrain.getY() - 1),
+            Qt.point(terrain.getX() - 1, terrain.getY()), Qt.point(terrain.getX(), terrain.getY()), Qt.point(terrain.getX() + 1, terrain.getY()),
+            Qt.point(terrain.getX() - 1, terrain.getY() + 1), Qt.point(terrain.getX(), terrain.getY() + 1), Qt.point(terrain.getX() + 1, terrain.getY() + 1)];
+        for (var i = 0; i < targetFields.length; i++) {
+            if (map.onMap(targetFields[i].x, targetFields[i].y)) {
+                GameConsole.print(targetFields[i].x + ", " + targetFields[i].y, 1)
+                var foundTerrain = map.getTerrain(targetFields[i].x, targetFields[i].y);
+                var currentUnit = foundTerrain.getUnit();
+                if (currentUnit != null && currentUnit.getUnitID().includes("FW_SUPER")) {
+                    return false
+                }
+            } else {
+                return false;
+            }
+        }
+        for (var i = 0; i < targetFields.length; i++) {
+            if (map.onMap(targetFields[i].x, targetFields[i].y)) {
+                var foundTerrain = map.getTerrain(targetFields[i].x, targetFields[i].y);
+                if (MOVEMENTTABLE.getMovementpointsFromTable(foundTerrain, MOVE_TANK_SUPER.movementpointsTable) > 0) {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    this.getDirectionNoS = function (newX, newY, oldX, oldY) {
+        if (newX === oldX && newY === oldY) {
+            return ""
+        } else {
+            if (newX < oldX) {
+                return "W";
+            }
+            if (newX > oldX) {
+                return "E";
+            }
+            if (newY < oldY) {
+                return "N";
+            }
+            if (newY > oldY) {
+                return "";
+            }
+        }
+    }
+
+    this.getDirectionInverted = function (newX, newY, oldX, oldY) {
+        if (newX === oldX && newY === oldY) {
+            return ""
+        } else {
+            if (newX < oldX) {
+                return "E";
+            }
+            if (newX > oldX) {
+                return "W";
+            }
+            if (newY < oldY) {
+                return "S";
+            }
+            if (newY > oldY) {
+                return "N";
+            }
+        }
+    }
+
     this.handlePostAction = function (unit, action, map) {
         if (unit.getTerrain() !== null) {
             ACTION_HANDLER.pingCheck(unit, map)
