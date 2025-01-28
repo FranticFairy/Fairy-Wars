@@ -34,7 +34,7 @@ var Constructor = function()
         var direction = directionVar.readDataString();
         directionVar.writeDataString(direction);
         
-        unit.loadSpriteV2("FW_SUPER_NOROSHI_CORE+mask", GameEnums.Recoloring_Matrix);
+        unit.loadSpriteV2(coreID +"+mask" + direction, GameEnums.Recoloring_Matrix);
         unit.loadSpriteV2(coreID + direction, GameEnums.Recoloring_None);
         var displayIconVar = variables.createVariable("displayIcon");
         var displayIcon = displayIconVar.readDataString();
