@@ -3,14 +3,6 @@ var Constructor = function()
 
     this.init = function(unit)
     {
-        unit.setAmmo1(6);
-        unit.setMaxAmmo1(6);
-        unit.setWeapon1ID("FW_WEP_HTANKGUN");
-
-        unit.setAmmo2(9);
-        unit.setMaxAmmo2(9);
-        unit.setWeapon2ID("FW_WEP_HMG");
-
         unit.setFuel(50);
         unit.setMaxFuel(50);
         unit.setBaseMovementPoints(0);
@@ -64,7 +56,7 @@ var Constructor = function()
 
     this.getName = function()
     {
-        return qsTr("Superunit Segment");
+        return qsTr("Indestructible Segment");
     };
 
     this.getDescription = function()

@@ -241,7 +241,6 @@ var Constructor = function () {
             Qt.point(terrain.getX() - 1, terrain.getY() + 1), Qt.point(terrain.getX(), terrain.getY() + 1), Qt.point(terrain.getX() + 1, terrain.getY() + 1)];
         for (var i = 0; i < targetFields.length; i++) {
             if (map.onMap(targetFields[i].x, targetFields[i].y)) {
-                GameConsole.print(targetFields[i].x + ", " + targetFields[i].y, 1)
                 var foundTerrain = map.getTerrain(targetFields[i].x, targetFields[i].y);
                 var currentUnit = foundTerrain.getUnit();
                 if (currentUnit != null && currentUnit.getUnitID().includes("FW_SUPER")) {
@@ -309,11 +308,73 @@ var Constructor = function () {
 
     this.handlePostBattleActions = function (unit, damage, otherUnit, gotAttacked, weapon, action) {
         if (unit.getTerrain() !== null) {
+            if(unit.getHp() < 0.01 && unit.getUnitID().includes("FW_SUPER_DESTRUCTIBLESEGMENT")) {
+                ACTION_HANDLER.superUnitHandleComponentDeath(unit, otherUnit);
+            }
             ACTION_HANDLER.pingCheck(unit, map)
         }
     }
 
+    this.superUnitHandleComponentDeath = function(unit, otherUnit) {
+        unit.setHp(10);
+
+        var variables = unit.getVariables();
+
+        var coreIDVar = variables.createVariable("coreID");
+        var coreID = coreIDVar.readDataString();
+
+        var directionVar = variables.createVariable("direction");
+        var direction = directionVar.readDataString();
+
+        var segmentCoreIDVar = variables.createVariable("segmentCoreID");
+        var segmentCoreID = segmentCoreIDVar.readDataString();
+
+        unit.transformUnit("FW_SUPER_UNARMEDSEGMENT");
+
+        variables = unit.getVariables();
+
+        coreIDVar = variables.createVariable("coreID");
+        directionVar = variables.createVariable("direction");
+        segmentCoreIDVar = variables.createVariable("segmentCoreID");
+
+        coreID = coreID.replace("_ARMED","");
+
+        coreIDVar.writeDataString(coreID);
+        directionVar.writeDataString(direction);
+        segmentCoreIDVar.writeDataString(segmentCoreID);
+        
+        unit.updateSprites(false);
+        var map = unit.getMap();
+        var coreUnit = map.getUnit(segmentCoreID);
+        coreUnit.setHp(coreUnit.getHp() - 2.5);
+        if (coreUnit.getHp() <= 0)
+        {
+            // we destroyed a unit
+            map.getGameRecorder().destroyedUnit(otherUnit.getOwner().getPlayerID(), coreUnit.getUnitID(), coreUnit.getOwner().getPlayerID());
+            var coreVariables = coreUnit.getVariables();
+            var componentsVar = coreVariables.createVariable("components");
+            var components = componentsVar.readDataString();
+            var segments = components.split(",");
+            for(var fv = 0; fv < segments.length; fv++) {
+                var segmentUnit = map.getUnit(segments[fv]);
+                segmentUnit.killUnit();
+            }
+            coreUnit.killUnit();
+        }
+    }
+
+    this.revealToAll = function(unit,map) {
+        var playerCount = map.getPlayerCount();
+        for(var x = 0; x < playerCount; x++) {
+            var thisPlayer =  map.getPlayer(x);
+            thisPlayer.addVisionField(unit.getX(), unit.getY(), 1, true);
+        }
+    }
+
     this.pingCheck = function (unit, map) {
+        if(unit.getUnitID().includes("FW_SUPER")) {
+            ACTION_HANDLER.revealToAll(unit,map);
+        }
         switch (unit.getUnitID()) {
             case "FW_ATTACKER_ANTIRADAR":
             case "FW_SEAPLANE_ANTIRADAR":

@@ -3,19 +3,15 @@ var Constructor = function()
 
     this.init = function(unit)
     {
-        unit.setAmmo1(6);
-        unit.setMaxAmmo1(6);
-        unit.setWeapon1ID("FW_WEP_HTANKGUN");
-
-        unit.setAmmo2(9);
-        unit.setMaxAmmo2(9);
-        unit.setWeapon2ID("FW_WEP_HMG");
+        unit.setAmmo1(4);
+        unit.setMaxAmmo1(4);
+        unit.setWeapon1ID("FW_WEP_SHTANKGUN");
 
         unit.setFuel(50);
         unit.setMaxFuel(50);
-        unit.setBaseMovementPoints(10);
+        unit.setBaseMovementPoints(5);
         unit.setMinRange(1);
-        unit.setMaxRange(1);
+        unit.setMaxRange(5);
         unit.setVision(1);
 
         var variables = unit.getVariables();
@@ -57,12 +53,12 @@ var Constructor = function()
 
     this.getName = function()
     {
-        return qsTr("Experimental Superheavy Cruising Tank 'NOROSHI'");
+        return qsTr("'NOROSHI' Landship");
     };
 
     this.getDescription = function()
     {
-        return qsTr("The core of the Experimental Superheavy Cruising Tank 'NOROSHI'");
+        return qsTr("The core of the Experimental Superheavy Landship 'NOROSHI'");
     };
 
     this.getBaseCost = function()
@@ -77,7 +73,7 @@ var Constructor = function()
 
     this.getTypeOfWeapon1 = function(unit)
     {
-        return GameEnums.WeaponType_Direct;
+        return GameEnums.WeaponType_Indirect;
     };
 
     this.getTypeOfWeapon2 = function(unit)
@@ -89,7 +85,7 @@ var Constructor = function()
         return false;
     }
 
-    this.actionList = ["ACTION_FIRE"];
+    this.actionList = ["ACTION_FIRE", "ACTION_HOELLIUM_WAIT"];
 }
 
 Constructor.prototype = UNIT;
