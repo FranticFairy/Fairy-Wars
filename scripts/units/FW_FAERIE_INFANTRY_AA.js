@@ -5,7 +5,7 @@ var Constructor = function()
     {
         unit.setAmmo2(9);
         unit.setMaxAmmo2(9);
-        unit.setWeapon2ID("FW_WEP_FAE_AR");
+        unit.setWeapon2ID("FW_WEP_FAE_HR");
 
         unit.setFuel(80);
         unit.setMaxFuel(80);
@@ -16,12 +16,17 @@ var Constructor = function()
         unit.setVisionHigh(999);
 
         var variables = unit.getVariables();
+
+        var displayIconVar = variables.createVariable("displayIcon");
+        var displayIcon = displayIconVar.readDataString();
+        displayIcon = "+aa";
+        displayIconVar.writeDataString(displayIcon);
     };
 
-    this.variant = true;
-    this.upgradeCost = 1500;
+    this.variant = false;
+    this.upgradeCost = 0;
     this.builtBeforeToday = false;
-    this.variantList = ["FW_FAERIE_INFANTRY_AA"];
+    this.variantList = ["FW_FAERIE_INFANTRY"];
     this.fuelConsumption = 1;
 
     this.getShowInEditor = function () {
@@ -44,12 +49,12 @@ var Constructor = function()
 
     this.getName = function()
     {
-        return qsTr("Elite Faerie Infantry");
+        return qsTr("Faerie Infantry");
     };
 
     this.getDescription = function()
     {
-        return qsTr("Faerie infantry teams with additional training and equipment for engaging enemy infantry and aircraft.");
+        return qsTr("Teina's unique unit. Flying infantry unit, effective for capturing across water or in difficult terrain.");
     };
 
     this.getBaseCost = function()
@@ -81,4 +86,4 @@ var Constructor = function()
 }
 
 Constructor.prototype = UNIT;
-var FW_FAERIE_INFANTRY = new Constructor();
+var FW_FAERIE_INFANTRY_AA = new Constructor();

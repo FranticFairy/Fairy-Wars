@@ -313,10 +313,7 @@ var Constructor = function() {
                     animation.addSprite("power10", -map.getImageSize() * 1.27, -map.getImageSize() * 1.27, 0, 2, delay)
                     animations[counter].queueAnimation(animation)
                     animations[counter] = animation
-                    counter++
-                    if (counter >= animations.length) {
-                        counter = 0
-                    }
+                    counter = (counter + 1) % animations.length
                 }
 
                 if (!viewplayer.getFieldVisible(building.getX(), building.getY())) {
