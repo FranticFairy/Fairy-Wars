@@ -18,8 +18,8 @@ var Constructor = function()
         var variables = unit.getVariables();
     };
 
-    this.variant = true;
-    this.upgradeCost = 1500;
+    this.variant = false;
+    this.upgradeCost = 0;
     this.builtBeforeToday = false;
     this.variantList = ["FW_FAERIE_INFANTRY_AA"];
     this.fuelConsumption = 1;
@@ -44,12 +44,12 @@ var Constructor = function()
 
     this.getName = function()
     {
-        return qsTr("Elite Faerie Infantry");
+        return qsTr("Faerie Infantry");
     };
 
     this.getDescription = function()
     {
-        return qsTr("Faerie infantry teams with additional training and equipment for engaging enemy infantry and aircraft.");
+        return qsTr("Teina's unique unit. Flying infantry unit, effective for capturing across water or in difficult terrain.");
     };
 
     this.getBaseCost = function()
