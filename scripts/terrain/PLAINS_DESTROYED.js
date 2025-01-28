@@ -34,3 +34,7 @@ PLAINS_DESTROYED.init = function (terrain) {
 PLAINS_DESTROYED.onWeatherChanged = function(terrain) {
     ACTION_TERRAIN_LOADSPRITES.perform(terrain.getX(),terrain.getY());
 }
+PLAINS_DESTROYED.getVisionHide = function()
+{
+    return true;
+};

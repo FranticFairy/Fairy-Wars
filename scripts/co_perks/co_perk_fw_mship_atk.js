@@ -7,7 +7,7 @@ var Constructor = function()
 		if (CO_PERK.isActive(co))
 		{
             if(attacker.getUnitType() === GameEnums.UnitType_Naval_Medium) {
-				return 5;
+				return ACTION_HANDLER.getPerkBuffValue("atk");
             }
 		}
         return 0;
@@ -32,7 +32,7 @@ var Constructor = function()
     };
     this.getCosts = function()
     {
-        return 2;
+        return ACTION_HANDLER.getPerkCost("atk");
     };
 
 };

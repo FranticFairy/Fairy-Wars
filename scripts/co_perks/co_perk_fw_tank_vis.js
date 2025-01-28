@@ -7,7 +7,7 @@ var Constructor = function()
 		{
             var baseUnit = ACTION_HANDLER.getBase(unit.getUnitID());
             if(baseUnit === "FW_LTANK" || baseUnit === "FW_MTANK" || baseUnit === "FW_HTANK" || baseUnit === "FW_SHTANK") {
-				return 1;
+				return ACTION_HANDLER.getPerkBuffValue("vis");
             }
 		}
         return 0;
@@ -32,7 +32,7 @@ var Constructor = function()
     };
     this.getCosts = function()
     {
-        return 3;
+        return ACTION_HANDLER.getPerkCost("vis");
     };
 
 };

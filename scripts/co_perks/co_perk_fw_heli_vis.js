@@ -6,7 +6,7 @@ var Constructor = function()
 		if (CO_PERK.isActive(co))
 		{
             if(unit.getUnitType() === GameEnums.UnitType_Heli) {
-				return 1;
+				return ACTION_HANDLER.getPerkBuffValue("vis");
             }
 		}
         return 0;
@@ -31,7 +31,7 @@ var Constructor = function()
     };
     this.getCosts = function()
     {
-        return 3;
+        return ACTION_HANDLER.getPerkCost("vis");
     };
 
 };

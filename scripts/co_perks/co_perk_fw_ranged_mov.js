@@ -6,7 +6,7 @@ var Constructor = function()
 		if (CO_PERK.isActive(co))
 		{
             if(unit.getBaseMaxRange() > 1) {
-				return 1;
+				return ACTION_HANDLER.getPerkBuffValue("mov");
             }
 		}
         return 0;
@@ -31,7 +31,7 @@ var Constructor = function()
     };
     this.getCosts = function()
     {
-        return 3;
+        return ACTION_HANDLER.getPerkCost("mov");
     };
 
 };

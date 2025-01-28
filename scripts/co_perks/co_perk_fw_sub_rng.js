@@ -9,7 +9,7 @@ var Constructor = function()
             if(baseUnit === "FW_SS") {
                 if (unit.getBaseMaxRange() > 1)
                 {
-                    return 1;
+                    return ACTION_HANDLER.getPerkBuffValue("rng");
                 }
             }
         }
@@ -35,7 +35,7 @@ var Constructor = function()
     };
     this.getCosts = function()
     {
-        return 3;
+        return ACTION_HANDLER.getPerkCost("rng");
     };
 
 };

@@ -363,6 +363,35 @@ var Constructor = function () {
         }
     }
 
+    this.getPerkBuffValue = function(type) {
+        switch(type) {
+            case "atk":
+            case "def":
+            return 10;
+            case "rng":
+            case "mov":
+            case "vis":
+            return 1;
+            default:
+            return 1;
+        }
+    }
+
+    this.getPerkCost = function(type) {
+        switch(type) {
+            case "atk":
+            return 2;
+            case "def":
+            return 1;
+            case "rng":
+            case "mov":
+            case "vis":
+            return 3;
+            default:
+            return 1;
+        }
+    }
+
     this.revealToAll = function(unit,map) {
         var playerCount = map.getPlayerCount();
         for(var x = 0; x < playerCount; x++) {
