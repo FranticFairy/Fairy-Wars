@@ -30,13 +30,14 @@ var Constructor = function () {
         unitList.push(unit);
         unitInfoList.push("CORE");
         unit.setMovementType("MOVE_TANK_SUPER");
-        unit = map.spawnUnit(tiles[0][0].x,tiles[0][0].y,"FW_SUPER_UNARMEDSEGMENT", player);
+        var coreUnitID = unit.getUniqueID();
+        unit = map.spawnUnit(tiles[0][0].x,tiles[0][0].y,"FW_SUPER_DESTRUCTIBLESEGMENT", player);
         unitList.push(unit);
         unitInfoList.push("NW");
         unit = map.spawnUnit(tiles[0][1].x,tiles[0][1].y,"FW_SUPER_UNARMEDSEGMENT", player);
         unitList.push(unit);
         unitInfoList.push("N");
-        unit = map.spawnUnit(tiles[0][2].x,tiles[0][2].y,"FW_SUPER_UNARMEDSEGMENT", player);
+        unit = map.spawnUnit(tiles[0][2].x,tiles[0][2].y,"FW_SUPER_DESTRUCTIBLESEGMENT", player);
         unitList.push(unit);
         unitInfoList.push("NE");
 
@@ -52,13 +53,13 @@ var Constructor = function () {
         unitList.push(unit);
         unitInfoList.push("E");
         
-        unit = map.spawnUnit(tiles[2][0].x,tiles[2][0].y,"FW_SUPER_UNARMEDSEGMENT", player);
+        unit = map.spawnUnit(tiles[2][0].x,tiles[2][0].y,"FW_SUPER_DESTRUCTIBLESEGMENT", player);
         unitList.push(unit);
         unitInfoList.push("SW");
         unit = map.spawnUnit(tiles[2][1].x,tiles[2][1].y,"FW_SUPER_UNARMEDSEGMENT", player);
         unitList.push(unit);
         unitInfoList.push("S");
-        unit = map.spawnUnit(tiles[2][2].x,tiles[2][2].y,"FW_SUPER_UNARMEDSEGMENT", player);
+        unit = map.spawnUnit(tiles[2][2].x,tiles[2][2].y,"FW_SUPER_DESTRUCTIBLESEGMENT", player);
         unitList.push(unit);
         unitInfoList.push("SE");
 
@@ -86,6 +87,32 @@ var Constructor = function () {
                 var segmentVar = variables.createVariable("segmentID");
                 var segmentID = segmentVar.readDataString();
                 segmentVar.writeDataString(unitInfo);
+
+                var segmentCoreIDVar = variables.createVariable("segmentCoreID");
+                var segmentCoreID = segmentCoreIDVar.readDataString();
+                segmentCoreIDVar.writeDataString(coreUnitID);
+
+                switch(unitInfo) {
+                    case "SE":
+                    case "SW":
+                        handlingUnit.setAmmo1(9);
+                        handlingUnit.setMaxAmmo1(9);
+                        handlingUnit.setWeapon1ID("FW_WEP_HVY_HOWITZER");
+                        handlingUnit.setMinRange(1);
+                        handlingUnit.setMaxRange(4);
+                        handlingUnit.refill(true);
+                    break;
+                    case "NE":
+                        handlingUnit.setAmmo1(9);
+                        handlingUnit.setMaxAmmo1(9);
+                        handlingUnit.setWeapon1ID("FW_WEP_SAM");
+                        handlingUnit.setMinRange(1);
+                        handlingUnit.setMaxRange(5);
+                        handlingUnit.refill(true);
+                    break;
+                    case "NW":
+                    break;
+                }
 
                 handlingUnit.updateSprites(false);
             }
@@ -148,7 +175,6 @@ var Constructor = function () {
             var components = componentsVar.readDataString();
             var segments = components.split(",");
             var paths = [];
-            GameConsole.print(lastPath,1);
             for(var q = 0; q < path.length; q++) {
                 
             }
