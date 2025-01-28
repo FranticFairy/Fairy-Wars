@@ -47,7 +47,7 @@ var Constructor = function()
     };
     this.getIcon = function(map)
     {
-        return "BUILDSITE";
+        return "DREAM";
     };
     this.perform = function(action, map)
     {
@@ -77,7 +77,7 @@ var Constructor = function()
             var captureAnimation = GameAnimationFactory.createGameAnimationCapture(map, x, y, capturePoints, unit.getCapturePoints(), maxCapturePoints);
             captureAnimation.addBackgroundSprite("capture_background");
             var armyName = Global.getArmyNameFromPlayerTable(unit.getOwner(), ACTION_CAPTURE.armyData);
-            Global["BUILDSITE"].addCaptureAnimationBuilding(captureAnimation, building, null, unit.getOwner());
+            Global["DREAM"].addCaptureAnimationBuilding(captureAnimation, building, null, unit.getOwner());
             captureAnimation.addSoldierSprite("soldier+" + armyName + "+mask" , unit.getOwner(), GameEnums.Recoloring_Matrix);
             captureAnimation.addSoldierSprite("soldier+" + armyName , unit.getOwner(), GameEnums.Recoloring_None);
             animation.queueAnimation(captureAnimation);
@@ -85,7 +85,7 @@ var Constructor = function()
         if (captured && checkHasCharges(action, map))
         {
             var terrain = map.getTerrain(actionTargetField.x, actionTargetField.y);
-            terrain.loadBuilding("BUILDSITE");
+            terrain.loadBuilding("DREAM");
             terrain.getBuilding().setUnitOwner(unit);
             reduceCharges(action, map);
         }
