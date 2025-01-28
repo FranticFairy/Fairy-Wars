@@ -5,7 +5,7 @@ var Constructor = function() {
 
     this.init = function(co, map) {
         co.setPowerStars(3)
-        co.setSuperpowerStars(2)
+        co.setSuperpowerStars(7)
     }
     this.getCOArmy = function() {
         return "FA"
@@ -249,11 +249,11 @@ var Constructor = function() {
 
         return animation
     }
-    let enableDreamweaving = function(co, map, isSuperPower) {
+    let enableDreamweaving = function(co, map, weavingCount, placeSiteCount) {
         let variables = co.getVariables()
-        variables.createVariable(VAR_DREAMWEAVING_COUNT).writeDataInt32(6)
+        variables.createVariable(VAR_DREAMWEAVING_COUNT).writeDataInt32(weavingCount)
         let varPlacesite = variables.createVariable(VAR_PLACESITE_COUNT)
-        varPlacesite.writeDataInt32(varPlacesite.readDataInt32() + 1)
+        varPlacesite.writeDataInt32(varPlacesite.readDataInt32() + placeSiteCount)
     }
 
     // CO Power
@@ -261,12 +261,12 @@ var Constructor = function() {
         return qsTr("Fantasia")
     }
     this.getPowerDescription = function(co) {
-        let text = qsTr("Allows Teina to use Dreamweaving 6 times this turn on empty tiles, and her Dreamweavers to construct one Dreamscape.")
+        let text = qsTr("Allows Teina to use Dreamweaving 8 times this turn on visible tiles, and her Dreamweavers to construct one Dreamscape.")
         return text
     }
     this.activatePower = function(co, map) {
         activeCoPowerAnimation(co, map, GameEnums.PowerMode_Power)
-        enableDreamweaving(co, map, false)
+        enableDreamweaving(co, map, 8, 1)
     }
 
     // Super CO Power
@@ -274,13 +274,13 @@ var Constructor = function() {
         return qsTr("Fabricated Elysium")
     }
     this.getSuperPowerDescription = function(co) {
-        let text = qsTr("Allows Teina to use Dreamweaving 6 times this turn on empty tiles, and her Dreamweavers to construct one Dreamscape. All non-temporary structures she owns gain +100 income permanently.")
+        let text = qsTr("Allows Teina's Dreamweavers to construct two Dreamscapes. All non-temporary structures she owns gain +100 income permanently.")
         return text
     }
     let disallowedSites = ["BUILDSITE", "DREAM", "TEMPORARY_AIRPORT", "TEMPORARY_HARBOUR", "DEPOT"]
     this.activateSuperpower = function(co, powerMode, map) {
         let copAnim = activeCoPowerAnimation(co, map, powerMode)
-        enableDreamweaving(co, map, true)
+        enableDreamweaving(co, map, 0, 2)
 
         // Apply bonus to all buildings the player owns.
         let buildings = co.getOwner().getBuildings();

@@ -12,7 +12,7 @@ var Constructor = function()
         unit.setBaseMovementPoints(3);
         unit.setMinRange(1);
         unit.setMaxRange(1);
-        unit.setVision(2);
+        unit.setVision(3);
         unit.setVisionHigh(999);
 
         var variables = unit.getVariables();
