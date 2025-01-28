@@ -5,7 +5,7 @@ var Constructor = function() {
 
     this.init = function(co, map) {
         co.setPowerStars(3)
-        co.setSuperpowerStars(7)
+        co.setSuperpowerStars(4)
     }
     this.getCOArmy = function() {
         return "FA"

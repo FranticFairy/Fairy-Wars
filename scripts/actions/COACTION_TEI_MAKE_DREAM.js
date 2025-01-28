@@ -47,7 +47,7 @@ var Constructor = function()
     };
     this.getIcon = function(map)
     {
-        return "DREAM";
+        return "BUILD";
     };
     this.perform = function(action, map)
     {

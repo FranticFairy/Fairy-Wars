@@ -87,6 +87,9 @@
 		<image file="telegate+mask.png" />
 		<image file="telegate+neutral.png" />
 		<image file="telegate.png" />
+		<image file="dream+mask.png" />
+		<image file="dream+neutral.png" />
+		<image file="dream.png" />
         
         <!-- weld -->
         <image file="weld+E+W.png" />

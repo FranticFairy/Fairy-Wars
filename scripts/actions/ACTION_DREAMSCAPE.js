@@ -60,4 +60,4 @@ var Constructor = function()
 }
 
 Constructor.prototype = ACTION;
-var ACTION_BUILDSITE = new Constructor();
+var ACTION_DREAMSCAPE = new Constructor();
